@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Yarnabout — Learn a Language, Have a Yarn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<style>
+  :root{
+    --bg:#171923;
+    --bg-elev:#1F2333;
+    --bg-elev-2:#272C40;
+    --text:#F3EDE0;
+    --text-dim:#A9A6B0;
+    --thread:#E8DCC0;
+    --mandarin:#E14848;
+    --spanish:#F0A93C;
+    --arabic:#2FB6A6;
+    --maori:#6FBF73;
+    --yolngu:#C97A3D;
+    --good:#5FD97E;
+    --bad:#F0665C;
+    --radius:18px;
+    --radius-sm:12px;
+    --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);}
+  body{
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    min-height:100dvh;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(232,220,192,0.05), transparent 40%),
+      radial-gradient(circle at 90% 90%, rgba(47,182,166,0.06), transparent 45%),
+      var(--bg);
+  }
+  h1,h2,h3,.display{font-family:'Baloo 2',sans-serif;}
+  button{font-family:'Inter',sans-serif;cursor:pointer;}
+  #app{max-width:1400px;margin:0 auto;padding: clamp(16px, 3vw, 40px);min-height:100dvh;display:flex;flex-direction:column;}
+
+  /* ---- Yarn thread signature element ---- */
+  .yarn-trail{width:100%;overflow:visible;display:block;margin: 8px 0 24px;}
+  .yarn-dot{transition:r .3s ease, fill .3s ease;}
+  .stitch{border:none;border-top:3px dashed rgba(232,220,192,0.25);margin:20px 0;}
+
+  /* ---- Header ---- */
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand .yarnball{font-size: clamp(28px,4vw,40px);}
+  .brand h1{font-size: clamp(26px, 4vw, 44px); margin:0; letter-spacing:.5px;}
+  .brand small{color:var(--text-dim); display:block; font-size:.85em; font-weight:500;}
+  .playerchip{display:flex;align-items:center;gap:8px;background:var(--bg-elev);border:1px solid rgba(255,255,255,0.06);padding:8px 14px;border-radius:999px;font-weight:600;font-size:clamp(13px,1.4vw,16px);}
+  .playerchip .dot{width:10px;height:10px;border-radius:50%;background:var(--thread);}
+
+  /* ---- Screens ---- */
+  .screen{flex:1;display:flex;flex-direction:column;animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .subtitle{color:var(--text-dim);font-size:clamp(14px,1.6vw,18px);margin: 0 0 24px;max-width:60ch;}
+
+  /* ---- Cards / grids ---- */
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+  .card{
+    background:var(--bg-elev);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:var(--radius);
+    padding:22px;
+    box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:10px;
+    position:relative;overflow:hidden;
+    transition:transform .18s ease, border-color .18s ease;
+  }
+  .card.clickable{cursor:pointer;}
+  .card.clickable:hover, .card.clickable:focus-visible{transform:translateY(-4px);border-color: var(--accent, var(--thread));outline:none;}
+  .card .icon{font-size:clamp(30px,3.4vw,40px);}
+  .card h3{margin:0;font-size:clamp(18px,2vw,24px);}
+  .card p{margin:0;color:var(--text-dim);font-size:clamp(13px,1.4vw,15px);}
+  .card .bar{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--accent, var(--thread));}
+  .card.locked{opacity:.45;filter:grayscale(.4);cursor:not-allowed;}
+  .badge{align-self:flex-start;font-size:11px;text-transform:uppercase;letter-spacing:.08em;background:rgba(255,255,255,0.08);padding:3px 9px;border-radius:999px;color:var(--text-dim);}
+
+  /* ---- Buttons ---- */
+  .btn{
+    border:none;border-radius:999px;padding: 12px 24px;font-weight:700;font-size:clamp(14px,1.6vw,17px);
+    background:var(--bg-elev-2);color:var(--text);border:1px solid rgba(255,255,255,0.08);
+    transition:transform .12s ease, background .12s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn.primary{background:linear-gradient(135deg, var(--accent,var(--thread)), color-mix(in srgb, var(--accent,var(--thread)) 70%, white));color:#171923;}
+  .btn.ghost{background:transparent;}
+  .btn.big{padding:18px 30px;font-size:clamp(16px,2vw,20px);}
+  .btn:disabled{opacity:.4;cursor:not-allowed;}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+  .row.between{justify-content:space-between;}
+  .spacer{flex:1;}
+
+  input[type=text]{
+    background:var(--bg-elev-2);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-sm);
+    padding:12px 16px;color:var(--text);font-size:16px;width:100%;
+  }
+  input[type=text]:focus{outline:2px solid var(--thread);}
+
+  /* ---- Flashcards ---- */
+  .stage{display:flex;flex-direction:column;align-items:center;gap:22px;flex:1;justify-content:center;padding: 10px 0 30px;}
+  .progressline{width:min(680px,90%);height:8px;background:var(--bg-elev-2);border-radius:999px;overflow:hidden;}
+  .progressline > div{height:100%;background:var(--accent,var(--thread));transition:width .3s ease;}
+  .flashcard{
+    width:min(680px,94%);
+    background:var(--bg-elev);border:1px solid rgba(255,255,255,0.08);border-radius:24px;
+    padding: clamp(28px,5vw,56px) clamp(20px,5vw,50px);text-align:center;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:16px;align-items:center;
+  }
+  .target-word{font-family:'Noto Sans SC','Noto Sans Arabic','Baloo 2',sans-serif;font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.1;}
+  .target-word.rtl{direction:rtl;}
+  .translit{color:var(--text-dim);font-size:clamp(14px,2vw,20px);letter-spacing:.03em;}
+  .speak-btn{background:var(--accent,var(--thread));color:#171923;border:none;width:52px;height:52px;border-radius:50%;font-size:22px;box-shadow:var(--shadow);}
+  .choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(680px,94%);}
+  @media (max-width:520px){.choices{grid-template-columns:1fr;}}
+  .choice{
+    background:var(--bg-elev-2);border:2px solid rgba(255,255,255,0.08);border-radius:var(--radius-sm);
+    padding:16px;font-size:clamp(15px,1.8vw,18px);font-weight:600;color:var(--text);text-align:left;
+  }
+  .choice:hover{border-color:var(--accent,var(--thread));}
+  .choice.correct{background:rgba(95,217,126,0.18);border-color:var(--good);}
+  .choice.wrong{background:rgba(240,102,92,0.18);border-color:var(--bad);}
+  .feedback{min-height:28px;font-weight:700;font-size:clamp(15px,2vw,19px);}
+  .feedback.good{color:var(--good);}
+  .feedback.bad{color:var(--bad);}
+
+  /* ---- Phrases list ---- */
+  .phraselist{display:flex;flex-direction:column;gap:12px;}
+  .phrase{background:var(--bg-elev);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:16px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .phrase .ptext{font-family:'Noto Sans SC','Noto Sans Arabic','Baloo 2',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:600;}
+  .phrase .ptext.rtl{direction:rtl;}
+  .phrase .ptranslit{color:var(--text-dim);font-size:.9em;}
+  .phrase .pen{margin-left:auto;color:var(--text-dim);font-style:italic;}
+
+  /* ---- Writing practice ---- */
+  .writewrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
+  .canvasbox{position:relative;width:min(360px,80vw);height:min(360px,80vw);background:var(--bg-elev);border:2px solid rgba(255,255,255,0.1);border-radius:var(--radius);box-shadow:var(--shadow);}
+  .canvasbox .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(260px,60vw);font-family:'Noto Sans SC','Noto Sans Arabic',sans-serif;color:rgba(255,255,255,0.08);user-select:none;pointer-events:none;}
+  .canvasbox canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;}
+  .writemeta{text-align:center;}
+  .writemeta .lbl{font-size:clamp(28px,4vw,40px);font-weight:700;font-family:'Noto Sans SC','Noto Sans Arabic',sans-serif;}
+  .writemeta .name{color:var(--text-dim);}
+
+  /* ---- Culture ---- */
+  .culturecard{background:var(--bg-elev);border-radius:var(--radius);padding:30px;max-width:680px;margin:0 auto;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.06);}
+  .culturecard h3{margin-top:0;}
+
+  /* ---- Scoreboard ---- */
+  table.scores{width:100%;border-collapse:collapse;}
+  table.scores th, table.scores td{text-align:left;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);}
+  table.scores th{color:var(--text-dim);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.05em;}
+
+  footer.hint{margin-top:auto;padding-top:24px;color:var(--text-dim);font-size:12px;text-align:center;}
+
+  /* ---- TV / big-screen mode: scale everything up on wide, high-res displays ---- */
+  @media (min-width: 1600px){
+    body{font-size:19px;}
+    .btn{padding:18px 32px;}
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* =========================================================
+   YARNABOUT — data, state, supabase sync, and screen logic
+   Single-file app, same hosting pattern as G3 Ride Tracker
+   and Waypoints (GitHub Pages, Supabase cloud sync).
+   ========================================================= */
+
+// ---- Supabase (same project as G3 Ride Tracker / Waypoints) ----
+const SUPABASE_URL = "https://rkfoehpnleolzoffcjou.supabase.co";
+const SUPABASE_KEY = "sb_publishable_MQmKVyjXRRZka-HVh6BAow_0J8dTJ8b";
+let sb = null;
+try{ sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); }catch(e){ console.warn("Supabase init failed, using local storage only", e); }
+
+// ---- Content data ----
+const LANGUAGES = {
+  mandarin: {
+    key:"mandarin", name:"Mandarin", native:"中文", accent:"var(--mandarin)", flag:"🇨🇳",
+    speechLang:"zh-CN", rtl:false, script:true, available:true,
+    blurb:"Tones do the heavy lifting — the same syllable can mean four different things depending on pitch.",
+    words:[
+      {t:"你好",p:"nǐ hǎo",en:"hello"},{t:"谢谢",p:"xièxie",en:"thank you"},{t:"请",p:"qǐng",en:"please"},
+      {t:"是",p:"shì",en:"yes"},{t:"不",p:"bù",en:"no"},{t:"再见",p:"zàijiàn",en:"goodbye"},
+      {t:"对不起",p:"duìbùqǐ",en:"sorry"},{t:"打扰一下",p:"dǎrǎo yīxià",en:"excuse me"},
+      {t:"水",p:"shuǐ",en:"water"},{t:"食物",p:"shíwù",en:"food"},
+      {t:"一",p:"yī",en:"one"},{t:"二",p:"èr",en:"two"},{t:"三",p:"sān",en:"three"},{t:"四",p:"sì",en:"four"},{t:"五",p:"wǔ",en:"five"},
+      {t:"大",p:"dà",en:"big"},{t:"小",p:"xiǎo",en:"small"},{t:"好",p:"hǎo",en:"good"},
+      {t:"哪里",p:"nǎlǐ",en:"where"},{t:"多少钱",p:"duōshǎo qián",en:"how much"},
+      {t:"厕所",p:"cèsuǒ",en:"toilet"},{t:"酒店",p:"jiǔdiàn",en:"hotel"},{t:"机场",p:"jīchǎng",en:"airport"},
+      {t:"火车站",p:"huǒchēzhàn",en:"train station"},{t:"帮助",p:"bāngzhù",en:"help"},
+      {t:"今天",p:"jīntiān",en:"today"},{t:"明天",p:"míngtiān",en:"tomorrow"},{t:"朋友",p:"péngyǒu",en:"friend"},
+      {t:"漂亮",p:"piàoliang",en:"beautiful"},{t:"好吃",p:"hǎochī",en:"delicious"},
+      {t:"贵",p:"guì",en:"expensive"},{t:"便宜",p:"piányi",en:"cheap"},
+      {t:"左",p:"zuǒ",en:"left"},{t:"右",p:"yòu",en:"right"},{t:"直走",p:"zhízǒu",en:"straight ahead"},
+      {t:"市场",p:"shìchǎng",en:"market"},{t:"电话",p:"diànhuà",en:"phone"},{t:"时间",p:"shíjiān",en:"time"},
+      {t:"早上",p:"zǎoshang",en:"morning"},{t:"晚上",p:"wǎnshang",en:"evening"},{t:"名字",p:"míngzi",en:"name"}
+    ],
+    phrases:[
+      {t:"你好吗？",p:"Nǐ hǎo ma?",en:"How are you?"},
+      {t:"我叫……",p:"Wǒ jiào…",en:"My name is…"},
+      {t:"你叫什么名字？",p:"Nǐ jiào shénme míngzi?",en:"What's your name?"},
+      {t:"多少钱？",p:"Duōshǎo qián?",en:"How much is it?"},
+      {t:"洗手间在哪里？",p:"Xǐshǒujiān zài nǎlǐ?",en:"Where's the bathroom?"},
+      {t:"我不懂",p:"Wǒ bù dǒng",en:"I don't understand"},
+      {t:"你会说英语吗？",p:"Nǐ huì shuō Yīngyǔ ma?",en:"Do you speak English?"},
+      {t:"请再说一遍",p:"Qǐng zài shuō yī biàn",en:"Please say that again"},
+      {t:"我要这个",p:"Wǒ yào zhège",en:"I want this one"},
+      {t:"账单，谢谢",p:"Zhàngdān, xièxie",en:"The bill, please"},
+      {t:"祝你好运",p:"Zhù nǐ hǎoyùn",en:"Good luck"},
+      {t:"没关系",p:"Méi guānxi",en:"No worries / it's okay"},
+      {t:"干杯！",p:"Gānbēi!",en:"Cheers!"}
+    ],
+    writing:[
+      {t:"人",name:"person"},{t:"大",name:"big"},{t:"小",name:"small"},{t:"水",name:"water"},{t:"山",name:"mountain"},
+      {t:"口",name:"mouth"},{t:"日",name:"sun"},{t:"月",name:"moon"},{t:"好",name:"good"},{t:"一",name:"one"},
+      {t:"二",name:"two"},{t:"三",name:"three"},{t:"你",name:"you"},{t:"我",name:"I / me"},{t:"友",name:"friend"}
+    ],
+    culture:[
+      {title:"Tones aren't optional", body:"Mandarin has four tones plus a neutral one. 'Mā' (mum), 'má' (hemp), 'mǎ' (horse) and 'mà' (scold) are the same sound said differently — get the pitch wrong and you've said something else entirely, not just said it badly."},
+      {title:"One writing system, many spoken forms", body:"Hanzi characters represent meaning rather than sound, which is why Mandarin and Cantonese speakers can often read the same newspaper while barely understanding each other's speech."},
+      {title:"Chinese New Year", body:"The most important festival on the calendar, timed to the lunar calendar (late Jan–Feb). Red envelopes (hóngbāo) with money are given for good luck, and the colour red is everywhere — it's believed to scare off bad spirits."},
+      {title:"Tea before coffee", body:"Tea culture goes back thousands of years and varies hugely by region — from delicate green teas to smoky pu-erh. Offering tea to a guest is a basic form of hospitality."},
+      {title:"Face (面子, miànzi)", body:"The concept of 'face' — social standing and dignity — shapes a lot of everyday interaction. Public criticism or causing someone embarrassment is taken seriously, even in small moments."}
+    ]
+  },
+  spanish: {
+    key:"spanish", name:"Spanish", native:"Español", accent:"var(--spanish)", flag:"🇪🇸",
+    speechLang:"es-ES", rtl:false, script:false, available:true,
+    blurb:"One of the most phonetic major languages — if you can read it, you can mostly say it.",
+    words:[
+      {t:"hola",p:"OH-lah",en:"hello"},{t:"gracias",p:"GRAH-syahs",en:"thank you"},{t:"por favor",p:"por fah-VOR",en:"please"},
+      {t:"sí",p:"see",en:"yes"},{t:"no",p:"no",en:"no"},{t:"adiós",p:"ah-DYOHS",en:"goodbye"},
+      {t:"lo siento",p:"lo SYEN-toh",en:"sorry"},{t:"disculpe",p:"dees-KOOL-peh",en:"excuse me"},
+      {t:"agua",p:"AH-gwah",en:"water"},{t:"comida",p:"koh-MEE-dah",en:"food"},
+      {t:"uno",p:"OO-noh",en:"one"},{t:"dos",p:"dohs",en:"two"},{t:"tres",p:"trehs",en:"three"},{t:"cuatro",p:"KWAH-troh",en:"four"},{t:"cinco",p:"SEEN-koh",en:"five"},
+      {t:"grande",p:"GRAHN-deh",en:"big"},{t:"pequeño",p:"peh-KEN-yoh",en:"small"},{t:"bueno",p:"BWEH-noh",en:"good"},
+      {t:"dónde",p:"DOHN-deh",en:"where"},{t:"cuánto",p:"KWAHN-toh",en:"how much"},
+      {t:"baño",p:"BAHN-yoh",en:"toilet"},{t:"hotel",p:"oh-TEL",en:"hotel"},{t:"aeropuerto",p:"ah-eh-roh-PWEHR-toh",en:"airport"},
+      {t:"estación de tren",p:"es-tah-SYOHN deh trehn",en:"train station"},{t:"ayuda",p:"ah-YOO-dah",en:"help"},
+      {t:"hoy",p:"oy",en:"today"},{t:"mañana",p:"mahn-YAH-nah",en:"tomorrow / morning"},{t:"amigo",p:"ah-MEE-goh",en:"friend"},
+      {t:"hermoso",p:"ehr-MOH-soh",en:"beautiful"},{t:"delicioso",p:"deh-lee-SYOH-soh",en:"delicious"},
+      {t:"caro",p:"KAH-roh",en:"expensive"},{t:"barato",p:"bah-RAH-toh",en:"cheap"},
+      {t:"izquierda",p:"ees-KYEHR-dah",en:"left"},{t:"derecha",p:"deh-REH-chah",en:"right"},{t:"derecho",p:"deh-REH-choh",en:"straight ahead"},
+      {t:"mercado",p:"mehr-KAH-doh",en:"market"},{t:"teléfono",p:"teh-LEH-foh-noh",en:"phone"},{t:"tiempo",p:"TYEHM-poh",en:"time"},
+      {t:"noche",p:"NOH-cheh",en:"evening / night"},{t:"nombre",p:"NOHM-breh",en:"name"}
+    ],
+    phrases:[
+      {t:"¿Cómo estás?",p:"KOH-moh es-TAHS",en:"How are you?"},
+      {t:"Me llamo…",p:"meh YAH-moh",en:"My name is…"},
+      {t:"¿Cómo te llamas?",p:"KOH-moh teh YAH-mahs",en:"What's your name?"},
+      {t:"¿Cuánto cuesta?",p:"KWAHN-toh KWES-tah",en:"How much does it cost?"},
+      {t:"¿Dónde está el baño?",p:"DOHN-deh es-TAH el BAHN-yoh",en:"Where's the bathroom?"},
+      {t:"No entiendo",p:"no en-TYEN-doh",en:"I don't understand"},
+      {t:"¿Hablas inglés?",p:"AH-blahs een-GLEHS",en:"Do you speak English?"},
+      {t:"¿Puede repetir, por favor?",p:"PWEH-deh reh-peh-TEER",en:"Can you repeat, please?"},
+      {t:"Quiero esto",p:"KYEH-roh EHS-toh",en:"I want this"},
+      {t:"La cuenta, por favor",p:"lah KWEN-tah",en:"The bill, please"},
+      {t:"Buena suerte",p:"BWEH-nah SWEHR-teh",en:"Good luck"},
+      {t:"No pasa nada",p:"no PAH-sah NAH-dah",en:"No worries"},
+      {t:"¡Salud!",p:"sah-LOOD",en:"Cheers!"}
+    ],
+    writing:[
+      {t:"ñ",name:"eñe (unique Spanish letter)"},{t:"ll",name:"double L sound"},
+      {t:"hola",name:"hello"},{t:"gracias",name:"thank you"},{t:"amigo",name:"friend"},
+      {t:"agua",name:"water"},{t:"buenos días",name:"good morning"}
+    ],
+    culture:[
+      {title:"One language, many accents", body:"Spanish is official in 20 countries, and pronunciation shifts a lot — the 'c' and 'z' sound like 'th' in most of Spain but like 's' across Latin America."},
+      {title:"The siesta is fading but the rhythm remains", body:"Traditional afternoon siestas are less common now, but long, late lunches and a slower midday pace still shape daily life in much of Spain and Latin America."},
+      {title:"Tapas are a way of eating, not a dish", body:"Small shared plates ordered over the course of an evening, often standing at a bar, moving between venues with friends — the food is almost secondary to the socialising."},
+      {title:"Día de los Muertos", body:"In Mexico, the Day of the Dead (Nov 1–2) honours deceased relatives with colourful altars, marigolds and sugar skulls — a celebration of memory rather than a mournful occasion."},
+      {title:"Flamenco", body:"Originating in Andalusia, flamenco blends guitar, percussive footwork, hand-clapping (palmas) and raw, emotional singing (cante) — it's improvised, not choreographed like ballet."}
+    ]
+  },
+  arabic: {
+    key:"arabic", name:"Arabic", native:"العربية", accent:"var(--arabic)", flag:"🇸🇦",
+    speechLang:"ar-SA", rtl:true, script:true, available:true,
+    blurb:"Written right-to-left with a script that flows and joins — and one spoken language on paper (Modern Standard) that's rarely quite how people actually talk.",
+    words:[
+      {t:"مرحبا",p:"marhaban",en:"hello"},{t:"شكرا",p:"shukran",en:"thank you"},{t:"من فضلك",p:"min fadlik",en:"please"},
+      {t:"نعم",p:"na'am",en:"yes"},{t:"لا",p:"laa",en:"no"},{t:"مع السلامة",p:"ma'a as-salama",en:"goodbye"},
+      {t:"آسف",p:"aasif",en:"sorry"},{t:"عفوا",p:"'afwan",en:"excuse me"},
+      {t:"ماء",p:"maa'",en:"water"},{t:"طعام",p:"ta'am",en:"food"},
+      {t:"واحد",p:"waahid",en:"one"},{t:"اثنان",p:"ithnaan",en:"two"},{t:"ثلاثة",p:"thalaatha",en:"three"},{t:"أربعة",p:"arba'a",en:"four"},{t:"خمسة",p:"khamsa",en:"five"},
+      {t:"كبير",p:"kabeer",en:"big"},{t:"صغير",p:"sagheer",en:"small"},{t:"جيد",p:"jayyid",en:"good"},
+      {t:"أين",p:"ayna",en:"where"},{t:"بكم",p:"bikam",en:"how much"},
+      {t:"حمام",p:"hammaam",en:"toilet"},{t:"فندق",p:"funduq",en:"hotel"},{t:"مطار",p:"mataar",en:"airport"},
+      {t:"محطة القطار",p:"mahattat al-qitar",en:"train station"},{t:"مساعدة",p:"musaa'ada",en:"help"},
+      {t:"اليوم",p:"al-yawm",en:"today"},{t:"غدا",p:"ghadan",en:"tomorrow"},{t:"صديق",p:"sadeeq",en:"friend"},
+      {t:"جميل",p:"jameel",en:"beautiful"},{t:"لذيذ",p:"latheedh",en:"delicious"},
+      {t:"غالي",p:"ghaali",en:"expensive"},{t:"رخيص",p:"rakhees",en:"cheap"},
+      {t:"يسار",p:"yasaar",en:"left"},{t:"يمين",p:"yameen",en:"right"},{t:"مستقيم",p:"mustaqeem",en:"straight ahead"},
+      {t:"سوق",p:"souq",en:"market"},{t:"هاتف",p:"haatif",en:"phone"},{t:"وقت",p:"waqt",en:"time"},
+      {t:"صباح",p:"sabaah",en:"morning"},{t:"اسم",p:"ism",en:"name"}
+    ],
+    phrases:[
+      {t:"كيف حالك؟",p:"kayfa haaluk",en:"How are you?"},
+      {t:"اسمي…",p:"ismi…",en:"My name is…"},
+      {t:"ما اسمك؟",p:"maa ismuk",en:"What's your name?"},
+      {t:"بكم هذا؟",p:"bikam haatha",en:"How much is this?"},
+      {t:"أين الحمام؟",p:"ayna al-hammaam",en:"Where's the bathroom?"},
+      {t:"لا أفهم",p:"laa afham",en:"I don't understand"},
+      {t:"هل تتكلم الإنجليزية؟",p:"hal tatakallam al-injliziyya",en:"Do you speak English?"},
+      {t:"من فضلك كرر",p:"min fadlik karrir",en:"Please repeat"},
+      {t:"أريد هذا",p:"ureedu haatha",en:"I want this"},
+      {t:"الفاتورة من فضلك",p:"al-fatoora min fadlik",en:"The bill, please"},
+      {t:"حظا سعيدا",p:"hazzan sa'eedan",en:"Good luck"},
+      {t:"لا بأس",p:"laa ba's",en:"No worries"},
+      {t:"في صحتك",p:"fee sihhatak",en:"Cheers"}
+    ],
+    writing:[
+      {t:"ا",name:"alif"},{t:"ب",name:"baa"},{t:"ت",name:"taa"},{t:"ث",name:"thaa"},{t:"ج",name:"jeem"},
+      {t:"ح",name:"haa"},{t:"خ",name:"khaa"},{t:"د",name:"daal"},{t:"ذ",name:"dhaal"},{t:"ر",name:"raa"},
+      {t:"ز",name:"zaay"},{t:"س",name:"seen"},{t:"ش",name:"sheen"},{t:"ص",name:"saad"},{t:"ض",name:"daad"},
+      {t:"ط",name:"taa (emphatic)"},{t:"ظ",name:"dhaa (emphatic)"},{t:"ع",name:"ain"},{t:"غ",name:"ghain"},{t:"ف",name:"faa"},
+      {t:"ق",name:"qaaf"},{t:"ك",name:"kaaf"},{t:"ل",name:"laam"},{t:"م",name:"meem"},{t:"ن",name:"noon"},
+      {t:"ه",name:"haa (soft)"},{t:"و",name:"waw"},{t:"ي",name:"yaa"}
+    ],
+    culture:[
+      {title:"Right to left, and joined-up", body:"Arabic script flows right-to-left and most letters change shape depending on whether they're at the start, middle or end of a word — closer to cursive than to printed Latin letters."},
+      {title:"Standard vs street", body:"Modern Standard Arabic (what's taught and used in news/formal writing) differs a fair bit from the everyday dialects spoken in Egypt, the Levant, the Gulf or North Africa — they're not always mutually intelligible."},
+      {title:"Hospitality is a big deal", body:"Offering coffee or tea to a guest — and the guest accepting — is a basic ritual of welcome across much of the Arab world, not just politeness."},
+      {title:"Calligraphy as art", body:"Because figurative art was historically limited in religious contexts, calligraphy became one of the great Arab and Islamic art forms — the same word can be rendered dozens of stylistically distinct ways."},
+      {title:"Ramadan and Eid", body:"During Ramadan, many Muslims fast from dawn to sunset for a month; it ends with the celebration of Eid al-Fitr, marked by family gatherings, gifts and shared meals."}
+    ]
+  },
+  maori: {
+    key:"maori", name:"Māori", native:"Te Reo Māori", accent:"var(--maori)", flag:"🇳🇿",
+    speechLang:"en-NZ", rtl:false, script:false, available:false,
+    blurb:"Coming soon — Aotearoa New Zealand's indigenous language.", words:[], phrases:[], writing:[], culture:[]
+  },
+  yolngu: {
+    key:"yolngu", name:"Yolŋu Matha", native:"Gupapuyngu", accent:"var(--yolngu)", flag:"🟠",
+    speechLang:"en-AU", rtl:false, script:false, available:false,
+    blurb:"Coming soon — a Yolŋu language from North East Arnhem Land.", words:[], phrases:[], writing:[], culture:[]
+  }
+};
+
+const LEVELS = {
+  tourist: {key:"tourist", name:"Tourist", desc:"Core survival words & phrases", available:true},
+  basic: {key:"basic", name:"Basic Conversation", desc:"500 words, sentence structures & more", available:false}
+};
+
+// ---- State ----
+const state = {
+  screen:"players",
+  group:[],          // array of {id, name}
+  activePlayer:null, // current player object
+  language:null,
+  level:"tourist",
+  mode:null,
+  session:{ items:[], index:0, correct:0, total:0 },
+  scores:{}          // local cache: {playerId: {langKey: {correct,total}}}
+};
+
+// ---- Persistence helpers ----
+function loadLocal(key, fallback){ try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }catch(e){ return fallback; } }
+function saveLocal(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+async function ensurePlayersLoaded(){
+  state.group = loadLocal("yarnabout_group", []);
+  state.scores = loadLocal("yarnabout_scores", {});
+  if(sb){
+    try{
+      const {data, error} = await sb.from('yarnabout_players').select('*').order('created_at');
+      if(!error && data && data.length){
+        state.group = data.map(r=>({id:r.id, name:r.name}));
+        saveLocal("yarnabout_group", state.group);
+      }
+      const {data: scoreRows} = await sb.from('yarnabout_scores').select('*');
+      if(scoreRows){
+        const merged = {};
+        scoreRows.forEach(r=>{
+          merged[r.player_id] = merged[r.player_id] || {};
+          merged[r.player_id][r.language] = {correct:r.correct, total:r.total};
+        });
+        state.scores = merged;
+        saveLocal("yarnabout_scores", state.scores);
+      }
+    }catch(e){ console.warn("Supabase load failed, using local data", e); }
+  }
+}
+
+async function addPlayer(name){
+  const id = "p_" + Date.now() + "_" + Math.random().toString(36).slice(2,7);
+  const player = {id, name};
+  state.group.push(player);
+  saveLocal("yarnabout_group", state.group);
+  if(sb){
+    try{ await sb.from('yarnabout_players').insert({id, name}); }catch(e){ console.warn("Supabase insert player failed", e); }
+  }
+  return player;
+}
+
+async function recordResult(playerId, langKey, gotCorrect){
+  state.scores[playerId] = state.scores[playerId] || {};
+  const cur = state.scores[playerId][langKey] || {correct:0,total:0};
+  cur.total += 1;
+  if(gotCorrect) cur.correct += 1;
+  state.scores[playerId][langKey] = cur;
+  saveLocal("yarnabout_scores", state.scores);
+  if(sb){
+    try{
+      await sb.from('yarnabout_scores').upsert({
+        player_id:playerId, language:langKey, correct:cur.correct, total:cur.total, updated_at:new Date().toISOString()
+      }, {onConflict:'player_id,language'});
+    }catch(e){ console.warn("Supabase score sync failed", e); }
+  }
+}
+
+// ---- Speech ----
+function speak(text, langCode){
+  try{
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = langCode;
+    u.rate = 0.85;
+    window.speechSynthesis.speak(u);
+  }catch(e){ console.warn("TTS not available", e); }
+}
+
+// ---- Utility ----
+function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function pickN(arr, n){ return shuffle(arr).slice(0,n); }
+function el(tag, attrs={}, ...children){
+  const e = document.createElement(tag);
+  for(const [k,v] of Object.entries(attrs)){
+    if(k==="class") e.className=v;
+    else if(k==="html") e.innerHTML=v;
+    else if(k.startsWith("on") && typeof v==="function") e.addEventListener(k.slice(2), v);
+    else if(v!==undefined && v!==null) e.setAttribute(k,v);
+  }
+  children.flat().forEach(c=>{ if(c===null||c===undefined) return; e.appendChild(typeof c==="string"?document.createTextNode(c):c); });
+  return e;
+}
+
+function yarnTrail(activeIndex, total, accent){
+  const w = 320, h = 30, gap = w/(total+1);
+  const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  svg.setAttribute("class","yarn-trail");
+  svg.style.maxWidth = "360px";
+  let d = `M ${gap} ${h/2} `;
+  for(let i=1;i<total;i++){
+    const x = gap*(i+1);
+    const yOff = (i%2===0)? -8 : 8;
+    d += `Q ${gap*i+gap/2} ${h/2+yOff} ${x} ${h/2} `;
+  }
+  const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+  path.setAttribute("d", d);
+  path.setAttribute("stroke","rgba(232,220,192,0.3)");
+  path.setAttribute("stroke-width","2");
+  path.setAttribute("stroke-dasharray","1 7");
+  path.setAttribute("fill","none");
+  svg.appendChild(path);
+  for(let i=0;i<total;i++){
+    const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("cx", gap*(i+1)); c.setAttribute("cy", h/2);
+    c.setAttribute("r", i<=activeIndex ? 7 : 5);
+    c.setAttribute("class","yarn-dot");
+    c.setAttribute("fill", i<=activeIndex ? accent : "rgba(255,255,255,0.15)");
+    svg.appendChild(c);
+  }
+  return svg;
+}
+
+// ---- Render root ----
+const app = document.getElementById("app");
+function render(){
+  app.innerHTML = "";
+  app.appendChild(renderTopbar());
+  const screenEl = el("div",{class:"screen"});
+  app.appendChild(screenEl);
+  const renderers = {
+    players: renderPlayersScreen,
+    home: renderHomeScreen,
+    level: renderLevelScreen,
+    mode: renderModeScreen,
+    flashcards: renderFlashcardsScreen,
+    phrases: renderPhrasesScreen,
+    writing: renderWritingScreen,
+    culture: renderCultureScreen,
+    scoreboard: renderScoreboardScreen
+  };
+  (renderers[state.screen] || renderHomeScreen)(screenEl);
+  app.appendChild(el("footer",{class:"hint"}, "Yarnabout · G'day, ready for a yarn? · Synced across your devices"));
+}
+
+function renderTopbar(){
+  const bar = el("div",{class:"topbar"});
+  const brand = el("div",{class:"brand"},
+    el("span",{class:"yarnball"},"🧶"),
+    el("div",{},
+      el("h1",{}, "Yarnabout"),
+      el("small",{}, state.language ? `${LANGUAGES[state.language].flag} ${LANGUAGES[state.language].name} · ${LEVELS[state.level].name}` : "Fun language learning, home team style")
+    )
+  );
+  bar.appendChild(brand);
+  const right = el("div",{class:"row"});
+  if(state.activePlayer){
+    right.appendChild(el("div",{class:"playerchip"}, el("span",{class:"dot"}), state.activePlayer.name));
+  }
+  if(state.screen !== "players"){
+    right.appendChild(el("button",{class:"btn ghost", onclick:()=>{ state.screen="players"; render(); }}, "Switch player"));
+  }
+  bar.appendChild(right);
+  return bar;
+}
+
+// ---- Screen: Players / Groups ----
+function renderPlayersScreen(root){
+  root.appendChild(el("h2",{}, "Who's playing tonight?"));
+  root.appendChild(el("p",{class:"subtitle"}, "Add everyone in your group. Everyone's progress is tracked separately and synced to the cloud, so pick up on the phone right where you left off on the TV."));
+
+  const grid = el("div",{class:"grid"});
+  state.group.forEach(p=>{
+    grid.appendChild(el("div",{class:"card clickable", tabindex:"0", onclick:()=>{ state.activePlayer=p; state.screen="home"; render(); }},
+      el("div",{class:"icon"}, "🙋"),
+      el("h3",{}, p.name),
+      el("p",{}, "Tap to play as " + p.name)
+    ));
+  });
+
+  const addCard = el("div",{class:"card"},
+    el("div",{class:"icon"}, "➕"),
+    el("h3",{}, "Add a player"),
+    el("div",{class:"row"},
+      (()=>{ const i = el("input",{type:"text", placeholder:"Name"}); i.id="newPlayerInput"; return i; })(),
+    ),
+    el("button",{class:"btn primary", onclick: async ()=>{
+      const input = document.getElementById("newPlayerInput");
+      const name = input.value.trim();
+      if(!name) return;
+      const p = await addPlayer(name);
+      state.activePlayer = p;
+      state.screen = "home";
+      render();
+    }}, "Add & play")
+  );
+  grid.appendChild(addCard);
+  root.appendChild(grid);
+}
+
+// ---- Screen: Home (language select) ----
+function renderHomeScreen(root){
+  root.appendChild(el("h2",{}, "Pick a language"));
+  root.appendChild(el("p",{class:"subtitle"}, "Three languages ready to go, two more brewing."));
+  const grid = el("div",{class:"grid"});
+  Object.values(LANGUAGES).forEach(lang=>{
+    const card = el("div",{
+      class:"card clickable" + (lang.available ? "" : " locked"),
+      style:`--accent:${lang.accent}`,
+      tabindex: lang.available ? "0" : "-1",
+      onclick: lang.available ? ()=>{ state.language=lang.key; state.screen="level"; render(); } : null
+    },
+      el("div",{class:"bar"}),
+      el("div",{class:"icon"}, lang.flag),
+      el("h3",{}, lang.name + (lang.native? " · " + lang.native : "")),
+      el("p",{}, lang.blurb),
+      !lang.available ? el("span",{class:"badge"}, "Coming soon") : el("span",{class:"badge"}, lang.words.length + " words ready")
+    );
+    grid.appendChild(card);
+  });
+  root.appendChild(grid);
+}
+
+// ---- Screen: Level ----
+function renderLevelScreen(root){
+  const lang = LANGUAGES[state.language];
+  root.appendChild(el("h2",{}, "Choose your level"));
+  root.appendChild(el("p",{class:"subtitle"}, `${lang.flag} ${lang.name}`));
+  const grid = el("div",{class:"grid"});
+  Object.values(LEVELS).forEach(lvl=>{
+    grid.appendChild(el("div",{
+      class:"card clickable" + (lvl.available ? "" : " locked"),
+      style:`--accent:${lang.accent}`,
+      onclick: lvl.available ? ()=>{ state.level=lvl.key; state.screen="mode"; render(); } : null
+    },
+      el("div",{class:"bar"}),
+      el("div",{class:"icon"}, lvl.key==="tourist" ? "🧳" : "💬"),
+      el("h3",{}, lvl.name),
+      el("p",{}, lvl.desc),
+      !lvl.available ? el("span",{class:"badge"}, "Coming soon") : null
+    ));
+  });
+  root.appendChild(grid);
+  root.appendChild(el("button",{class:"btn ghost", onclick:()=>{ state.screen="home"; render(); }}, "← Back"));
+}
+
+// ---- Screen: Mode select ----
+function renderModeScreen(root){
+  const lang = LANGUAGES[state.language];
+  root.appendChild(el("h2",{}, "How do you want to play?"));
+  root.appendChild(el("p",{class:"subtitle"}, `${lang.flag} ${lang.name} · ${LEVELS[state.level].name}`));
+  const modes = [
+    {key:"flashcards", icon:"🎴", title:"Flashcards", desc:"Multiple choice, quick rounds", enabled: lang.words.length>0},
+    {key:"phrases", icon:"💬", title:"Key Phrases", desc:"Everyday lines with audio", enabled: lang.phrases.length>0},
+    {key:"writing", icon:"✍️", title:"Writing Practice", desc:"Trace characters & letters", enabled: lang.writing.length>0},
+    {key:"culture", icon:"🌏", title:"Culture & History", desc:"Bite-size stories about the language", enabled: lang.culture.length>0},
+    {key:"scoreboard", icon:"🏆", title:"Scoreboard", desc:"See how the whole group's going", enabled:true}
+  ];
+  const grid = el("div",{class:"grid"});
+  modes.forEach(m=>{
+    grid.appendChild(el("div",{
+      class:"card clickable" + (m.enabled ? "" : " locked"),
+      style:`--accent:${lang.accent}`,
+      onclick: m.enabled ? ()=>{ state.mode=m.key; startMode(m.key); state.screen=m.key; render(); } : null
+    },
+      el("div",{class:"bar"}),
+      el("div",{class:"icon"}, m.icon),
+      el("h3",{}, m.title),
+      el("p",{}, m.desc)
+    ));
+  });
+  root.appendChild(grid);
+  root.appendChild(el("button",{class:"btn ghost", onclick:()=>{ state.screen="level"; render(); }}, "← Back"));
+}
+
+function startMode(mode){
+  const lang = LANGUAGES[state.language];
+  if(mode==="flashcards"){
+    state.session = {items: pickN(lang.words, Math.min(10, lang.words.length)), index:0, correct:0, total:0};
+  } else if(mode==="phrases"){
+    state.session = {items: lang.phrases, index:0, correct:0, total:0, revealed:{}};
+  } else if(mode==="writing"){
+    state.session = {items: lang.writing, index:0};
+  } else if(mode==="culture"){
+    state.session = {items: lang.culture, index:0};
+  }
+}
+
+// ---- Screen: Flashcards ----
+function renderFlashcardsScreen(root){
+  const lang = LANGUAGES[state.language];
+  const s = state.session;
+  if(s.index >= s.items.length){
+    root.appendChild(roundComplete(lang, s));
+    return;
+  }
+  const item = s.items[s.index];
+  root.appendChild(yarnTrail(s.index, s.items.length, lang.accent));
+  const stage = el("div",{class:"stage"});
+  const prog = el("div",{class:"progressline"}, el("div",{style:`width:${(s.index/s.items.length)*100}%; background:${lang.accent}`}));
+  stage.appendChild(prog);
+
+  const card = el("div",{class:"flashcard"},
+    el("div",{class:"target-word" + (lang.rtl?" rtl":"")}, item.t),
+    lang.script ? el("div",{class:"translit"}, item.p) : null,
+    el("button",{class:"speak-btn", style:`background:${lang.accent}`, onclick:()=>speak(item.t, lang.speechLang)}, "🔊")
+  );
+  stage.appendChild(card);
+
+  const correctEn = item.en;
+  const distractors = pickN(lang.words.filter(w=>w.en!==correctEn).map(w=>w.en), 3);
+  const options = shuffle([correctEn, ...distractors]);
+  const choicesWrap = el("div",{class:"choices"});
+  const feedback = el("div",{class:"feedback"});
+
+  options.forEach(opt=>{
+    const btn = el("button",{class:"choice", onclick:()=>{
+      const isCorrect = opt===correctEn;
+      Array.from(choicesWrap.children).forEach(c=>c.disabled=true);
+      btn.classList.add(isCorrect?"correct":"wrong");
+      if(!isCorrect){
+        Array.from(choicesWrap.children).find(c=>c.textContent===correctEn)?.classList.add("correct");
+      }
+      feedback.textContent = isCorrect ? "Nice one! 🎉" : `Close — it means "${correctEn}"`;
+      feedback.className = "feedback " + (isCorrect?"good":"bad");
+      s.total++; if(isCorrect) s.correct++;
+      if(state.activePlayer) recordResult(state.activePlayer.id, lang.key, isCorrect);
+      setTimeout(()=>{ s.index++; render(); }, 1100);
+    }}, opt);
+    choicesWrap.appendChild(btn);
+  });
+  stage.appendChild(choicesWrap);
+  stage.appendChild(feedback);
+  root.appendChild(stage);
+}
+
+function roundComplete(lang, s){
+  const wrap = el("div",{class:"stage"});
+  wrap.appendChild(el("div",{class:"flashcard"},
+    el("div",{style:"font-size:48px;"}, "🧶"),
+    el("h2",{}, "Round done!"),
+    el("p",{}, `${s.correct} / ${s.items.length} correct — bonzer effort.`),
+    el("div",{class:"row"},
+      el("button",{class:"btn primary", style:`--accent:${lang.accent}`, onclick:()=>{ startMode("flashcards"); render(); }}, "Play again"),
+      el("button",{class:"btn ghost", onclick:()=>{ state.screen="mode"; render(); }}, "Change mode")
+    )
+  ));
+  return wrap;
+}
+
+// ---- Screen: Phrases ----
+function renderPhrasesScreen(root){
+  const lang = LANGUAGES[state.language];
+  root.appendChild(el("h2",{}, "Key phrases"));
+  root.appendChild(el("p",{class:"subtitle"}, "Tap 🔊 to hear it, tap the card to reveal the meaning."));
+  const list = el("div",{class:"phraselist"});
+  lang.phrases.forEach((ph, i)=>{
+    const revealed = state.session.revealed[i];
+    const row = el("div",{class:"phrase", onclick:(e)=>{ if(e.target.tagName==="BUTTON") return; state.session.revealed[i]=!revealed; render(); }},
+      el("button",{class:"speak-btn", style:`background:${lang.accent};width:40px;height:40px;font-size:16px;`, onclick:(e)=>{e.stopPropagation(); speak(ph.t, lang.speechLang);}}, "🔊"),
+      el("div",{},
+        el("div",{class:"ptext"+(lang.rtl?" rtl":"")}, ph.t),
+        lang.script ? el("div",{class:"ptranslit"}, ph.p) : null
+      ),
+      el("div",{class:"pen"}, revealed ? ph.en : "tap to reveal")
+    );
+    list.appendChild(row);
+  });
+  root.appendChild(list);
+  root.appendChild(el("hr",{class:"stitch"}));
+  root.appendChild(el("button",{class:"btn ghost", onclick:()=>{ state.screen="mode"; render(); }}, "← Back to modes"));
+}
+
+// ---- Screen: Writing practice ----
+function renderWritingScreen(root){
+  const lang = LANGUAGES[state.language];
+  const s = state.session;
+  const item = s.items[s.index % s.items.length];
+  root.appendChild(el("h2",{}, "Writing practice"));
+  root.appendChild(el("p",{class:"subtitle"}, lang.rtl ? "Trace right-to-left, following the letter's natural flow." : "Trace over the faint character, then try it freehand."));
+
+  const wrap = el("div",{class:"writewrap"});
+  const box = el("div",{class:"canvasbox"});
+  const ghost = el("div",{class:"ghost"}, item.t);
+  const canvas = el("canvas",{});
+  box.appendChild(ghost); box.appendChild(canvas);
+  wrap.appendChild(box);
+  wrap.appendChild(el("div",{class:"writemeta"},
+    el("div",{class:"lbl"}, item.t),
+    el("div",{class:"name"}, item.name || "")
+  ));
+  const controls = el("div",{class:"row"},
+    el("button",{class:"btn", onclick:()=>{ setupCanvas(canvas); }}, "Clear"),
+    el("button",{class:"btn primary", style:`--accent:${lang.accent}`, onclick:()=>{ s.index=(s.index+1)%s.items.length; render(); }}, "Next →"),
+    el("button",{class:"speak-btn", style:`background:${lang.accent}`, onclick:()=>speak(item.t, lang.speechLang)}, "🔊")
+  );
+  wrap.appendChild(controls);
+  wrap.appendChild(yarnTrail(s.index % s.items.length, s.items.length, lang.accent));
+  root.appendChild(wrap);
+  root.appendChild(el("button",{class:"btn ghost", onclick:()=>{ state.screen="mode"; render(); }}, "← Back to modes"));
+
+  requestAnimationFrame(()=> setupCanvas(canvas));
+}
+
+function setupCanvas(canvas){
+  const box = canvas.parentElement;
+  const rect = box.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width*dpr; canvas.height = rect.height*dpr;
+  canvas.style.width = rect.width+"px"; canvas.style.height = rect.height+"px";
+  const ctx = canvas.getContext("2d");
+  ctx.scale(dpr,dpr);
+  ctx.clearRect(0,0,rect.width,rect.height);
+  ctx.lineWidth = 6; ctx.lineCap="round"; ctx.lineJoin="round";
+  ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--thread') || "#E8DCC0";
+  let drawing=false, last=null;
+  function pos(e){
+    const r = canvas.getBoundingClientRect();
+    const t = e.touches ? e.touches[0] : e;
+    return {x: t.clientX-r.left, y: t.clientY-r.top};
+  }
+  function start(e){ drawing=true; last=pos(e); e.preventDefault(); }
+  function move(e){ if(!drawing) return; const p=pos(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke(); last=p; e.preventDefault(); }
+  function end(){ drawing=false; }
+  canvas.onpointerdown = start; canvas.onpointermove = move; canvas.onpointerup = end; canvas.onpointerleave = end;
+  canvas.ontouchstart = start; canvas.ontouchmove = move; canvas.ontouchend = end;
+}
+
+// ---- Screen: Culture ----
+function renderCultureScreen(root){
+  const lang = LANGUAGES[state.language];
+  const s = state.session;
+  const item = s.items[s.index];
+  root.appendChild(el("h2",{}, "Culture & history"));
+  root.appendChild(yarnTrail(s.index, s.items.length, lang.accent));
+  root.appendChild(el("div",{class:"culturecard"},
+    el("h3",{}, item.title),
+    el("p",{}, item.body)
+  ));
+  root.appendChild(el("div",{class:"row", style:"justify-content:center;margin-top:16px;"},
+    el("button",{class:"btn", disabled: s.index===0, onclick:()=>{ s.index--; render(); }}, "← Prev"),
+    el("button",{class:"btn primary", style:`--accent:${lang.accent}`, disabled: s.index>=s.items.length-1, onclick:()=>{ s.index++; render(); }}, "Next →")
+  ));
+  root.appendChild(el("hr",{class:"stitch"}));
+  root.appendChild(el("button",{class:"btn ghost", onclick:()=>{ state.screen="mode"; render(); }}, "← Back to modes"));
+}
+
+// ---- Screen: Scoreboard ----
+function renderScoreboardScreen(root){
+  root.appendChild(el("h2",{}, "Scoreboard"));
+  root.appendChild(el("p",{class:"subtitle"}, "Every player's tally, across all languages played."));
+  const table = el("table",{class:"scores"});
+  const langKeys = Object.values(LANGUAGES).filter(l=>l.available).map(l=>l);
+  const thead = el("tr",{}, el("th",{},"Player"), ...langKeys.map(l=>el("th",{}, l.flag+" "+l.name)));
+  table.appendChild(thead);
+  state.group.forEach(p=>{
+    const row = el("tr",{}, el("td",{}, p.name));
+    langKeys.forEach(l=>{
+      const rec = (state.scores[p.id]||{})[l.key];
+      row.appendChild(el("td",{}, rec ? `${rec.correct}/${rec.total}` : "—"));
+    });
+    table.appendChild(row);
+  });
+  root.appendChild(table);
+  root.appendChild(el("button",{class:"btn ghost", onclick:()=>{ state.screen="mode"; render(); }}, "← Back to modes"));
+}
+
+// ---- Boot ----
+(async function boot(){
+  app.appendChild(el("div",{class:"screen"}, el("h2",{},"Winding the yarn ball… 🧶")));
+  await ensurePlayersLoaded();
+  state.screen = "players";
+  render();
+})();
+</script>
+</body>
+</html>
