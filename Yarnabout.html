@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Yarnabout — Learn a Language, Have a Yarn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Noto+Sans+Egyptian+Hieroglyphs&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <style>
   :root{
@@ -23,6 +23,8 @@
     --russian:#4E7FD6;
     --indonesian:#D9483C;
     --french:#3D6DB5;
+    --swahili:#2E8B57;
+    --hieroglyphs:#C9A227;
     --good:#5FD97E;
     --bad:#F0665C;
     --radius:18px;
@@ -118,7 +120,7 @@
     padding: clamp(28px,5vw,56px) clamp(20px,5vw,50px);text-align:center;box-shadow:var(--shadow);
     display:flex;flex-direction:column;gap:16px;align-items:center;
   }
-  .target-word{font-family:'Noto Sans SC','Noto Sans Arabic','Baloo 2',sans-serif;font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.1;}
+  .target-word{font-family:'Noto Sans SC','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Baloo 2',sans-serif;font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.1;}
   .target-word.rtl{direction:rtl;}
   .translit{color:var(--text-dim);font-size:clamp(14px,2vw,20px);letter-spacing:.03em;}
   .speak-btn{background:var(--accent,var(--thread));color:#171923;border:none;width:52px;height:52px;border-radius:50%;font-size:22px;box-shadow:var(--shadow);}
@@ -138,7 +140,7 @@
   /* ---- Phrases list ---- */
   .phraselist{display:flex;flex-direction:column;gap:12px;}
   .phrase{background:var(--bg-elev);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:16px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-  .phrase .ptext{font-family:'Noto Sans SC','Noto Sans Arabic','Baloo 2',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:600;}
+  .phrase .ptext{font-family:'Noto Sans SC','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Baloo 2',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:600;}
   .phrase .ptext.rtl{direction:rtl;}
   .phrase .ptranslit{color:var(--text-dim);font-size:.9em;}
   .phrase .pen{margin-left:auto;color:var(--text-dim);font-style:italic;}
@@ -146,10 +148,10 @@
   /* ---- Writing practice ---- */
   .writewrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
   .canvasbox{position:relative;width:min(360px,80vw);height:min(360px,80vw);background:var(--bg-elev);border:2px solid rgba(255,255,255,0.1);border-radius:var(--radius);box-shadow:var(--shadow);}
-  .canvasbox .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(260px,60vw);font-family:'Noto Sans SC','Noto Sans Arabic',sans-serif;color:rgba(255,255,255,0.08);user-select:none;pointer-events:none;}
+  .canvasbox .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(260px,60vw);font-family:'Noto Sans SC','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs',sans-serif;color:rgba(255,255,255,0.08);user-select:none;pointer-events:none;}
   .canvasbox canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;}
   .writemeta{text-align:center;}
-  .writemeta .lbl{font-size:clamp(28px,4vw,40px);font-weight:700;font-family:'Noto Sans SC','Noto Sans Arabic',sans-serif;}
+  .writemeta .lbl{font-size:clamp(28px,4vw,40px);font-weight:700;font-family:'Noto Sans SC','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs',sans-serif;}
   .writemeta .name{color:var(--text-dim);}
 
   /* ---- Culture ---- */
@@ -834,6 +836,201 @@ const LANGUAGES = {
       {title:"70, 80 and 90 are doing arithmetic", body:"Standard French counts 70 as 'soixante-dix' (sixty-ten), 80 as 'quatre-vingts' (four-twenties) and 90 as 'quatre-vingt-dix' (four-twenty-ten) — a leftover from an old base-20 counting system. Belgian and Swiss French use simpler forms instead."},
       {title:"Liaison links words together", body:"When one word ends in a normally-silent consonant and the next starts with a vowel, that consonant often gets pronounced to link them smoothly — 'les amis' sounds like 'lay-za-MEE', not 'lay ah-MEE'."},
       {title:"Café culture runs deep", body:"Sitting at a café for hours over a single coffee, watching the street, is a genuine cultural institution in France — cafés have historically doubled as meeting places for writers, philosophers and political movements."}
+    ]
+  },
+  swahili: {
+    key:"swahili", name:"Swahili", native:"Kiswahili", accent:"var(--swahili)", flag:"🇹🇿",
+    speechLang:"sw-KE", rtl:false, script:false, available:true,
+    blurb:"East Africa's great lingua franca — a Bantu language shaped by centuries of Arab coastal trade, spoken across Kenya, Tanzania, Uganda and beyond.",
+    words:[
+      {t:"jambo",p:"JAM-bo",en:"hello"},{t:"habari",p:"ha-BA-ri",en:"hello / how's it going (lit. 'news')"},
+      {t:"asante",p:"a-SAN-te",en:"thank you"},{t:"tafadhali",p:"ta-fa-DHA-li",en:"please"},
+      {t:"ndiyo",p:"n-DEE-yo",en:"yes"},{t:"hapana",p:"ha-PA-na",en:"no"},{t:"kwaheri",p:"kwa-HE-ri",en:"goodbye"},
+      {t:"samahani",p:"sa-ma-HA-ni",en:"sorry / excuse me"},{t:"karibu",p:"ka-REE-boo",en:"welcome / you're welcome"},
+      {t:"habari za asubuhi",p:"ha-BA-ri za a-soo-BOO-hi",en:"good morning"},{t:"habari za jioni",p:"ha-BA-ri za ji-O-ni",en:"good evening"},
+      {t:"usiku mwema",p:"oo-SEE-koo MWE-ma",en:"good night"},
+      {t:"moja",p:"MO-ja",en:"one"},{t:"mbili",p:"m-BEE-li",en:"two"},{t:"tatu",p:"TA-too",en:"three"},{t:"nne",p:"N-neh",en:"four"},
+      {t:"tano",p:"TA-no",en:"five"},{t:"sita",p:"SEE-ta",en:"six"},{t:"saba",p:"SA-ba",en:"seven"},{t:"nane",p:"NA-neh",en:"eight"},
+      {t:"tisa",p:"TEE-sa",en:"nine"},{t:"kumi",p:"KOO-mi",en:"ten"},{t:"ishirini",p:"i-shi-REE-ni",en:"twenty"},
+      {t:"hamsini",p:"ham-SEE-ni",en:"fifty"},{t:"mia",p:"MEE-a",en:"one hundred"},
+      {t:"nyekundu",p:"nye-KOON-doo",en:"red"},{t:"bluu",p:"BLOO",en:"blue"},{t:"kijani",p:"ki-JA-ni",en:"green"},
+      {t:"njano",p:"n-JA-no",en:"yellow"},{t:"nyeusi",p:"nye-OO-si",en:"black"},{t:"nyeupe",p:"nye-OO-peh",en:"white"},
+      {t:"machungwa",p:"ma-CHOON-gwa",en:"orange"},{t:"kahawia",p:"ka-ha-WEE-a",en:"brown"},
+      {t:"baba",p:"BA-ba",en:"dad"},{t:"mama",p:"MA-ma",en:"mum"},{t:"mtoto wa kiume",p:"m-TO-to wa ki-OO-meh",en:"son"},
+      {t:"mtoto wa kike",p:"m-TO-to wa KEE-keh",en:"daughter"},{t:"kaka",p:"KA-ka",en:"brother"},{t:"dada",p:"DA-da",en:"sister"},
+      {t:"babu",p:"BA-boo",en:"grandpa"},{t:"bibi",p:"BEE-bi",en:"grandma"},{t:"mume",p:"MOO-meh",en:"husband"},{t:"mke",p:"m-KEH",en:"wife"},
+      {t:"maji",p:"MA-ji",en:"water"},{t:"mkate",p:"m-KA-teh",en:"bread"},{t:"maziwa",p:"ma-ZEE-wa",en:"milk"},{t:"chai",p:"CHAI",en:"tea"},
+      {t:"kahawa",p:"ka-HA-wa",en:"coffee"},{t:"bia",p:"BEE-a",en:"beer"},{t:"nyama",p:"NYA-ma",en:"meat"},{t:"kuku",p:"KOO-koo",en:"chicken"},
+      {t:"samaki",p:"sa-MA-ki",en:"fish"},{t:"wali",p:"WA-li",en:"rice"},{t:"yai",p:"YAI",en:"egg"},{t:"tunda",p:"TOON-da",en:"fruit"},
+      {t:"ndizi",p:"n-DEE-zi",en:"banana"},{t:"sukari",p:"soo-KA-ri",en:"sugar"},{t:"chumvi",p:"CHOOM-vi",en:"salt"},
+      {t:"shule",p:"SHOO-leh",en:"school"},{t:"hospitali",p:"hos-pi-TA-li",en:"hospital"},{t:"benki",p:"BEN-ki",en:"bank"},
+      {t:"mkahawa",p:"m-ka-HA-wa",en:"restaurant / cafe"},{t:"duka",p:"DOO-ka",en:"shop"},{t:"soko",p:"SO-ko",en:"market"},
+      {t:"nyumba",p:"NYOOM-ba",en:"house"},{t:"mji",p:"m-JI",en:"town / city"},{t:"barabara",p:"ba-ra-BA-ra",en:"street / road"},
+      {t:"hoteli",p:"ho-TE-li",en:"hotel"},
+      {t:"kichwa",p:"KICH-wa",en:"head"},{t:"mkono",p:"m-KO-no",en:"hand / arm"},{t:"mguu",p:"m-GOO",en:"leg / foot"},
+      {t:"macho",p:"MA-cho",en:"eyes"},{t:"mdomo",p:"m-DO-mo",en:"mouth"},{t:"sikio",p:"si-KEE-o",en:"ear"},{t:"pua",p:"POO-a",en:"nose"},
+      {t:"moyo",p:"MO-yo",en:"heart"},
+      {t:"mbwa",p:"m-BWA",en:"dog"},{t:"paka",p:"PA-ka",en:"cat"},{t:"ndege",p:"n-DE-geh",en:"bird / airplane"},
+      {t:"simba",p:"SIM-ba",en:"lion"},{t:"tembo",p:"TEM-bo",en:"elephant"},{t:"twiga",p:"TWEE-ga",en:"giraffe"},
+      {t:"nyoka",p:"NYO-ka",en:"snake"},{t:"kobe",p:"KO-beh",en:"turtle"},
+      {t:"-kubwa",p:"KOOB-wa",en:"big"},{t:"-dogo",p:"DO-go",en:"small"},{t:"-zuri",p:"ZOO-ri",en:"good / beautiful"},
+      {t:"-baya",p:"BA-ya",en:"bad"},{t:"-refu",p:"RE-foo",en:"long / tall"},{t:"-fupi",p:"FOO-pi",en:"short"},
+      {t:"moto",p:"MO-to",en:"hot"},{t:"baridi",p:"ba-REE-di",en:"cold"},{t:"haraka",p:"ha-RA-ka",en:"fast"},{t:"-pya",p:"PYA",en:"new"},
+      {t:"kula",p:"KOO-la",en:"to eat"},{t:"kunywa",p:"KOON-ywa",en:"to drink"},{t:"kuona",p:"koo-O-na",en:"to see"},
+      {t:"kusikia",p:"koo-si-KEE-a",en:"to hear"},{t:"kuongea",p:"koo-on-GEH-a",en:"to speak"},{t:"kutembea",p:"koo-tem-BEH-a",en:"to walk"},
+      {t:"kukimbia",p:"koo-kim-BEE-a",en:"to run"},{t:"kulala",p:"koo-LA-la",en:"to sleep"},{t:"kununua",p:"koo-noo-NOO-a",en:"to buy"},
+      {t:"kufanya kazi",p:"koo-FAN-ya KA-zi",en:"to work"},
+      {t:"nini",p:"NEE-ni",en:"what"},{t:"nani",p:"NA-ni",en:"who"},{t:"kwa nini",p:"kwa NEE-ni",en:"why"},
+      {t:"vipi",p:"VEE-pi",en:"how"},{t:"lini",p:"LEE-ni",en:"when"},{t:"wapi",p:"WA-pi",en:"where"},
+      {t:"rafiki",p:"ra-FEE-ki",en:"friend"},{t:"jina",p:"JEE-na",en:"name"},{t:"wakati",p:"wa-KA-ti",en:"time"},
+      {t:"siku",p:"SEE-koo",en:"day"},{t:"pesa",p:"PEH-sa",en:"money"},{t:"kazi",p:"KA-zi",en:"work / job"},
+      {t:"gari",p:"GA-ri",en:"car"},{t:"simu",p:"SEE-moo",en:"phone"},{t:"kitabu",p:"ki-TA-boo",en:"book"},{t:"upendo",p:"oo-PEN-do",en:"love"}
+    ],
+    phrases:[
+      {t:"Habari yako?",p:"ha-BA-ri YA-ko",en:"How are you?"},
+      {t:"Jina lako nani?",p:"JEE-na LA-ko NA-ni",en:"What's your name?"},
+      {t:"Jina langu ni…",p:"JEE-na LAN-goo nee",en:"My name is…"},
+      {t:"Bei gani?",p:"BEH-i GA-ni",en:"How much? (what price)"},
+      {t:"Choo kiko wapi?",p:"CHO-o KEE-ko WA-pi",en:"Where's the toilet?"},
+      {t:"Sielewi",p:"si-eh-LEH-wi",en:"I don't understand"},
+      {t:"Unasema Kiingereza?",p:"oo-na-SEH-ma ki-in-geh-REH-za",en:"Do you speak English?"},
+      {t:"Samahani, sema tena",p:"sa-ma-HA-ni SEH-ma TEH-na",en:"Sorry, say that again"},
+      {t:"Nataka hii",p:"na-TA-ka HEE",en:"I want this"},
+      {t:"Bili, tafadhali",p:"BEE-li ta-fa-DHA-li",en:"The bill, please"},
+      {t:"Bahati njema",p:"ba-HA-ti n-JEH-ma",en:"Good luck"},
+      {t:"Hakuna matata",p:"ha-KOO-na ma-TA-ta",en:"No worries / no problem"},
+      {t:"Afya!",p:"AH-fya",en:"Cheers! (lit. 'health')"}
+    ],
+    writing:[],
+    culture:[
+      {title:"A lingua franca, not one tribe's language", body:"Swahili is spoken across Kenya, Tanzania, Uganda, the DRC and beyond as a shared second language between groups with entirely different native tongues — and it's an official language of the African Union."},
+      {title:"Arab trade left its mark", body:"Centuries of trade along the East African coast brought heavy Arabic influence into Swahili vocabulary — 'kitabu' (book) comes from Arabic 'kitab', for instance. 'Swahili' itself derives from the Arabic 'sawahil', meaning 'coasts'."},
+      {title:"Noun classes instead of gender", body:"Rather than masculine/feminine like French or Spanish, Swahili sorts nouns into around a dozen classes (people, plants, abstract ideas, and more), each with its own prefix pattern that ripples through the rest of the sentence."},
+      {title:"Hakuna matata is a real, everyday phrase", body:"Long before The Lion King made it famous worldwide, 'hakuna matata' was (and still is) an ordinary, commonly used expression across East Africa meaning 'no problems' or 'don't worry about it'."},
+      {title:"Safari is a Swahili word too", body:"The English word 'safari' comes directly from Swahili 'safari', meaning simply 'journey' or 'trip' — it only picked up its specific meaning of an African wildlife expedition once it entered English."}
+    ]
+  },
+  hieroglyphs: {
+    key:"hieroglyphs", name:"Egyptian Hieroglyphs", native:"𓂋𓏤𓆎𓅓𓏏𓊖", accent:"var(--hieroglyphs)", flag:"𓋹",
+    speechLang:"en-US", rtl:false, script:true, available:true,
+    blurb:"Not a spoken language you'll chat in tonight — a 3,000-year-old writing system. This is the alphabet, number system and a handful of the most iconic signs, verified sign-by-sign against the real Unicode hieroglyph chart.",
+    words:[
+      {t:"𓄿",p:"a (glottal)",en:"the sound 'ꜣ' — a glottal catch (Egyptian vulture sign)"},
+      {t:"𓂝",p:"a (guttural)",en:"the sound 'ꜥ' — a guttural, like Hebrew ayin (forearm sign)"},
+      {t:"𓇋",p:"i / ee",en:"the sound 'j' — like 'ee' or a soft 'y' (reed leaf sign)"},
+      {t:"𓇌",p:"y",en:"the sound 'y' (double reed sign)"},
+      {t:"𓅱",p:"w / oo",en:"the sound 'w' or 'u' (quail chick sign)"},
+      {t:"𓃀",p:"b",en:"the sound 'b' (foot sign)"},
+      {t:"𓊪",p:"p",en:"the sound 'p' (stool sign)"},
+      {t:"𓆑",p:"f",en:"the sound 'f' (horned viper sign)"},
+      {t:"𓅓",p:"m",en:"the sound 'm' (owl sign)"},
+      {t:"𓈖",p:"n",en:"the sound 'n' (water ripple sign)"},
+      {t:"𓂋",p:"r",en:"the sound 'r' (mouth sign)"},
+      {t:"𓉔",p:"h",en:"the sound 'h' (reed shelter sign)"},
+      {t:"𓎛",p:"h (emphatic)",en:"a sharper 'h' than English (twisted wick sign)"},
+      {t:"𓐍",p:"kh",en:"a guttural 'kh', like Scottish 'loch' (placenta sign)"},
+      {t:"𓄡",p:"kh (soft)",en:"a softer 'kh' sound (animal's belly sign)"},
+      {t:"𓋴",p:"s",en:"the sound 's' (folded cloth sign)"},
+      {t:"𓈙",p:"sh",en:"the sound 'sh' (pool sign)"},
+      {t:"𓈎",p:"q",en:"a deep 'q', further back than 'k' (hill slope sign)"},
+      {t:"𓎡",p:"k",en:"the sound 'k' (basket with handle sign)"},
+      {t:"𓎼",p:"g",en:"the sound 'g' (jar stand sign)"},
+      {t:"𓏏",p:"t",en:"the sound 't' (bread loaf sign)"},
+      {t:"𓍿",p:"tj / ch",en:"the sound 'tj', like 'ch' in 'church' (tethering rope sign)"},
+      {t:"𓂧",p:"d",en:"the sound 'd' (hand sign)"},
+      {t:"𓆓",p:"dj / j",en:"the sound 'dj', like 'j' in 'judge' (cobra sign)"},
+      {t:"𓏤",p:"one",en:"the number 1 (single stroke)"},
+      {t:"𓎆",p:"ten",en:"the number 10 (cattle hobble)"},
+      {t:"𓍢",p:"hundred",en:"the number 100 (coiled rope)"},
+      {t:"𓆼",p:"thousand",en:"the number 1,000 (lotus plant)"},
+      {t:"𓂭",p:"ten thousand",en:"the number 10,000 (raised finger)"},
+      {t:"𓆐",p:"hundred thousand",en:"the number 100,000 (tadpole)"},
+      {t:"𓁨",p:"million",en:"the number 1,000,000 — shown as Heh, god of infinity"},
+      {t:"𓋹",p:"ankh",en:"life / to live (the ankh)"},
+      {t:"𓄤",p:"nefer",en:"beautiful, good, perfect (the word 'nefer')"},
+      {t:"𓁦",p:"maat",en:"Maat — truth, order and balance (also a goddess)"},
+      {t:"𓊽",p:"djed",en:"stability, endurance (the djed pillar)"},
+      {t:"𓌀",p:"was",en:"power, dominion (the was-sceptre)"},
+      {t:"𓎬",p:"tyet",en:"the Knot of Isis, a protective symbol"},
+      {t:"𓇳",p:"ra",en:"Ra, the sun"},
+      {t:"𓉐",p:"per",en:"house"},
+      {t:"𓄣",p:"ib",en:"heart"},
+      {t:"𓁹",p:"jrt",en:"eye / to see"},
+      {t:"𓂀",p:"wedjat",en:"the Eye of Horus, a protection symbol"},
+      {t:"𓅐",p:"mut",en:"mother (vulture sign)"},
+      {t:"𓂓",p:"ka",en:"the 'ka' — a person's life force"},
+      {t:"𓆣",p:"kheper",en:"the scarab beetle — becoming, transformation (the god Khepri)"},
+      {t:"𓅭",p:"sa",en:"son"},
+      {t:"𓏛",p:"medjat",en:"book / papyrus scroll"},
+      {t:"𓇯",p:"pet",en:"sky, heaven"},
+      {t:"𓇾",p:"ta",en:"land, earth"},
+      {t:"𓈗",p:"mu",en:"water"},
+      {t:"𓈋",p:"djew",en:"mountain"},
+      {t:"𓊛",p:"depet",en:"ship, boat"},
+      {t:"𓎟",p:"neb",en:"lord / everything (the word 'neb')"},
+      {t:"𓍷",p:"shenu",en:"the cartouche — an oval ring enclosing a royal name"},
+      {t:"𓇼",p:"seba",en:"star"},
+      {t:"𓇹",p:"iah",en:"moon / month"},
+      {t:"𓁷",p:"hor",en:"face / upon"},
+      {t:"𓂈",p:"sedjem",en:"ear / to listen"},
+      {t:"𓂉",p:"fend",en:"nose"},
+      {t:"𓏊",p:"henket",en:"beer"},
+      {t:"𓎯",p:"merhet",en:"oil, ointment"},
+      {t:"𓆳",p:"renpet",en:"year"},
+      {t:"𓉥",p:"ah",en:"palace"},
+      {t:"𓊭",p:"qeres",en:"coffin, burial"},
+      {t:"𓊮",p:"nesser",en:"fire, flame"},
+      {t:"𓋑",p:"hedjet",en:"the White Crown of Upper Egypt"},
+      {t:"𓋔",p:"deshret",en:"the Red Crown of Lower Egypt"},
+      {t:"𓋖",p:"sekhemty",en:"the Double Crown of unified Egypt"},
+      {t:"𓀀",p:"z",en:"man / I, me, my"},
+      {t:"𓁐",p:"zet",en:"woman"},
+      {t:"𓁶",p:"tp",en:"head"},
+      {t:"𓁿",p:"remi",en:"to weep, tears"},
+      {t:"𓂢",p:"jabi",en:"left (side)"},
+      {t:"𓄟",p:"shed",en:"to read aloud / to save"},
+      {t:"𓅘",p:"neh",en:"to petition, beseech"},
+      {t:"𓅝",p:"hib",en:"ibis — the bird of Thoth"},
+      {t:"𓆊",p:"sobek",en:"crocodile (the god Sobek)"},
+      {t:"𓆏",p:"heqet",en:"frog (the goddess Heket)"},
+      {t:"𓆛",p:"inet",en:"fish (tilapia)"},
+      {t:"𓆸",p:"seshen",en:"lotus flower — also means beautiful"},
+      {t:"𓇅",p:"wadj",en:"papyrus, fresh, green"},
+      {t:"𓈍",p:"khai",en:"to appear, to shine (of the king)"},
+      {t:"𓉴",p:"mer",en:"pyramid"},
+      {t:"𓉶",p:"tekhen",en:"obelisk"},
+      {t:"𓉸",p:"ahau",en:"stela — a commemorative stone slab"},
+      {t:"𓊤",p:"user",en:"oar / voice"},
+      {t:"𓊹",p:"netjer",en:"a god (generic divine standard)"},
+      {t:"𓌒",p:"ped",en:"bow (weapon), to stretch"},
+      {t:"𓌢",p:"sen",en:"arrow / brother / two"},
+      {t:"𓌳",p:"shena",en:"sickle"},
+      {t:"𓏌",p:"nu",en:"pot"},
+      {t:"𓏙",p:"dji",en:"to give (an offering)"},
+      {t:"𓁚",p:"ra-horakhty",en:"Ra, the sun god"},
+      {t:"𓅃",p:"heru",en:"Horus, the falcon-headed sky god"},
+      {t:"𓁢",p:"anpu",en:"Anubis, god of mummification"},
+      {t:"𓁟",p:"djehuty",en:"Thoth, god of writing and wisdom"},
+      {t:"𓁥",p:"hathor",en:"Hathor, goddess of love and joy"},
+      {t:"𓁰",p:"ptah",en:"Ptah, god of craftsmen"},
+      {t:"𓁲",p:"bes",en:"Bes, protector of the home and childbirth"},
+      {t:"𓁣",p:"seth",en:"Seth, god of chaos and storms"},
+      {t:"𓁩",p:"amun",en:"Amun, king of the gods"},
+      {t:"𓁴",p:"sekhmet",en:"Sekhmet, goddess of war and healing"},
+      {t:"𓆫",p:"serqet",en:"Serket, goddess of protection from venom"},
+      {t:"𓀲",p:"osiris",en:"Osiris, god of the afterlife (shown as the White Crown)"}
+    ],
+    phrases:[],
+    writing:[
+      {t:"𓋹",name:"ankh — life"},{t:"𓂀",name:"Eye of Horus — protection"},{t:"𓆣",name:"scarab — transformation"},
+      {t:"𓊽",name:"djed pillar — stability"},{t:"𓌀",name:"was sceptre — power"},{t:"𓍷",name:"cartouche — royal name ring"}
+    ],
+    culture:[
+      {title:"This isn't a spoken-language deck like the others", body:"Ancient Egyptian died out as a spoken language over a thousand years ago, and nobody knows exactly how it sounded. What you hear here is 'Egyptological pronunciation' — a scholarly convention (inserting a short 'e' between consonants) used so Egyptologists can talk about words out loud, not a reconstruction of the real ancient sound."},
+      {title:"Verified sign by sign", body:"Every glyph, transliteration and meaning here was checked directly against the official Unicode Egyptian Hieroglyphs code chart and Gardiner's sign list — the standard reference Egyptologists actually use — rather than guessed."},
+      {title:"24 sounds, thousands of signs", body:"Alongside logograms (whole-word picture signs) and determinatives (silent meaning-clarifiers), Egyptian had a set of roughly 24 single-consonant signs — shown here — that function like an alphabet. Ancient scribes mixed all three sign types freely within the same word."},
+      {title:"No vowels written down", body:"Hieroglyphic writing recorded consonants, not vowels — which is exactly why nobody can be fully certain how Egyptian words were actually pronounced, and why 'Tutankhamun' and similar names are modern reconstructions filled in by convention."},
+      {title:"Decoded via the Rosetta Stone", body:"Hieroglyphs were unreadable for over 1,400 years until the 1799 discovery of the Rosetta Stone, which repeated the same royal decree in hieroglyphic, Demotic and Greek — giving Jean-François Champollion the key to crack the script in 1822."}
     ]
   },
   yolngu: {
