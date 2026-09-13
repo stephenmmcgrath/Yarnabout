@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Yarnabout — Learn a Language, Have a Yarn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Noto+Sans+Egyptian+Hieroglyphs&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Noto+Sans+Egyptian+Hieroglyphs&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <style>
   :root{
@@ -25,6 +25,8 @@
     --french:#3D6DB5;
     --swahili:#2E8B57;
     --hieroglyphs:#C9A227;
+    --korean:#8E44AD;
+    --irish:#3D9970;
     --good:#5FD97E;
     --bad:#F0665C;
     --radius:18px;
@@ -120,7 +122,7 @@
     padding: clamp(28px,5vw,56px) clamp(20px,5vw,50px);text-align:center;box-shadow:var(--shadow);
     display:flex;flex-direction:column;gap:16px;align-items:center;
   }
-  .target-word{font-family:'Noto Sans SC','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Baloo 2',sans-serif;font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.1;}
+  .target-word{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Baloo 2',sans-serif;font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.1;}
   .target-word.rtl{direction:rtl;}
   .translit{color:var(--text-dim);font-size:clamp(14px,2vw,20px);letter-spacing:.03em;}
   .speak-btn{background:var(--accent,var(--thread));color:#171923;border:none;width:52px;height:52px;border-radius:50%;font-size:22px;box-shadow:var(--shadow);}
@@ -140,7 +142,7 @@
   /* ---- Phrases list ---- */
   .phraselist{display:flex;flex-direction:column;gap:12px;}
   .phrase{background:var(--bg-elev);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:16px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-  .phrase .ptext{font-family:'Noto Sans SC','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Baloo 2',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:600;}
+  .phrase .ptext{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Baloo 2',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:600;}
   .phrase .ptext.rtl{direction:rtl;}
   .phrase .ptranslit{color:var(--text-dim);font-size:.9em;}
   .phrase .pen{margin-left:auto;color:var(--text-dim);font-style:italic;}
@@ -148,10 +150,10 @@
   /* ---- Writing practice ---- */
   .writewrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
   .canvasbox{position:relative;width:min(360px,80vw);height:min(360px,80vw);background:var(--bg-elev);border:2px solid rgba(255,255,255,0.1);border-radius:var(--radius);box-shadow:var(--shadow);}
-  .canvasbox .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(260px,60vw);font-family:'Noto Sans SC','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs',sans-serif;color:rgba(255,255,255,0.08);user-select:none;pointer-events:none;}
+  .canvasbox .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(260px,60vw);font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs',sans-serif;color:rgba(255,255,255,0.08);user-select:none;pointer-events:none;}
   .canvasbox canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;}
   .writemeta{text-align:center;}
-  .writemeta .lbl{font-size:clamp(28px,4vw,40px);font-weight:700;font-family:'Noto Sans SC','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs',sans-serif;}
+  .writemeta .lbl{font-size:clamp(28px,4vw,40px);font-weight:700;font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs',sans-serif;}
   .writemeta .name{color:var(--text-dim);}
 
   /* ---- Culture ---- */
@@ -1031,6 +1033,227 @@ const LANGUAGES = {
       {title:"24 sounds, thousands of signs", body:"Alongside logograms (whole-word picture signs) and determinatives (silent meaning-clarifiers), Egyptian had a set of roughly 24 single-consonant signs — shown here — that function like an alphabet. Ancient scribes mixed all three sign types freely within the same word."},
       {title:"No vowels written down", body:"Hieroglyphic writing recorded consonants, not vowels — which is exactly why nobody can be fully certain how Egyptian words were actually pronounced, and why 'Tutankhamun' and similar names are modern reconstructions filled in by convention."},
       {title:"Decoded via the Rosetta Stone", body:"Hieroglyphs were unreadable for over 1,400 years until the 1799 discovery of the Rosetta Stone, which repeated the same royal decree in hieroglyphic, Demotic and Greek — giving Jean-François Champollion the key to crack the script in 1822."}
+    ]
+  },
+  korean: {
+    key:"korean", name:"Korean", native:"한국어", accent:"var(--korean)", flag:"🇰🇷",
+    speechLang:"ko-KR", rtl:false, script:true, available:true,
+    blurb:"Hangul was purpose-built in 1443 to be easy to learn — genuinely one of the most logical writing systems ever designed, even if the grammar takes more work.",
+    words:[
+      {t:"안녕하세요",p:"an-nyeong-ha-se-yo",en:"hello (formal)"},{t:"안녕",p:"an-nyeong",en:"hi / bye (casual)"},
+      {t:"감사합니다",p:"gam-sa-ham-ni-da",en:"thank you"},{t:"주세요",p:"ju-se-yo",en:"please (give me)"},
+      {t:"네",p:"ne",en:"yes"},{t:"아니요",p:"a-ni-yo",en:"no"},{t:"안녕히 가세요",p:"an-nyeong-hi ga-se-yo",en:"goodbye (to the one leaving)"},
+      {t:"안녕히 계세요",p:"an-nyeong-hi gye-se-yo",en:"goodbye (to the one staying)"},{t:"죄송합니다",p:"joe-song-ham-ni-da",en:"sorry"},
+      {t:"실례합니다",p:"sil-lye-ham-ni-da",en:"excuse me"},{t:"안녕히 주무세요",p:"an-nyeong-hi ju-mu-se-yo",en:"good night"},
+      {t:"천만에요",p:"cheon-man-e-yo",en:"you're welcome"},
+      {t:"일",p:"il",en:"one (counting numbers)"},{t:"이",p:"i",en:"two (counting numbers)"},{t:"삼",p:"sam",en:"three (counting numbers)"},
+      {t:"사",p:"sa",en:"four (counting numbers)"},{t:"오",p:"o",en:"five (counting numbers)"},{t:"육",p:"yuk",en:"six (counting numbers)"},
+      {t:"칠",p:"chil",en:"seven (counting numbers)"},{t:"팔",p:"pal",en:"eight (counting numbers)"},{t:"구",p:"gu",en:"nine (counting numbers)"},
+      {t:"십",p:"sip",en:"ten (counting numbers)"},{t:"이십",p:"i-sip",en:"twenty"},{t:"삼십",p:"sam-sip",en:"thirty"},
+      {t:"백",p:"baek",en:"one hundred"},{t:"천",p:"cheon",en:"one thousand"},
+      {t:"하나",p:"ha-na",en:"one (counting objects)"},{t:"둘",p:"dul",en:"two (counting objects)"},{t:"셋",p:"set",en:"three (counting objects)"},
+      {t:"넷",p:"net",en:"four (counting objects)"},{t:"다섯",p:"da-seot",en:"five (counting objects)"},{t:"여섯",p:"yeo-seot",en:"six (counting objects)"},
+      {t:"일곱",p:"il-gop",en:"seven (counting objects)"},{t:"여덟",p:"yeo-deol",en:"eight (counting objects)"},{t:"아홉",p:"a-hop",en:"nine (counting objects)"},
+      {t:"열",p:"yeol",en:"ten (counting objects)"},
+      {t:"빨간색",p:"ppal-gan-saek",en:"red"},{t:"파란색",p:"pa-ran-saek",en:"blue"},{t:"초록색",p:"cho-rok-saek",en:"green"},
+      {t:"노란색",p:"no-ran-saek",en:"yellow"},{t:"검은색",p:"geo-meun-saek",en:"black"},{t:"흰색",p:"huin-saek",en:"white"},
+      {t:"주황색",p:"ju-hwang-saek",en:"orange"},{t:"보라색",p:"bo-ra-saek",en:"purple"},{t:"분홍색",p:"bun-hong-saek",en:"pink"},{t:"갈색",p:"gal-saek",en:"brown"},
+      {t:"아빠",p:"ap-pa",en:"dad"},{t:"엄마",p:"eom-ma",en:"mum"},{t:"아들",p:"a-deul",en:"son"},{t:"딸",p:"ttal",en:"daughter"},
+      {t:"오빠",p:"op-pa",en:"older brother (said by a female)"},{t:"형",p:"hyeong",en:"older brother (said by a male)"},
+      {t:"누나",p:"nu-na",en:"older sister (said by a male)"},{t:"언니",p:"eon-ni",en:"older sister (said by a female)"},
+      {t:"남동생",p:"nam-dong-saeng",en:"younger brother"},{t:"여동생",p:"yeo-dong-saeng",en:"younger sister"},
+      {t:"할아버지",p:"ha-ra-beo-ji",en:"grandpa"},{t:"할머니",p:"hal-meo-ni",en:"grandma"},{t:"남편",p:"nam-pyeon",en:"husband"},
+      {t:"아내",p:"a-nae",en:"wife"},{t:"가족",p:"ga-jok",en:"family"},{t:"친구",p:"chin-gu",en:"friend"},
+      {t:"물",p:"mul",en:"water"},{t:"빵",p:"ppang",en:"bread"},{t:"우유",p:"u-yu",en:"milk"},{t:"차",p:"cha",en:"tea"},
+      {t:"커피",p:"keo-pi",en:"coffee"},{t:"주스",p:"ju-seu",en:"juice"},{t:"맥주",p:"maek-ju",en:"beer"},{t:"고기",p:"go-gi",en:"meat"},
+      {t:"닭고기",p:"dak-go-gi",en:"chicken"},{t:"생선",p:"saeng-seon",en:"fish"},{t:"밥",p:"bap",en:"rice / a meal"},{t:"수프",p:"su-peu",en:"soup"},
+      {t:"계란",p:"gye-ran",en:"egg"},{t:"치즈",p:"chi-jeu",en:"cheese"},{t:"사과",p:"sa-gwa",en:"apple"},{t:"바나나",p:"ba-na-na",en:"banana"},
+      {t:"오렌지",p:"o-ren-ji",en:"orange (fruit)"},{t:"감자",p:"gam-ja",en:"potato"},{t:"야채",p:"ya-chae",en:"vegetables"},
+      {t:"과일",p:"gwa-il",en:"fruit"},{t:"설탕",p:"seol-tang",en:"sugar"},{t:"소금",p:"so-geum",en:"salt"},
+      {t:"아침식사",p:"a-chim-sik-sa",en:"breakfast"},{t:"점심",p:"jeom-sim",en:"lunch"},{t:"저녁",p:"jeo-nyeok",en:"dinner / evening"},
+      {t:"학교",p:"hak-gyo",en:"school"},{t:"병원",p:"byeong-won",en:"hospital"},{t:"은행",p:"eun-haeng",en:"bank"},
+      {t:"식당",p:"sik-dang",en:"restaurant"},{t:"가게",p:"ga-ge",en:"shop"},{t:"공원",p:"gong-won",en:"park"},
+      {t:"집",p:"jip",en:"house"},{t:"도시",p:"do-si",en:"city"},{t:"거리",p:"geo-ri",en:"street"},
+      {t:"공항",p:"gong-hang",en:"airport"},{t:"기차역",p:"gi-cha-yeok",en:"train station"},{t:"호텔",p:"ho-tel",en:"hotel"},
+      {t:"머리",p:"meo-ri",en:"head"},{t:"손",p:"son",en:"hand"},{t:"다리",p:"da-ri",en:"leg"},{t:"눈",p:"nun",en:"eyes"},
+      {t:"입",p:"ip",en:"mouth"},{t:"귀",p:"gwi",en:"ear"},{t:"코",p:"ko",en:"nose"},{t:"심장",p:"sim-jang",en:"heart"},
+      {t:"머리카락",p:"meo-ri-ka-rak",en:"hair"},{t:"이",p:"i",en:"teeth"},{t:"등",p:"deung",en:"back"},{t:"손가락",p:"son-ga-rak",en:"finger"},
+      {t:"개",p:"gae",en:"dog"},{t:"고양이",p:"go-yang-i",en:"cat"},{t:"새",p:"sae",en:"bird"},{t:"말",p:"mal",en:"horse"},
+      {t:"소",p:"so",en:"cow"},{t:"돼지",p:"dwae-ji",en:"pig"},{t:"호랑이",p:"ho-rang-i",en:"tiger"},{t:"곰",p:"gom",en:"bear"},
+      {t:"토끼",p:"to-kki",en:"rabbit"},{t:"늑대",p:"neuk-dae",en:"wolf"},{t:"여우",p:"yeo-u",en:"fox"},{t:"쥐",p:"jwi",en:"mouse"},
+      {t:"빠른",p:"ppa-reun",en:"fast"},{t:"느린",p:"neu-rin",en:"slow"},{t:"뜨거운",p:"tteu-geo-un",en:"hot"},{t:"차가운",p:"cha-ga-un",en:"cold"},
+      {t:"새로운",p:"sae-ro-un",en:"new"},{t:"오래된",p:"o-rae-doen",en:"old"},{t:"큰",p:"keun",en:"big / tall"},{t:"작은",p:"ja-geun",en:"small"},
+      {t:"긴",p:"gin",en:"long"},{t:"짧은",p:"jjal-beun",en:"short"},{t:"깨끗한",p:"kkae-kkeu-tan",en:"clean"},{t:"더러운",p:"deo-reo-un",en:"dirty"},
+      {t:"피곤한",p:"pi-gon-han",en:"tired"},{t:"배고픈",p:"bae-go-peun",en:"hungry"},{t:"예쁜",p:"ye-ppeun",en:"pretty"},
+      {t:"좋은",p:"jo-eun",en:"good"},{t:"나쁜",p:"nap-peun",en:"bad"},{t:"비싼",p:"bi-ssan",en:"expensive"},{t:"싼",p:"ssan",en:"cheap"},
+      {t:"아름다운",p:"a-reum-da-un",en:"beautiful"},
+      {t:"먹다",p:"meok-da",en:"to eat"},{t:"마시다",p:"ma-si-da",en:"to drink"},{t:"보다",p:"bo-da",en:"to watch / see"},
+      {t:"듣다",p:"deut-da",en:"to listen"},{t:"말하다",p:"mal-ha-da",en:"to speak"},{t:"걷다",p:"geot-da",en:"to walk"},
+      {t:"뛰다",p:"ttwi-da",en:"to run"},{t:"자다",p:"ja-da",en:"to sleep"},{t:"사다",p:"sa-da",en:"to buy"},{t:"팔다",p:"pal-da",en:"to sell"},
+      {t:"사랑하다",p:"sa-rang-ha-da",en:"to love"},{t:"좋아하다",p:"jo-a-ha-da",en:"to like"},{t:"생각하다",p:"saeng-gak-ha-da",en:"to think"},
+      {t:"알다",p:"al-da",en:"to know"},{t:"일하다",p:"il-ha-da",en:"to work"},{t:"읽다",p:"ik-da",en:"to read"},{t:"쓰다",p:"sseu-da",en:"to write"},
+      {t:"놀다",p:"nol-da",en:"to play"},{t:"살다",p:"sal-da",en:"to live"},{t:"이해하다",p:"i-hae-ha-da",en:"to understand"},
+      {t:"무엇",p:"mu-eot",en:"what"},{t:"누구",p:"nu-gu",en:"who"},{t:"왜",p:"wae",en:"why"},{t:"어떻게",p:"eo-tteo-ke",en:"how"},
+      {t:"언제",p:"eon-je",en:"when"},{t:"어디",p:"eo-di",en:"where"},{t:"어느",p:"eo-neu",en:"which"},
+      {t:"지금",p:"ji-geum",en:"now"},{t:"어제",p:"eo-je",en:"yesterday"},{t:"오늘",p:"o-neul",en:"today"},{t:"내일",p:"nae-il",en:"tomorrow"},
+      {t:"시간",p:"si-gan",en:"hour / time"},{t:"분",p:"bun",en:"minute"},{t:"년",p:"nyeon",en:"year"},{t:"월",p:"wol",en:"month"},{t:"주",p:"ju",en:"week"},
+      {t:"월요일",p:"wo-ryo-il",en:"Monday"},{t:"화요일",p:"hwa-yo-il",en:"Tuesday"},{t:"수요일",p:"su-yo-il",en:"Wednesday"},
+      {t:"목요일",p:"mo-gyo-il",en:"Thursday"},{t:"금요일",p:"geu-myo-il",en:"Friday"},{t:"토요일",p:"to-yo-il",en:"Saturday"},
+      {t:"일요일",p:"i-ryo-il",en:"Sunday"},{t:"아침",p:"a-chim",en:"morning"},
+      {t:"날씨",p:"nal-ssi",en:"weather"},{t:"해",p:"hae",en:"sun"},{t:"비",p:"bi",en:"rain"},{t:"눈",p:"nun",en:"snow"},
+      {t:"바람",p:"ba-ram",en:"wind"},{t:"구름",p:"gu-reum",en:"cloud"},{t:"폭풍",p:"pok-pung",en:"storm"},{t:"무지개",p:"mu-ji-gae",en:"rainbow"},
+      {t:"옷",p:"ot",en:"clothing"},{t:"셔츠",p:"syeo-cheu",en:"shirt"},{t:"바지",p:"ba-ji",en:"trousers"},{t:"드레스",p:"deu-re-seu",en:"dress"},
+      {t:"신발",p:"sin-bal",en:"shoes"},{t:"재킷",p:"jae-kit",en:"jacket"},{t:"모자",p:"mo-ja",en:"hat"},{t:"양말",p:"yang-mal",en:"socks"},
+      {t:"버스",p:"beo-seu",en:"bus"},{t:"기차",p:"gi-cha",en:"train"},{t:"비행기",p:"bi-haeng-gi",en:"airplane"},
+      {t:"자전거",p:"ja-jeon-geo",en:"bicycle"},{t:"택시",p:"taek-si",en:"taxi"},{t:"배",p:"bae",en:"boat"},{t:"지하철",p:"ji-ha-cheol",en:"subway"},
+      {t:"책",p:"chaek",en:"book"},{t:"테이블",p:"te-i-beul",en:"table"},{t:"의자",p:"ui-ja",en:"chair"},{t:"문",p:"mun",en:"door"},
+      {t:"창문",p:"chang-mun",en:"window"},{t:"전화기",p:"jeon-hwa-gi",en:"phone"},{t:"돈",p:"don",en:"money"},{t:"회사",p:"hoe-sa",en:"company / work"},
+      {t:"열쇠",p:"yeol-soe",en:"key"},{t:"가방",p:"ga-bang",en:"bag"},{t:"시계",p:"si-gye",en:"watch / clock"},
+      {t:"신문",p:"sin-mun",en:"newspaper"},{t:"컴퓨터",p:"keom-pyu-teo",en:"computer"},{t:"시장",p:"si-jang",en:"market"},
+      {t:"행복한",p:"haeng-bok-han",en:"happy"},{t:"슬픈",p:"seul-peun",en:"sad"},{t:"화난",p:"hwa-nan",en:"angry"},
+      {t:"놀란",p:"nol-lan",en:"surprised"},{t:"무서운",p:"mu-seo-un",en:"scared"},{t:"차분한",p:"cha-bun-han",en:"calm"},
+      {t:"사랑에 빠진",p:"sa-rang-e ppa-jin",en:"in love"},{t:"지루한",p:"ji-ru-han",en:"bored"},
+      {t:"선생님",p:"seon-saeng-nim",en:"teacher"},{t:"의사",p:"ui-sa",en:"doctor"},{t:"경찰관",p:"gyeong-chal-gwan",en:"police officer"},
+      {t:"엔지니어",p:"en-ji-ni-eo",en:"engineer"},{t:"학생",p:"hak-saeng",en:"student"},{t:"운전사",p:"un-jeon-sa",en:"driver"},
+      {t:"요리사",p:"yo-ri-sa",en:"cook"},{t:"점원",p:"jeom-won",en:"shop assistant"},
+      {t:"사랑",p:"sa-rang",en:"love (noun)"},{t:"음악",p:"eum-ak",en:"music"},{t:"텔레비전",p:"tel-le-bi-jeon",en:"TV"},{t:"인터넷",p:"in-teo-net",en:"internet"},
+      {t:"안경",p:"an-gyeong",en:"glasses"},{t:"우산",p:"u-san",en:"umbrella"},{t:"선물",p:"seon-mul",en:"gift"},{t:"편지",p:"pyeon-ji",en:"letter"}
+    ],
+    phrases:[
+      {t:"어떻게 지내세요?",p:"eo-tteo-ke ji-nae-se-yo",en:"How are you?"},
+      {t:"제 이름은…입니다",p:"je i-reu-meun … im-ni-da",en:"My name is…"},
+      {t:"이름이 뭐예요?",p:"i-reu-mi mwo-ye-yo",en:"What's your name?"},
+      {t:"얼마예요?",p:"eol-ma-ye-yo",en:"How much is it?"},
+      {t:"화장실이 어디예요?",p:"hwa-jang-si-ri eo-di-ye-yo",en:"Where's the bathroom?"},
+      {t:"이해가 안 돼요",p:"i-hae-ga an dwae-yo",en:"I don't understand"},
+      {t:"영어 할 줄 아세요?",p:"yeong-eo hal jul a-se-yo",en:"Do you speak English?"},
+      {t:"다시 말해 주세요",p:"da-si mal-hae ju-se-yo",en:"Please say that again"},
+      {t:"이거 주세요",p:"i-geo ju-se-yo",en:"I'll take this / give me this"},
+      {t:"계산서 주세요",p:"gye-san-seo ju-se-yo",en:"The bill, please"},
+      {t:"행운을 빌어요",p:"haeng-u-neul bi-reo-yo",en:"Good luck"},
+      {t:"괜찮아요",p:"gwaen-cha-na-yo",en:"It's okay / no worries"},
+      {t:"건배!",p:"geon-bae",en:"Cheers!"}
+    ],
+    writing:[
+      {t:"ㄱ",name:"giyeok — g/k"},{t:"ㄴ",name:"nieun — n"},{t:"ㄷ",name:"digeut — d/t"},{t:"ㄹ",name:"rieul — r/l"},
+      {t:"ㅁ",name:"mieum — m"},{t:"ㅂ",name:"bieup — b/p"},{t:"ㅅ",name:"siot — s"},{t:"ㅇ",name:"ieung — ng / silent"},
+      {t:"ㅈ",name:"jieut — j"},{t:"ㅊ",name:"chieut — ch"},{t:"ㅋ",name:"kieuk — k"},{t:"ㅌ",name:"tieut — t"},
+      {t:"ㅍ",name:"pieup — p"},{t:"ㅎ",name:"hieut — h"},{t:"ㅏ",name:"a"},{t:"ㅑ",name:"ya"},{t:"ㅓ",name:"eo"},
+      {t:"ㅕ",name:"yeo"},{t:"ㅗ",name:"o"},{t:"ㅛ",name:"yo"},{t:"ㅜ",name:"u"},{t:"ㅠ",name:"yu"},{t:"ㅡ",name:"eu"},{t:"ㅣ",name:"i"}
+    ],
+    culture:[
+      {title:"An alphabet invented on purpose", body:"Hangul was created in 1443 under King Sejong the Great specifically so ordinary people could learn to read and write, replacing exclusive reliance on Chinese characters. The shapes of the consonants are even modelled on the shape your mouth makes saying them."},
+      {title:"Two number systems, used differently", body:"Korean has native Korean numbers (하나, 둘, 셋…) for counting objects, people and age, and Sino-Korean numbers (일, 이, 삼…) for dates, money, phone numbers and minutes — which system you use depends entirely on what you're counting."},
+      {title:"Speech levels aren't optional", body:"Korean sentence endings change depending on your relative age and social relationship to who you're talking to — the same sentence can be phrased several different ways depending on whether you're speaking to a close friend, a stranger, or an elder."},
+      {title:"Everyone gets a year older on New Year's Day", body:"Under the traditional Korean age system, a baby is considered 1 year old at birth, and everyone's age ticks up together on New Year's Day rather than on individual birthdays — South Korea officially switched to international age in 2023 for most legal purposes, but the traditional system still comes up in daily life."},
+      {title:"Banchan and shared eating", body:"A Korean meal typically arrives with an array of small shared side dishes (banchan) — kimchi being the most famous — refilled throughout the meal and eaten alongside the main dish rather than as a separate course."}
+    ]
+  },
+  irish: {
+    key:"irish", name:"Irish", native:"Gaeilge", accent:"var(--irish)", flag:"🇮🇪",
+    speechLang:"ga-IE", rtl:false, script:false, available:true,
+    blurb:"A Celtic language with no direct words for 'yes' or 'no' — you answer by echoing the verb instead. Ireland's first official language, and an official EU language too.",
+    words:[
+      {t:"Dia duit",p:"DEE-a gwitch",en:"hello (lit. 'God to you')"},{t:"Dia is Muire duit",p:"DEE-a iss MWIR-ə gwitch",en:"hello (reply)"},
+      {t:"go raibh maith agat",p:"guh rev mah AH-gut",en:"thank you"},{t:"le do thoil",p:"leh duh HULL",en:"please"},
+      {t:"tá",p:"taw",en:"yes (lit. 'is/am' — Irish echoes the verb instead of a fixed word)"},
+      {t:"níl",p:"neel",en:"no (lit. 'is not')"},{t:"slán",p:"slawn",en:"goodbye"},
+      {t:"tá brón orm",p:"taw brohn ur-um",en:"sorry (lit. 'sorrow is on me')"},{t:"gabh mo leithscéal",p:"guv muh LESH-kayl",en:"excuse me"},
+      {t:"maidin mhaith",p:"MAH-din wah",en:"good morning"},{t:"oíche mhaith",p:"EE-heh wah",en:"good night"},{t:"fáilte",p:"FAWL-cheh",en:"welcome"},
+      {t:"a haon",p:"uh hayn",en:"one"},{t:"a dó",p:"uh doh",en:"two"},{t:"a trí",p:"uh tree",en:"three"},{t:"a ceathair",p:"uh KA-hir",en:"four"},
+      {t:"a cúig",p:"uh KOO-ig",en:"five"},{t:"a sé",p:"uh shay",en:"six"},{t:"a seacht",p:"uh shocht",en:"seven"},
+      {t:"a hocht",p:"uh hukht",en:"eight"},{t:"a naoi",p:"uh nay",en:"nine"},{t:"a deich",p:"uh deh",en:"ten"},
+      {t:"fiche",p:"FI-heh",en:"twenty"},{t:"tríocha",p:"TREE-uh-huh",en:"thirty"},{t:"céad",p:"kayd",en:"one hundred"},{t:"míle",p:"MEE-leh",en:"one thousand"},
+      {t:"dearg",p:"DYAR-ug",en:"red"},{t:"gorm",p:"GUR-um",en:"blue"},{t:"glas",p:"glahs",en:"green"},{t:"buí",p:"bwee",en:"yellow"},
+      {t:"dubh",p:"duv",en:"black"},{t:"bán",p:"bawn",en:"white"},{t:"oráiste",p:"or-AWSH-teh",en:"orange"},{t:"corcra",p:"KUR-kruh",en:"purple"},
+      {t:"bándearg",p:"bawn-DYAR-ug",en:"pink"},{t:"donn",p:"dun",en:"brown"},
+      {t:"daidí",p:"DAD-dee",en:"dad"},{t:"mamaí",p:"MAM-mee",en:"mum"},{t:"mac",p:"mok",en:"son"},{t:"iníon",p:"in-EEN",en:"daughter"},
+      {t:"deartháir",p:"DYAR-hawr",en:"brother"},{t:"deirfiúr",p:"DYER-fyoor",en:"sister"},{t:"seanathair",p:"SHAN-uh-hir",en:"grandpa"},
+      {t:"seanmháthair",p:"SHAN-waw-hir",en:"grandma"},{t:"fear céile",p:"far KAY-leh",en:"husband"},{t:"bean chéile",p:"ban KHAY-leh",en:"wife"},
+      {t:"teaghlach",p:"CHYOW-lukh",en:"family"},{t:"cara",p:"KAR-uh",en:"friend"},{t:"uncail",p:"UN-kil",en:"uncle"},{t:"aintín",p:"an-TEEN",en:"aunt"},
+      {t:"uisce",p:"ISH-keh",en:"water"},{t:"arán",p:"ah-RAWN",en:"bread"},{t:"bainne",p:"BAN-yeh",en:"milk"},{t:"tae",p:"tay",en:"tea"},
+      {t:"caife",p:"KAF-eh",en:"coffee"},{t:"sú",p:"soo",en:"juice"},{t:"beoir",p:"BYOR",en:"beer"},{t:"feoil",p:"FYOL",en:"meat"},
+      {t:"sicín",p:"shi-KEEN",en:"chicken"},{t:"iasc",p:"ee-usk",en:"fish"},{t:"rís",p:"reesh",en:"rice"},{t:"anraith",p:"AN-rah",en:"soup"},
+      {t:"ubh",p:"uv",en:"egg"},{t:"cáis",p:"kawsh",en:"cheese"},{t:"úll",p:"ool",en:"apple"},{t:"banana",p:"buh-NAH-nuh",en:"banana"},
+      {t:"oráiste",p:"or-AWSH-teh",en:"orange (fruit)"},{t:"práta",p:"PRAW-tuh",en:"potato"},{t:"glasraí",p:"GLAHS-ree",en:"vegetables"},
+      {t:"torthaí",p:"TUR-hee",en:"fruit"},{t:"siúcra",p:"SHOOK-ruh",en:"sugar"},{t:"salann",p:"SAL-un",en:"salt"},
+      {t:"bricfeasta",p:"BRIK-fas-tuh",en:"breakfast"},{t:"lón",p:"lohn",en:"lunch"},{t:"dinnéar",p:"din-AYR",en:"dinner"},
+      {t:"scoil",p:"skil",en:"school"},{t:"ospidéal",p:"os-pi-DAYL",en:"hospital"},{t:"banc",p:"bonk",en:"bank"},
+      {t:"bialann",p:"BEE-uh-lun",en:"restaurant"},{t:"siopa",p:"SHUP-uh",en:"shop"},{t:"páirc",p:"pawrk",en:"park"},
+      {t:"teach",p:"chokh",en:"house"},{t:"cathair",p:"KA-hir",en:"city"},{t:"sráid",p:"sroyd",en:"street"},
+      {t:"aerfort",p:"AYR-fort",en:"airport"},{t:"stáisiún traenach",p:"staw-SHOON TRAY-nukh",en:"train station"},{t:"óstán",p:"OHS-tawn",en:"hotel"},
+      {t:"ceann",p:"kyown",en:"head"},{t:"lámh",p:"lawv",en:"hand"},{t:"cos",p:"kus",en:"leg / foot"},{t:"súile",p:"SOO-leh",en:"eyes"},
+      {t:"béal",p:"bayl",en:"mouth"},{t:"cluas",p:"KLOO-us",en:"ear"},{t:"srón",p:"srohn",en:"nose"},{t:"croí",p:"kree",en:"heart"},
+      {t:"gruaig",p:"GROO-ig",en:"hair"},{t:"fiacla",p:"FEE-uk-luh",en:"teeth"},{t:"droim",p:"drim",en:"back"},{t:"méar",p:"mayr",en:"finger"},
+      {t:"madra",p:"MAD-ruh",en:"dog"},{t:"cat",p:"kot",en:"cat"},{t:"éan",p:"ayn",en:"bird"},{t:"capall",p:"KAP-ul",en:"horse"},
+      {t:"bó",p:"boh",en:"cow"},{t:"muc",p:"muk",en:"pig"},{t:"tíogar",p:"TEE-gur",en:"tiger"},{t:"béar",p:"bayr",en:"bear"},
+      {t:"coinín",p:"kun-EEN",en:"rabbit"},{t:"mac tíre",p:"mok TEE-reh",en:"wolf"},{t:"sionnach",p:"SHUN-ukh",en:"fox"},{t:"luch",p:"lukh",en:"mouse"},
+      {t:"tapa",p:"TOP-uh",en:"fast"},{t:"mall",p:"mowl",en:"slow"},{t:"te",p:"teh",en:"hot"},{t:"fuar",p:"FOO-ur",en:"cold"},
+      {t:"nua",p:"NOO-uh",en:"new"},{t:"sean",p:"shan",en:"old"},{t:"ard",p:"ahrd",en:"tall"},{t:"gearr",p:"gyar",en:"short"},
+      {t:"fada",p:"FAD-uh",en:"long"},{t:"glan",p:"glon",en:"clean"},{t:"salach",p:"SAL-ukh",en:"dirty"},{t:"tuirseach",p:"TUR-shukh",en:"tired"},
+      {t:"ocrach",p:"UK-rukh",en:"hungry"},{t:"mór",p:"mohr",en:"big"},{t:"beag",p:"byug",en:"small"},{t:"álainn",p:"AWL-in",en:"beautiful"},
+      {t:"maith",p:"mah",en:"good"},{t:"olc",p:"ulk",en:"bad"},{t:"daor",p:"deer",en:"expensive"},{t:"saor",p:"seer",en:"cheap"},
+      {t:"ith",p:"ih",en:"to eat"},{t:"ól",p:"ohl",en:"to drink"},{t:"féach",p:"fay-ukh",en:"to watch / look"},{t:"éist",p:"aysht",en:"to listen"},
+      {t:"labhair",p:"LOW-ir",en:"to speak"},{t:"siúil",p:"SHOO-il",en:"to walk"},{t:"rith",p:"rih",en:"to run"},{t:"codail",p:"KUD-il",en:"to sleep"},
+      {t:"ceannaigh",p:"KYAN-ee",en:"to buy"},{t:"díol",p:"DEE-ul",en:"to sell"},{t:"smaoinigh",p:"SMEE-nee",en:"to think"},
+      {t:"tuig",p:"tig",en:"to understand"},{t:"oibrigh",p:"IB-ree",en:"to work"},{t:"léigh",p:"lay",en:"to read"},{t:"scríobh",p:"shkreev",en:"to write"},
+      {t:"imir",p:"IM-ir",en:"to play (a game/sport)"},{t:"mair",p:"mahr",en:"to live"},{t:"iarr",p:"EE-ur",en:"to ask for / want"},
+      {t:"cuidigh",p:"KWID-ee",en:"to help"},{t:"tosaigh",p:"TUS-ee",en:"to start"},
+      {t:"cad",p:"kod",en:"what"},{t:"cé",p:"kay",en:"who"},{t:"cén fáth",p:"kayn faw",en:"why"},{t:"conas",p:"KUN-us",en:"how"},
+      {t:"cathain",p:"KA-hin",en:"when"},{t:"cá",p:"kaw",en:"where"},{t:"cé acu",p:"kay AH-koo",en:"which"},
+      {t:"anois",p:"uh-NISH",en:"now"},{t:"inné",p:"in-YAY",en:"yesterday"},{t:"inniu",p:"in-YOO",en:"today"},{t:"amárach",p:"uh-MAW-rukh",en:"tomorrow"},
+      {t:"uair an chloig",p:"OO-ir un khlig",en:"hour"},{t:"nóiméad",p:"NOH-mayd",en:"minute"},{t:"bliain",p:"BLEE-in",en:"year"},
+      {t:"mí",p:"mee",en:"month"},{t:"seachtain",p:"SHOKH-tin",en:"week"},{t:"Dé Luain",p:"day LOO-in",en:"Monday"},
+      {t:"Dé Máirt",p:"day mawrt",en:"Tuesday"},{t:"Dé Céadaoin",p:"day KAY-deen",en:"Wednesday"},{t:"Déardaoin",p:"DAYR-deen",en:"Thursday"},
+      {t:"Dé hAoine",p:"day HEE-neh",en:"Friday"},{t:"Dé Sathairn",p:"day SA-hirn",en:"Saturday"},{t:"Dé Domhnaigh",p:"day DOH-nee",en:"Sunday"},
+      {t:"maidin",p:"MAD-in",en:"morning"},
+      {t:"aimsir",p:"AM-shir",en:"weather"},{t:"grian",p:"GREE-un",en:"sun"},{t:"báisteach",p:"BAWSH-tukh",en:"rain"},
+      {t:"sneachta",p:"SHNOKH-tuh",en:"snow"},{t:"gaoth",p:"gway",en:"wind"},{t:"scamall",p:"SKOM-ul",en:"cloud"},
+      {t:"stoirm",p:"STIR-im",en:"storm"},{t:"tuar ceatha",p:"TOO-ur KA-huh",en:"rainbow"},
+      {t:"éadaí",p:"AY-dee",en:"clothing"},{t:"léine",p:"LAY-neh",en:"shirt"},{t:"briste",p:"BRISH-teh",en:"trousers"},
+      {t:"gúna",p:"GOO-nuh",en:"dress"},{t:"bróga",p:"BROH-guh",en:"shoes"},{t:"seaicéad",p:"SHAK-ayd",en:"jacket"},
+      {t:"hata",p:"HOT-uh",en:"hat"},{t:"stocaí",p:"STUK-ee",en:"socks"},
+      {t:"carr",p:"kahr",en:"car"},{t:"bus",p:"bus",en:"bus"},{t:"traein",p:"trayn",en:"train"},{t:"eitleán",p:"ET-lawn",en:"airplane"},
+      {t:"rothar",p:"RUH-hur",en:"bicycle"},{t:"tacsaí",p:"TOK-see",en:"taxi"},{t:"bád",p:"bawd",en:"boat"},{t:"veain",p:"vayn",en:"van"},
+      {t:"leabhar",p:"LOW-ur",en:"book"},{t:"bord",p:"bord",en:"table"},{t:"cathaoir",p:"KA-heer",en:"chair"},{t:"doras",p:"DUR-us",en:"door"},
+      {t:"fuinneog",p:"FIN-yohg",en:"window"},{t:"guthán",p:"GOO-hawn",en:"phone"},{t:"airgead",p:"AR-i-gud",en:"money"},
+      {t:"am",p:"om",en:"time"},{t:"post",p:"pust",en:"job"},{t:"eochair",p:"OKH-ir",en:"key"},{t:"mála",p:"MAW-luh",en:"bag"},
+      {t:"uaireadóir",p:"OO-ir-uh-dor",en:"watch"},{t:"nuachtán",p:"NOOKH-tawn",en:"newspaper"},{t:"ríomhaire",p:"REE-vur-eh",en:"computer"},
+      {t:"margadh",p:"MAR-guh",en:"market"},
+      {t:"sásta",p:"SAWS-tuh",en:"happy"},{t:"brónach",p:"BROH-nukh",en:"sad"},{t:"feargach",p:"FAR-uh-gukh",en:"angry"},
+      {t:"corraithe",p:"KUR-i-huh",en:"excited / surprised"},{t:"eaglach",p:"OG-lukh",en:"scared"},{t:"socair",p:"SUK-ir",en:"calm"},
+      {t:"i ngrá",p:"i n-graw",en:"in love"},{t:"leadránach",p:"lyad-RAWN-ukh",en:"bored"},
+      {t:"múinteoir",p:"MOON-chore",en:"teacher"},{t:"dochtúir",p:"DUKH-toor",en:"doctor"},{t:"garda",p:"GAR-duh",en:"police officer"},
+      {t:"innealtóir",p:"IN-ul-tore",en:"engineer"},{t:"mac léinn",p:"mok layn",en:"student"},{t:"tiománaí",p:"chum-AWN-ee",en:"driver"},
+      {t:"cócaire",p:"KOH-kur-eh",en:"cook"},{t:"freastalaí",p:"FRAS-tuh-lee",en:"shop assistant / waiter"},
+      {t:"grá",p:"graw",en:"love (noun)"},{t:"ceol",p:"kyohl",en:"music"},{t:"teilifís",p:"TEL-i-feesh",en:"TV"},{t:"idirlíon",p:"ID-ir-lee-un",en:"internet"},
+      {t:"sliabh",p:"SHLEE-uv",en:"mountain"},{t:"abhainn",p:"OW-in",en:"river"},{t:"farraige",p:"FAR-ig-eh",en:"sea"},{t:"loch",p:"lukh",en:"lake"},
+      {t:"oileán",p:"IL-awn",en:"island"},{t:"trá",p:"traw",en:"beach"},{t:"coill",p:"kwil",en:"forest"},{t:"spéir",p:"spayr",en:"sky"},
+      {t:"leaba",p:"LAB-uh",en:"bed"},{t:"cistin",p:"KISH-chin",en:"kitchen"},{t:"seomra",p:"SHOHM-ruh",en:"room"},{t:"bosca",p:"BUS-kuh",en:"box"},
+      {t:"scáthán",p:"SKAW-hawn",en:"mirror"},{t:"cófra",p:"KOH-fruh",en:"cupboard"},{t:"tine",p:"CHIN-eh",en:"fire"},{t:"solas",p:"SUL-us",en:"light"}
+    ],
+    phrases:[
+      {t:"Conas atá tú?",p:"KUN-us uh-TAW too",en:"How are you?"},
+      {t:"Is mise…",p:"iss MISH-eh",en:"I am… / My name is…"},
+      {t:"Cad is ainm duit?",p:"kod iss AN-im gwitch",en:"What's your name?"},
+      {t:"Cé mhéad atá air?",p:"kay vayd uh-TAW air",en:"How much is it?"},
+      {t:"Cá bhfuil an leithreas?",p:"kaw wil un LEH-hras",en:"Where's the toilet?"},
+      {t:"Ní thuigim",p:"nee HIG-im",en:"I don't understand"},
+      {t:"An bhfuil Béarla agat?",p:"un wil BAYR-luh AH-gut",en:"Do you speak English?"},
+      {t:"Abair arís é, le do thoil",p:"AB-ir uh-REESH ay",en:"Say it again, please"},
+      {t:"Ba mhaith liom é seo",p:"buh wah lyum ay shuh",en:"I would like this"},
+      {t:"An bille, le do thoil",p:"un BIL-eh leh duh HULL",en:"The bill, please"},
+      {t:"Ádh mór ort",p:"aw mohr urt",en:"Good luck"},
+      {t:"Níl aon fhadhb",p:"neel ayn eyb",en:"No worries"},
+      {t:"Sláinte!",p:"SLAWN-cheh",en:"Cheers! (lit. 'health')"}
+    ],
+    writing:[],
+    culture:[
+      {title:"No words for yes or no", body:"Irish has no direct equivalent of 'yes' or 'no' — you answer a question by repeating its verb, positively or negatively. Asked 'An bhfuil tú tuirseach?' (Are you tired?), you'd reply 'Tá' (I am) or 'Níl' (I am not)."},
+      {title:"Ireland's first official language", body:"Irish is the constitutional first official language of Ireland (English is the second), and since 2007 it's also been a full official working language of the European Union, despite having a relatively small number of daily speakers."},
+      {title:"The Gaeltacht", body:"Gaeltacht regions — mostly along the western coast in Donegal, Galway, Kerry and elsewhere — are areas where Irish remains the community's everyday language, rather than a second language learned at school."},
+      {title:"Sláinte and toasting culture", body:"'Sláinte' (health) is the standard toast when raising a glass — one of the small handful of Irish words that's genuinely part of everyday English-language conversation in Ireland."},
+      {title:"Sounds shift at the start of words", body:"Irish grammar regularly changes the beginning of a word depending on what comes before it (called mutation) — 'bróg' (shoe) can become 'bhróg' or 'mbróg' in different grammatical contexts, which is part of why written Irish looks trickier than it sounds."}
     ]
   },
   yolngu: {
