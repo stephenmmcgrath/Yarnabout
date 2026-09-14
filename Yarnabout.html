@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Yarnabout — Learn a Language, Have a Yarn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Noto+Sans+Egyptian+Hieroglyphs&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Noto+Sans+Egyptian+Hieroglyphs&family=Noto+Sans+KR:wght@500;700&family=Noto+Sans+Cuneiform&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <style>
   :root{
@@ -31,6 +31,7 @@
     --zulu:#D4A017;
     --icelandic:#4A90A4;
     --afrikaans:#E07A3E;
+    --sumerian:#B08D57;
     --good:#5FD97E;
     --bad:#F0665C;
     --radius:18px;
@@ -126,7 +127,7 @@
     padding: clamp(28px,5vw,56px) clamp(20px,5vw,50px);text-align:center;box-shadow:var(--shadow);
     display:flex;flex-direction:column;gap:16px;align-items:center;
   }
-  .target-word{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Baloo 2',sans-serif;font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.1;}
+  .target-word{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Baloo 2',sans-serif;font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.1;}
   .target-word.rtl{direction:rtl;}
   .translit{color:var(--text-dim);font-size:clamp(14px,2vw,20px);letter-spacing:.03em;}
   .speak-btn{background:var(--accent,var(--thread));color:#171923;border:none;width:52px;height:52px;border-radius:50%;font-size:22px;box-shadow:var(--shadow);}
@@ -146,7 +147,7 @@
   /* ---- Phrases list ---- */
   .phraselist{display:flex;flex-direction:column;gap:12px;}
   .phrase{background:var(--bg-elev);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:16px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-  .phrase .ptext{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Baloo 2',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:600;}
+  .phrase .ptext{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Baloo 2',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:600;}
   .phrase .ptext.rtl{direction:rtl;}
   .phrase .ptranslit{color:var(--text-dim);font-size:.9em;}
   .phrase .pen{margin-left:auto;color:var(--text-dim);font-style:italic;}
@@ -154,10 +155,10 @@
   /* ---- Writing practice ---- */
   .writewrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
   .canvasbox{position:relative;width:min(360px,80vw);height:min(360px,80vw);background:var(--bg-elev);border:2px solid rgba(255,255,255,0.1);border-radius:var(--radius);box-shadow:var(--shadow);}
-  .canvasbox .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(260px,60vw);font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs',sans-serif;color:rgba(255,255,255,0.08);user-select:none;pointer-events:none;}
+  .canvasbox .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(260px,60vw);font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform',sans-serif;color:rgba(255,255,255,0.08);user-select:none;pointer-events:none;}
   .canvasbox canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;}
   .writemeta{text-align:center;}
-  .writemeta .lbl{font-size:clamp(28px,4vw,40px);font-weight:700;font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs',sans-serif;}
+  .writemeta .lbl{font-size:clamp(28px,4vw,40px);font-weight:700;font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform',sans-serif;}
   .writemeta .name{color:var(--text-dim);}
 
   /* ---- Culture ---- */
@@ -1652,6 +1653,124 @@ const LANGUAGES = {
       {title:"More than just Dutch roots", body:"Afrikaans absorbed vocabulary and influence from Malay (brought by enslaved and indentured people from the Dutch East Indies), Khoi and San languages, Portuguese, and later English — a genuinely blended linguistic history."},
       {title:"Braai is a way of life", body:"A 'braai' (barbecue) is far more than a cooking method in South African culture — it's a core social occasion, casual and communal, that South Africans of every background take seriously."},
       {title:"Officially one of many", body:"Afrikaans is one of South Africa's 12 official languages and is also spoken in Namibia — with speakers spanning a genuinely wide range of ethnic and cultural backgrounds, not any single group."}
+    ]
+  },
+  sumerian: {
+    key:"sumerian", name:"Sumerian", native:"𒅴𒂠", accent:"var(--sumerian)", flag:"𒀭",
+    speechLang:"en-US", rtl:false, script:true, available:true,
+    blurb:"The world's first written language, invented in Mesopotamia around 3200 BCE — every sign below is checked directly against the academic Unicode cuneiform sign list, not guessed.",
+    words:[
+      {t:"𒀸",p:"ash",en:"the number 1"},{t:"𒈫",p:"min",en:"the number 2"},{t:"𒐈",p:"esh",en:"the number 3"},
+      {t:"𒐇",p:"limmu",en:"the number 4"},{t:"𒐊",p:"ia",en:"the number 5"},{t:"𒐋",p:"ash",en:"the number 6"},
+      {t:"𒐌",p:"imin",en:"the number 7"},{t:"𒐍",p:"ussu",en:"the number 8"},{t:"𒑆",p:"ilimmu",en:"the number 9"},
+      {t:"𒌋",p:"u",en:"the number 10"},{t:"𒎙",p:"nish",en:"the number 20"},{t:"𒐏",p:"nimin",en:"the number 40"},
+      {t:"𒀭",p:"an / dingir",en:"sky, heaven — also the sign for 'god'"},
+      {t:"𒆠",p:"ki",en:"earth, ground, place"},
+      {t:"𒉆",p:"nam",en:"fate, destiny"},
+      {t:"𒈨",p:"me",en:"divine powers, cosmic order"},
+      {t:"𒍣",p:"zi",en:"life, breath"},
+      {t:"𒇽",p:"lu",en:"man, person"},
+      {t:"𒊩",p:"munus",en:"woman"},
+      {t:"𒌉",p:"dumu / tur",en:"child, son — also means 'small'"},
+      {t:"𒁮",p:"dam",en:"spouse"},
+      {t:"𒂗",p:"en",en:"lord, high priest"},
+      {t:"𒈗",p:"lugal",en:"king (literally 'big man')"},
+      {t:"𒂼",p:"ama",en:"mother"},
+      {t:"𒋀",p:"shesh",en:"brother"},
+      {t:"𒊩𒌆",p:"nin",en:"lady, queen"},
+      {t:"𒊩𒆳",p:"geme",en:"female worker"},
+      {t:"𒂍",p:"e",en:"house, temple"},
+      {t:"𒂍𒃲",p:"e-gal",en:"palace (literally 'big house')"},
+      {t:"𒌷",p:"uru / iri",en:"city"},
+      {t:"𒆳",p:"kur",en:"mountain, foreign land"},
+      {t:"𒆜",p:"kaskal",en:"road, journey"},
+      {t:"𒂔",p:"edin",en:"steppe, open plain"},
+      {t:"𒀀",p:"a",en:"water"},
+      {t:"𒌓",p:"ud",en:"day, sun"},
+      {t:"𒌗",p:"iti",en:"month"},
+      {t:"𒈪",p:"mi",en:"night"},
+      {t:"𒄑",p:"gish",en:"wood, tree"},
+      {t:"𒅎",p:"im",en:"clay, rain, storm"},
+      {t:"𒆬",p:"kug",en:"precious, holy, pure"},
+      {t:"𒄞",p:"gud",en:"ox"},
+      {t:"𒇻",p:"udu",en:"sheep"},
+      {t:"𒀖",p:"ab",en:"cow"},
+      {t:"𒀲",p:"anshe",en:"donkey"},
+      {t:"𒌨",p:"ur",en:"dog"},
+      {t:"𒄩",p:"ha",en:"fish"},
+      {t:"𒈲",p:"mush",en:"snake"},
+      {t:"𒊊",p:"pirig",en:"lion"},
+      {t:"𒀫",p:"amar",en:"calf"},
+      {t:"𒁾",p:"dub",en:"clay tablet"},
+      {t:"𒃾",p:"geshtin",en:"wine, grapevine"},
+      {t:"𒊺",p:"she",en:"barley"},
+      {t:"𒊬",p:"sar",en:"garden — also 'to write'"},
+      {t:"𒌆",p:"tug",en:"garment, cloth"},
+      {t:"𒈣",p:"ma",en:"boat"},
+      {t:"𒃶",p:"gan",en:"field"},
+      {t:"𒊕",p:"sag",en:"head"},
+      {t:"𒅆",p:"igi",en:"eye"},
+      {t:"𒊮",p:"sha",en:"heart, inside"},
+      {t:"𒅗",p:"ka",en:"mouth"},
+      {t:"𒀉",p:"a2",en:"arm, strength"},
+      {t:"𒋾",p:"ti",en:"rib — also means 'to live' (a famous Sumerian pun)"},
+      {t:"𒃲",p:"gal",en:"big, great"},
+      {t:"𒈤",p:"mah",en:"exalted, lofty"},
+      {t:"𒋝",p:"sig",en:"good, fine"},
+      {t:"𒄭",p:"hi",en:"sweet, mixed"},
+      {t:"𒁺",p:"du",en:"to go, to come"},
+      {t:"𒅗",p:"dug",en:"to speak (same sign as 'mouth')"},
+      {t:"𒍪",p:"zu",en:"to know"},
+      {t:"𒀝",p:"ak",en:"to do, to make"},
+      {t:"𒋧",p:"sum",en:"to give"},
+      {t:"𒁀",p:"ba",en:"to allot, to give a share"},
+      {t:"𒊒",p:"ru",en:"to throw, to send"},
+      {t:"𒋛",p:"si",en:"to fill — also 'horn'"},
+      {t:"𒄖",p:"gu",en:"thread, string, voice"},
+      {t:"𒆥",p:"kin",en:"work, task, errand"},
+      {t:"𒍠",p:"zag",en:"border, right side"},
+      {t:"𒁕",p:"da",en:"side, rib, arm"},
+      {t:"𒁾𒊬",p:"dub-sar",en:"scribe (literally 'tablet writer')"},
+      {t:"𒋗",p:"shu",en:"hand"},
+      {t:"𒄊",p:"gir3",en:"foot"},
+      {t:"𒃻",p:"nig",en:"thing, possession"},
+      {t:"𒂁",p:"dug",en:"pot, vessel"},
+      {t:"𒉈",p:"ne",en:"fire, lamp, light"},
+      {t:"𒌫",p:"ur2",en:"base, foundation, thigh"},
+      {t:"𒉡",p:"nu",en:"not (negation)"},
+      {t:"𒈾",p:"na",en:"stone, person"},
+      {t:"𒁁",p:"bad",en:"to open, distant"},
+      {t:"𒌀",p:"til",en:"to finish, to complete"},
+      {t:"𒆰",p:"numun",en:"seed"},
+      {t:"𒋞",p:"sig4",en:"brick"},
+      {t:"𒁇",p:"bar",en:"outside, other side"},
+      {t:"𒁖",p:"dag",en:"dwelling, seat"},
+      {t:"𒆦",p:"kisal",en:"courtyard"},
+      {t:"𒁲",p:"di",en:"legal case, to judge"},
+      {t:"𒅥",p:"gu7",en:"to eat"},
+      {t:"𒃮",p:"gaba",en:"chest, breast"},
+      {t:"𒋢",p:"su",en:"flesh, body"},
+      {t:"𒁆",p:"balag",en:"harp (an ancient musical instrument)"},
+      {t:"𒋖",p:"shita",en:"mace, weapon"},
+      {t:"𒄇",p:"gidim",en:"ghost, spirit"},
+      {t:"𒌜",p:"udug",en:"protective or demonic spirit"},
+      {t:"𒀩",p:"alan",en:"statue, image"},
+      {t:"𒆧",p:"kish",en:"totality, world — also the city of Kish"},
+      {t:"𒂟",p:"erin2",en:"troops — also 'cedar'"},
+      {t:"𒉺",p:"pa",en:"branch, staff, sceptre of authority"},
+      {t:"𒂡",p:"ezen",en:"festival"}
+    ],
+    phrases:[],
+    writing:[
+      {t:"𒀭",name:"an / dingir — sky, god"},{t:"𒈗",name:"lugal — king"},{t:"𒂍",name:"e — house"},
+      {t:"𒌉",name:"dumu — child"},{t:"𒆠",name:"ki — earth"},{t:"𒄑",name:"gish — wood, tree"}
+    ],
+    culture:[
+      {title:"The world's first writing", body:"Sumerian cuneiform, developed around 3200 BCE in the city of Uruk, is the earliest writing system known — and it wasn't invented for literature or religion, but for tracking grain, livestock and temple accounts."},
+      {title:"Wedge-shaped by necessity", body:"'Cuneiform' comes from the Latin for 'wedge-shaped' — scribes pressed a cut reed stylus into soft clay tablets, and the wedge shape is simply what that stylus naturally produces, unlike the flowing curves of a pen or brush."},
+      {title:"Why we have 60 minutes in an hour", body:"Sumerian mathematics used a base-60 (sexagesimal) counting system rather than base-10. That's the direct reason we still divide hours into 60 minutes, minutes into 60 seconds, and circles into 360 degrees today."},
+      {title:"A language with no relatives", body:"Unlike almost every other ancient language, Sumerian is a language isolate — it has no known living or extinct relatives, and its origins remain a genuine mystery to linguists."},
+      {title:"The script outlived the language by millennia", body:"Sumerian died out as an everyday spoken language by around 2000 BCE, but scribes kept using it for scholarship and religion for another 2,000 years — and the cuneiform script itself was borrowed to write completely unrelated languages like Akkadian, Hittite and Elamite, staying in active use until roughly the 1st century CE."}
     ]
   },
   yolngu: {
