@@ -32,6 +32,7 @@
     --icelandic:#4A90A4;
     --afrikaans:#E07A3E;
     --sumerian:#B08D57;
+    --samoan:#0072B5;
     --good:#5FD97E;
     --bad:#F0665C;
     --radius:18px;
@@ -1773,6 +1774,75 @@ const LANGUAGES = {
       {title:"The script outlived the language by millennia", body:"Sumerian died out as an everyday spoken language by around 2000 BCE, but scribes kept using it for scholarship and religion for another 2,000 years — and the cuneiform script itself was borrowed to write completely unrelated languages like Akkadian, Hittite and Elamite, staying in active use until roughly the 1st century CE."}
     ]
   },
+  samoan: {
+    key:"samoan", name:"Samoan", native:"Gagana Sāmoa", accent:"var(--samoan)", flag:"🇼🇸",
+    speechLang:"sm-WS", rtl:false, script:false, available:true,
+    blurb:"A Polynesian language where fa'a Sāmoa — 'the Samoan way' — shapes everyday speech, from respect vocabulary to elaborate greetings.",
+    words:[
+      {t:"talofa",p:"tah-LOH-fah",en:"hello"},{t:"talofa lava",p:"tah-LOH-fah LAH-vah",en:"hello (emphatic / warm greeting)"},
+      {t:"malo",p:"MAH-loh",en:"hello / well done (informal greeting)"},{t:"tofā",p:"toh-FAH",en:"goodbye"},
+      {t:"tofā soifua",p:"toh-FAH soy-FOO-ah",en:"goodbye (formal, lit. 'farewell, have life')"},
+      {t:"fa'afetai",p:"fah-ah-feh-TIE",en:"thank you"},{t:"fa'amolemole",p:"fah-ah-moh-leh-MOH-leh",en:"please"},
+      {t:"ioe",p:"ee-OH-eh",en:"yes"},{t:"leai",p:"leh-AH-ee",en:"no"},{t:"fa'amagalo",p:"fah-ah-mah-NGAH-loh",en:"sorry / forgive me"},
+      {t:"manuia le taeao",p:"mah-noo-EE-ah leh tah-eh-AH-oh",en:"good morning"},{t:"manuia le pō",p:"mah-noo-EE-ah leh poh",en:"good night"},
+      {t:"tasi",p:"TAH-see",en:"one"},{t:"lua",p:"LOO-ah",en:"two"},{t:"tolu",p:"TOH-loo",en:"three"},{t:"fā",p:"fah",en:"four"},
+      {t:"lima",p:"LEE-mah",en:"five"},{t:"ono",p:"OH-noh",en:"six"},{t:"fitu",p:"FEE-too",en:"seven"},{t:"valu",p:"VAH-loo",en:"eight"},
+      {t:"iva",p:"EE-vah",en:"nine"},{t:"sefulu",p:"seh-FOO-loo",en:"ten"},{t:"sefulutasi",p:"seh-foo-loo-TAH-see",en:"eleven"},
+      {t:"luasefulu",p:"loo-ah-seh-FOO-loo",en:"twenty"},{t:"selau",p:"seh-LAH-oo",en:"one hundred"},{t:"afe",p:"AH-feh",en:"one thousand"},
+      {t:"mūmū",p:"MOO-moo",en:"red"},{t:"moana",p:"moh-AH-nah",en:"blue (also means 'ocean')"},{t:"lanumeamata",p:"lah-noo-meh-ah-MAH-tah",en:"green"},
+      {t:"samasama",p:"sah-mah-SAH-mah",en:"yellow"},{t:"uliuli",p:"oo-lee-OO-lee",en:"black"},{t:"pa'epa'e",p:"pah-eh-PAH-eh",en:"white"},
+      {t:"piniki",p:"pee-NEE-kee",en:"pink"},{t:"enaena",p:"eh-nah-EH-nah",en:"brown"},
+      {t:"tamā",p:"tah-MAH",en:"father"},{t:"tinā",p:"tee-NAH",en:"mother"},{t:"tama",p:"TAH-mah",en:"child / boy"},
+      {t:"teine",p:"TAY-neh",en:"girl"},{t:"atalii",p:"ah-tah-LEE-ee",en:"son"},{t:"afafine",p:"ah-fah-FEE-neh",en:"daughter"},
+      {t:"uso",p:"OO-soh",en:"sibling (of the same gender)"},{t:"aiga",p:"AH-ee-ngah",en:"family"},{t:"uō",p:"oo-OH",en:"friend"},
+      {t:"vai",p:"VAH-ee",en:"water"},{t:"falaoa",p:"fah-lah-OH-ah",en:"bread"},{t:"susu",p:"SOO-soo",en:"milk"},{t:"kofe",p:"KOH-feh",en:"coffee"},
+      {t:"i'a",p:"EE-ah",en:"fish"},{t:"moa",p:"MOH-ah",en:"chicken"},{t:"povi",p:"POH-vee",en:"cow / beef"},{t:"alaisa",p:"ah-lah-EE-sah",en:"rice"},
+      {t:"fuamoa",p:"foo-ah-MOH-ah",en:"egg"},{t:"fa'i",p:"FAH-ee",en:"banana"},{t:"suka",p:"SOO-kah",en:"sugar"},{t:"masima",p:"mah-SEE-mah",en:"salt"},
+      {t:"fale",p:"FAH-leh",en:"house"},{t:"aʻoga",p:"ah-OH-ngah",en:"school"},{t:"falemaʻi",p:"fah-leh-MAH-ee",en:"hospital"},
+      {t:"faleoloa",p:"fah-leh-oh-LOH-ah",en:"shop"},{t:"nuʻu",p:"NOO-oo",en:"village"},{t:"auala",p:"ah-oo-AH-lah",en:"road"},
+      {t:"malaevaʻalele",p:"mah-lah-eh-vah-ah-LEH-leh",en:"airport"},{t:"faletalimalo",p:"fah-leh-tah-lee-MAH-loh",en:"hotel (lit. 'guest house')"},
+      {t:"ulu",p:"OO-loo",en:"head"},{t:"lima",p:"LEE-mah",en:"hand (same word as the number 'five')"},{t:"vae",p:"VAH-eh",en:"leg / foot"},
+      {t:"mata",p:"MAH-tah",en:"eye"},{t:"gutu",p:"NGOO-too",en:"mouth"},{t:"taliga",p:"tah-LEE-ngah",en:"ear"},{t:"isu",p:"EE-soo",en:"nose"},
+      {t:"fatu",p:"FAH-too",en:"heart"},
+      {t:"maile",p:"MAH-ee-leh",en:"dog"},{t:"pusi",p:"POO-see",en:"cat"},{t:"manulele",p:"mah-noo-LEH-leh",en:"bird"},
+      {t:"puaʻa",p:"poo-AH-ah",en:"pig"},{t:"isumu",p:"ee-SOO-moo",en:"rat / mouse"},{t:"gata",p:"NGAH-tah",en:"snake"},
+      {t:"tele",p:"TEH-leh",en:"big / many"},{t:"laʻititi",p:"lah-ee-TEE-tee",en:"small"},{t:"lelei",p:"leh-LEH-ee",en:"good"},
+      {t:"leaga",p:"leh-AH-ngah",en:"bad"},{t:"vave",p:"VAH-veh",en:"fast"},{t:"lemu",p:"LEH-moo",en:"slow"},{t:"vevela",p:"veh-VEH-lah",en:"hot"},
+      {t:"malulu",p:"mah-LOO-loo",en:"cold"},{t:"fou",p:"FOH-oo",en:"new"},{t:"tuai",p:"TOO-ah-ee",en:"old"},
+      {t:"'ai",p:"AH-ee",en:"to eat"},{t:"inu",p:"EE-noo",en:"to drink"},{t:"va'ai",p:"vah-AH-ee",en:"to see / watch"},
+      {t:"fa'alogo",p:"fah-ah-LOH-ngoh",en:"to listen"},{t:"tautala",p:"tah-oo-TAH-lah",en:"to speak"},{t:"savali",p:"sah-VAH-lee",en:"to walk"},
+      {t:"momoʻe",p:"moh-MOH-eh",en:"to run"},{t:"moe",p:"MOH-eh",en:"to sleep"},{t:"faʻatau",p:"fah-ah-TAH-oo",en:"to buy"},
+      {t:"alofa",p:"ah-LOH-fah",en:"to love (also 'love' as a noun)"},
+      {t:"ā",p:"ah",en:"what"},{t:"ai",p:"AH-ee",en:"who"},{t:"aisea",p:"ah-ee-SEH-ah",en:"why"},{t:"faʻapefea",p:"fah-ah-peh-FEH-ah",en:"how"},
+      {t:"āfea",p:"ah-FEH-ah",en:"when"},{t:"fea",p:"FEH-ah",en:"where"},
+      {t:"taeao",p:"tah-eh-AH-oh",en:"morning"},{t:"afiafi",p:"ah-fee-AH-fee",en:"afternoon / evening"},{t:"pō",p:"poh",en:"night"},
+      {t:"aso",p:"AH-soh",en:"day"},{t:"vaiaso",p:"vah-ee-AH-soh",en:"week"},{t:"māsina",p:"mah-SEE-nah",en:"month"},
+      {t:"tausaga",p:"tah-oo-SAH-ngah",en:"year"},{t:"itūlā",p:"ee-too-LAH",en:"hour"},
+      {t:"pese",p:"PEH-seh",en:"song / music"},{t:"tusi",p:"TOO-see",en:"book"},{t:"tupe",p:"TOO-peh",en:"money"},
+      {t:"taʻavale",p:"tah-ah-VAH-leh",en:"car"},{t:"vaʻa",p:"VAH-ah",en:"boat / canoe"},{t:"matai",p:"mah-TAH-ee",en:"chief (a central role in Samoan society)"}
+    ],
+    phrases:[
+      {t:"Ua mai ʻoe?",p:"oo-ah my OH-eh",en:"How are you?"},
+      {t:"Manuia, faʻafetai",p:"mah-noo-EE-ah fah-ah-feh-TIE",en:"I'm fine, thank you"},
+      {t:"O ai lou igoa?",p:"oh AH-ee loh-oo ee-NGOH-ah",en:"What's your name?"},
+      {t:"O loʻu igoa o…",p:"oh LOH-oo ee-NGOH-ah oh",en:"My name is…"},
+      {t:"E fia le tau?",p:"eh FEE-ah leh TAH-oo",en:"How much does it cost?"},
+      {t:"Ou te lē malamalama",p:"oh-oo teh leh mah-lah-mah-LAH-mah",en:"I don't understand"},
+      {t:"E te tautala fa'aperetania?",p:"eh teh tah-oo-TAH-lah fah-ah-peh-reh-tah-NEE-ah",en:"Do you speak English?"},
+      {t:"Fa'amolemole, toe fai mai",p:"fah-ah-moh-leh-MOH-leh toh-eh FAH-ee my",en:"Please say that again"},
+      {t:"Manuia le aso",p:"mah-noo-EE-ah leh AH-soh",en:"Have a good day"},
+      {t:"E lē afaina",p:"eh leh ah-fah-EE-nah",en:"No worries / it doesn't matter"},
+      {t:"Manuia!",p:"mah-noo-EE-ah",en:"Cheers! / Good luck!"}
+    ],
+    writing:[],
+    culture:[
+      {title:"Fa'a Sāmoa — 'the Samoan way'", body:"Fa'a Sāmoa is the broader cultural and social system — encompassing respect, family obligation, communal life and the matai (chief) system — that shapes how Samoans speak and act, not just a set of customs on the side."},
+      {title:"Two registers of speech", body:"Samoan has a distinct polite/respectful vocabulary used with chiefs, elders and in formal settings, alongside everyday colloquial speech — similar in spirit to honorific systems in languages like Korean or Japanese, but built around the matai system specifically."},
+      {title:"The glottal stop is a real letter", body:"The 'okina (ʻ) marks a glottal stop and is a distinct sound, not decoration — 'aʻoga' (school) and 'aoga' (useful) are different words because of it, much like the macron over a vowel changes meaning too."},
+      {title:"The matai system", body:"Matai (chiefs) hold titles bestowed by their extended family (aiga) and play a central role in Samoan village governance and ceremony — the concept comes up constantly in everyday conversation about family and community."},
+      {title:"A major Pacific diaspora language", body:"Beyond Samoa and American Samoa, Samoan is widely spoken in New Zealand, Australia and parts of the US (especially Hawaii and California) — New Zealand in particular has a large Samoan-speaking community and offers Samoan-medium early childhood education."}
+    ]
+  },
   yolngu: {
     key:"yolngu", name:"Yolŋu Matha", native:"Gupapuyngu", accent:"var(--yolngu)", flag:"🟠",
     speechLang:"en-AU", rtl:false, script:false, available:true,
@@ -2033,7 +2103,13 @@ function renderPlayersScreen(root){
 // ---- Screen: Home (language select) ----
 function renderHomeScreen(root){
   root.appendChild(el("h2",{}, "Pick a language"));
-  root.appendChild(el("p",{class:"subtitle"}, "Three languages ready to go, two more brewing."));
+  const allLangs = Object.values(LANGUAGES);
+  const readyCount = allLangs.filter(l=>l.available).length;
+  const comingCount = allLangs.length - readyCount;
+  const subtitle = comingCount > 0
+    ? `${readyCount} languages ready to go, ${comingCount} more brewing.`
+    : `${readyCount} languages ready to go.`;
+  root.appendChild(el("p",{class:"subtitle"}, subtitle));
   const grid = el("div",{class:"grid"});
   Object.values(LANGUAGES).forEach(lang=>{
     const card = el("div",{
