@@ -36,6 +36,7 @@
     --punjabi:#D2691E;
     --nepali:#8B0000;
     --latin:#8A7256;
+    --navajo:#A65B3E;
     --good:#5FD97E;
     --bad:#F0665C;
     --radius:18px;
@@ -2191,6 +2192,64 @@ const LANGUAGES = {
       {title:"The working language of science, law and the Church for centuries", body:"Long after Rome fell, Latin remained the shared language of European scholarship, law and Catholic liturgy — which is why species get Latin binomial names (like Homo sapiens) and why legal terms like 'habeas corpus' and 'pro bono' survive today."},
       {title:"No fixed words for yes and no", body:"Classical Latin didn't really have dedicated words for 'yes' and 'no' the way modern languages do — like Irish, a Roman more often answered a question by restating the verb. 'Ita' and 'non' (used here) are reasonable stand-ins, but they weren't the automatic reflex answer that 'yes' and 'no' are in English."},
       {title:"Still spoken today, technically", body:"Latin is the official language of Vatican City, and a genuine 'Living Latin' movement runs immersion programmes and conversational meetups worldwide — so it's a dead language in the sense that no country grows up speaking it natively, but not entirely extinct."}
+    ]
+  },
+  navajo: {
+    key:"navajo", name:"Navajo", native:"Diné bizaad", accent:"var(--navajo)", flag:"🏜️",
+    speechLang:"en-US",
+    rtl:false, script:false, available:true,
+    blurb:"A tonal, polysynthetic language of the Navajo Nation — famous for the WWII Code Talkers. Every word here is sourced from a verified dictionary or linguistics reference, kept to a smaller honest set because tone and nasalization marks genuinely change meaning, and Navajo verbs don't have simple citation forms the way most languages here do.",
+    words:[
+      {t:"yá'át'ééh",p:"yah-AH-teh-eh",en:"hello"},{t:"hágooshį́į́",p:"hah-goh-SHEEN",en:"goodbye"},
+      {t:"ahéhee'",p:"ah-HEH-heh",en:"thank you"},{t:"aoo'",p:"ah-OH",en:"yes"},{t:"dooda",p:"DOH-dah",en:"no"},
+      {t:"t'áá shoodi",p:"tah SHOH-dee",en:"please"},
+      {t:"t'ááłá'í",p:"tah-lah-EE",en:"one"},{t:"naaki",p:"NAH-kee",en:"two"},{t:"tááʼ",p:"tahh",en:"three"},
+      {t:"díį́į́ʼ",p:"DEEN",en:"four"},{t:"ashdlaʼ",p:"ASH-dlah",en:"five"},{t:"hastą́ą́",p:"has-TAHN",en:"six"},
+      {t:"tsostsʼid",p:"TSOH-tsid",en:"seven"},{t:"tseebíí",p:"tseh-BEE",en:"eight"},{t:"náhástʹéí",p:"nah-HAS-teh-ee",en:"nine"},
+      {t:"neeznáá",p:"NEHZ-nah",en:"ten"},{t:"łaʼtsʼáadah",p:"lah-TSAH-dah",en:"eleven"},{t:"naadiin",p:"NAH-deen",en:"twenty"},
+      {t:"tádiin",p:"TAH-deen",en:"thirty"},{t:"tʼááłáhádí neeznádiin",p:"tah-lah-HAH-dee nehz-NAH-deen",en:"one hundred"},
+      {t:"tʼááłáhádí mííl",p:"tah-lah-HAH-dee meel",en:"one thousand"},
+      {t:"shizhé'é",p:"shih-ZHEH-eh",en:"my father"},{t:"shimá",p:"shih-MAH",en:"my mother"},
+      {t:"áłchíní",p:"al-CHIH-nee",en:"children"},{t:"biyeʼ",p:"BEE-yeh",en:"his/her son"},{t:"achʼéʼé",p:"ach-EH-eh",en:"his/her daughter"},
+      {t:"hahastiin",p:"hah-HAS-teen",en:"her husband"},{t:"hweʼesdzáán",p:"hweh-es-DZAHN",en:"his wife"},
+      {t:"shinaaí",p:"shih-NAH-ee",en:"my older brother"},{t:"shitsilí",p:"shih-tsih-LEE",en:"my younger brother"},
+      {t:"shiadí",p:"shih-AH-dee",en:"my older sister"},{t:"shideezhi",p:"shih-DEH-zhee",en:"my younger sister"},
+      {t:"hakʼéí",p:"hah-KEH-ee",en:"his/her relative(s)"},{t:"kʼé",p:"keh",en:"kinship / clan relations"},
+      {t:"atsį'",p:"ah-TSIN",en:"meat"},{t:"béégashii",p:"beh-gah-SHEE",en:"cow"},{t:"naʼahóóhai",p:"nah-ah-HOH-hai",en:"chicken"},
+      {t:"bisóodi",p:"bih-SOH-dee",en:"pig"},{t:"dibé",p:"dih-BEH",en:"sheep"},{t:"łóóʼ",p:"lohh",en:"fish"},
+      {t:"ch'il łigaai",p:"chil lih-GAI",en:"cabbage"},{t:"naa'ołí",p:"nah-oh-LEE",en:"beans"},{t:"ch'il łichí'í",p:"chil lih-CHEE",en:"tomatoes"},
+      {t:"nímasii",p:"NEE-mah-see",en:"potatoes"},{t:"naadą́ą́ʼ",p:"NAH-dahn",en:"corn"},
+      {t:"hastiin",p:"HAS-teen",en:"man"},{t:"asdzání",p:"as-DZAH-nee",en:"woman"},{t:"jóhonaa'éí",p:"joh-hoh-nah-EH-ee",en:"sun"},
+      {t:"ooljééʼ",p:"ohl-JEH",en:"moon"},{t:"dził",p:"dzihl",en:"mountain"},
+      {t:"ayą́",p:"ah-YAHN",en:"to eat"},{t:"yoo'į",p:"YOH-in",en:"to see"},{t:"yidiists'a'",p:"yih-DEE-stsah",en:"to hear"},
+      {t:"łichíí'",p:"lih-CHEE",en:"red"},{t:"łitso",p:"LIH-tsoh",en:"yellow"},{t:"yéego łitso",p:"YEH-goh lih-tsoh",en:"orange"},
+      {t:"ch'ilgo dootł'izh",p:"CHIL-goh doh-TLIZH",en:"green (plant green)"},{t:"yágo dootł'izh",p:"YAH-goh doh-TLIZH",en:"blue (sky blue)"},
+      {t:"tsédídééh",p:"tseh-DEE-deh",en:"purple"},{t:"dibéłchí'í",p:"dih-beh-CHEE",en:"brown"},{t:"łizhin",p:"LIH-zhin",en:"black"},
+      {t:"łigai",p:"LIH-gai",en:"white"},
+      {t:"hats'íís",p:"hah-TSEES",en:"body"},{t:"hatsiists'iin",p:"hah-tsee-STSEEN",en:"head"},{t:"hanii'",p:"hah-NEE",en:"face"},
+      {t:"hak'os",p:"hah-KOHS",en:"neck"},{t:"hadáyi'",p:"hah-DAH-yee",en:"throat"},{t:"hawos",p:"HAH-wohs",en:"shoulders"},
+      {t:"hagaan",p:"hah-GAHN",en:"arm"},{t:"hach'oozhlaa'",p:"hach-OHZH-lah",en:"elbow"},{t:"halátsíín",p:"hah-lah-TSEEN",en:"wrist"},
+      {t:"hala'",p:"hah-LAH",en:"hand(s)"},{t:"hajéíts'iin",p:"hah-jeh-EE-tseen",en:"chest"},{t:"habid",p:"HAH-bid",en:"stomach"},
+      {t:"hazhi'",p:"HAH-zhih",en:"trunk (of the body)"},{t:"hwííshgháán",p:"hweesh-GHAHN",en:"back"},{t:"hatł'aa'",p:"hah-TLAH",en:"buttocks"},
+      {t:"hajáád",p:"hah-JAHD",en:"legs"},{t:"hagod",p:"HAH-gohd",en:"knee"},{t:"hakétsíín",p:"hah-keh-TSEEN",en:"ankles"},
+      {t:"hakee'",p:"hah-KEH",en:"feet"},{t:"hakágí",p:"hah-KAH-gee",en:"skin"},{t:"hadoh",p:"HAH-doh",en:"muscles"},
+      {t:"hats'in",p:"HAH-tsin",en:"bones"},{t:"hatsii'",p:"hah-TSEE",en:"hair"}
+    ],
+    phrases:[],
+    writing:[
+      {t:"ł",name:"barred L — a voiceless breathy 'l' sound, no English equivalent"},
+      {t:"ʼ",name:"glottal stop — a distinct consonant, like the catch in 'uh-oh'"},
+      {t:"á",name:"high tone A — pitch changes meaning in Navajo"},
+      {t:"ą",name:"nasal A — pronounced through the nose, distinct from plain 'a'"},
+      {t:"ą́",name:"nasal A with high tone — both marks combine on one vowel"},
+      {t:"ch'",name:"ejective ch — a sharp, popped sound made further back in the throat"}
+    ],
+    culture:[
+      {title:"The Navajo Code Talkers", body:"During WWII, Navajo Marines developed a code based on Diné bizaad that the Japanese military never broke — it remains one of the only unbroken military codes in modern history, and the Code Talkers were awarded the Congressional Gold Medal in 2001."},
+      {title:"Tone and nasalization change meaning", body:"Navajo is a tonal language — high and low pitch distinguish otherwise identical-looking words — and vowels can also be nasalized. Both are marked with diacritics (like á versus a, or ą versus a), which is why those marks matter here, not just decoration."},
+      {title:"Verbs, not nouns, carry the weight", body:"Navajo verbs are polysynthetic — a single verb can pack in the subject, object, manner and aspect of an action all at once, built from many combined parts. There's no simple 'infinitive' form the way English has 'to eat' — dictionaries cite specific conjugated forms instead, which is why this deck stays modest on verbs."},
+      {title:"Diné bizaad means 'the People's language'", body:"Diné is how Navajo people refer to themselves, meaning roughly 'the People' — Diné bizaad, 'the People's language', is the name used for Navajo within the community itself."},
+      {title:"At risk, but actively being revived", body:"Navajo has more speakers than any other Native American language in the US, yet it's still classified as vulnerable — the Navajo Nation runs immersion schools and language revitalization programmes to pass it on to younger generations."}
     ]
   },
   yolngu: {
