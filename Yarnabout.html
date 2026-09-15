@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Yarnabout — Learn a Language, Have a Yarn</title>
+<title>DingoLingo — Learn a Language, Have a Yarn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Noto+Sans+Egyptian+Hieroglyphs&family=Noto+Sans+KR:wght@500;700&family=Noto+Sans+Cuneiform&family=Noto+Sans+Gurmukhi:wght@500;700&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -35,6 +35,7 @@
     --samoan:#0072B5;
     --punjabi:#D2691E;
     --nepali:#8B0000;
+    --latin:#8A7256;
     --good:#5FD97E;
     --bad:#F0665C;
     --radius:18px;
@@ -66,7 +67,7 @@
   /* ---- Header ---- */
   .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px;}
   .brand{display:flex;align-items:center;gap:12px;}
-  .brand .yarnball{font-size: clamp(28px,4vw,40px);}
+  .brand .applogo{width: clamp(32px,4.4vw,46px); height: clamp(27px,3.7vw,39px); display:block;}
   .brand h1{font-size: clamp(26px, 4vw, 44px); margin:0; letter-spacing:.5px;}
   .brand small{color:var(--text-dim); display:block; font-size:.85em; font-weight:500;}
   .playerchip{display:flex;align-items:center;gap:8px;background:var(--bg-elev);border:1px solid rgba(255,255,255,0.06);padding:8px 14px;border-radius:999px;font-weight:600;font-size:clamp(13px,1.4vw,16px);}
@@ -2059,6 +2060,139 @@ const LANGUAGES = {
       {title:"The language of the Himalaya", body:"Nepali is the lingua franca across Nepal's incredibly linguistically diverse population (over 120 languages are spoken there) and is also widely used in mountaineering and trekking communities around Everest and the wider Himalaya."}
     ]
   },
+  latin: {
+    key:"latin", name:"Latin", native:"Latina", accent:"var(--latin)", flag:"🏛️",
+    speechLang:"la",
+    rtl:false, script:false, available:true,
+    blurb:"The ancestor of French, Spanish and Italian — and hiding inside thousands of everyday English words too. Verbs shown here as infinitives for consistency with the rest of the app; classical dictionaries traditionally cite 'amo' (I love) rather than 'amare' (to love).",
+    words:[
+      {t:"salve",p:"SAL-weh",en:"hello (to one person)"},{t:"salvete",p:"sal-WEH-teh",en:"hello (to more than one)"},
+      {t:"ave",p:"AH-weh",en:"hail / greetings"},{t:"gratias",p:"GRAH-tee-ahs",en:"thanks"},
+      {t:"gratias tibi ago",p:"GRAH-tee-ahs TIH-bee AH-goh",en:"thank you (formal)"},{t:"quaeso",p:"KWY-soh",en:"please / I ask"},
+      {t:"ita",p:"IH-tah",en:"yes"},{t:"non",p:"nohn",en:"no"},{t:"vale",p:"WAH-leh",en:"goodbye (to one person)"},
+      {t:"valete",p:"wah-LEH-teh",en:"goodbye (to more than one)"},{t:"ignosce",p:"ig-NOHS-keh",en:"forgive me / excuse me"},
+      {t:"bona nox",p:"BOH-nah nohx",en:"good night"},
+      {t:"unus",p:"OO-noos",en:"one"},{t:"duo",p:"DOO-oh",en:"two"},{t:"tres",p:"trehs",en:"three"},{t:"quattuor",p:"KWAT-too-or",en:"four"},
+      {t:"quinque",p:"KWIN-kweh",en:"five"},{t:"sex",p:"sex",en:"six"},{t:"septem",p:"SEP-tem",en:"seven"},{t:"octo",p:"OK-toh",en:"eight"},
+      {t:"novem",p:"NOH-wem",en:"nine"},{t:"decem",p:"DEH-kem",en:"ten"},{t:"viginti",p:"wee-GIN-tee",en:"twenty"},
+      {t:"triginta",p:"tree-GIN-tah",en:"thirty"},{t:"centum",p:"KEN-toom",en:"one hundred"},{t:"mille",p:"MIL-leh",en:"one thousand"},
+      {t:"ruber",p:"ROO-ber",en:"red"},{t:"caeruleus",p:"kai-ROO-leh-oos",en:"blue"},{t:"viridis",p:"WEE-rih-dis",en:"green"},
+      {t:"flavus",p:"FLAH-woos",en:"yellow"},{t:"niger",p:"NIH-ger",en:"black"},{t:"albus",p:"AL-boos",en:"white"},
+      {t:"aurantius",p:"ow-RAN-tee-oos",en:"orange"},{t:"purpureus",p:"poor-POO-reh-oos",en:"purple"},
+      {t:"roseus",p:"ROH-seh-oos",en:"pink"},{t:"fuscus",p:"FOOS-koos",en:"brown"},
+      {t:"pater",p:"PAH-ter",en:"father"},{t:"mater",p:"MAH-ter",en:"mother"},{t:"filius",p:"FEE-lee-oos",en:"son"},
+      {t:"filia",p:"FEE-lee-ah",en:"daughter"},{t:"frater",p:"FRAH-ter",en:"brother"},{t:"soror",p:"SOH-ror",en:"sister"},
+      {t:"avus",p:"AH-woos",en:"grandfather"},{t:"avia",p:"AH-wee-ah",en:"grandmother"},{t:"maritus",p:"mah-REE-toos",en:"husband"},
+      {t:"uxor",p:"OOX-or",en:"wife"},{t:"familia",p:"fah-MEE-lee-ah",en:"family"},{t:"amicus",p:"ah-MEE-koos",en:"friend (male)"},
+      {t:"amica",p:"ah-MEE-kah",en:"friend (female)"},{t:"patruus",p:"PAH-troo-oos",en:"uncle (paternal)"},
+      {t:"aqua",p:"AH-kwah",en:"water"},{t:"vinum",p:"WEE-noom",en:"wine"},{t:"lac",p:"lahk",en:"milk"},{t:"panis",p:"PAH-nis",en:"bread"},
+      {t:"caseus",p:"KAH-seh-oos",en:"cheese"},{t:"caro",p:"KAH-roh",en:"meat"},{t:"piscis",p:"PIS-kis",en:"fish"},
+      {t:"ovum",p:"OH-woom",en:"egg"},{t:"mel",p:"mehl",en:"honey"},{t:"sal",p:"sahl",en:"salt"},{t:"pomum",p:"POH-moom",en:"fruit / apple"},
+      {t:"uva",p:"OO-wah",en:"grape"},{t:"ientaculum",p:"yen-TAH-koo-loom",en:"breakfast"},{t:"cena",p:"KEH-nah",en:"dinner (the main meal)"},
+      {t:"schola",p:"SKOH-lah",en:"school"},{t:"domus",p:"DOH-moos",en:"house"},{t:"forum",p:"FOH-room",en:"marketplace / public square"},
+      {t:"templum",p:"TEM-ploom",en:"temple"},{t:"via",p:"WEE-ah",en:"road / street"},{t:"urbs",p:"oorbs",en:"city"},
+      {t:"villa",p:"WIL-lah",en:"country house / villa"},{t:"thermae",p:"TER-my",en:"baths"},{t:"theatrum",p:"teh-AH-troom",en:"theatre"},
+      {t:"portus",p:"POR-toos",en:"harbour"},
+      {t:"caput",p:"KAH-poot",en:"head"},{t:"manus",p:"MAH-noos",en:"hand"},{t:"pes",p:"pehs",en:"foot"},{t:"oculus",p:"OK-oo-loos",en:"eye"},
+      {t:"os",p:"ohs",en:"mouth"},{t:"auris",p:"OW-ris",en:"ear"},{t:"nasus",p:"NAH-soos",en:"nose"},{t:"cor",p:"kor",en:"heart"},
+      {t:"capillus",p:"kah-PIL-loos",en:"hair"},{t:"dens",p:"dehns",en:"tooth"},
+      {t:"canis",p:"KAH-nis",en:"dog"},{t:"feles",p:"FEH-lehs",en:"cat"},{t:"avis",p:"AH-wis",en:"bird"},{t:"equus",p:"EH-kwoos",en:"horse"},
+      {t:"bos",p:"bohs",en:"cow / ox"},{t:"porcus",p:"POR-koos",en:"pig"},{t:"leo",p:"LEH-oh",en:"lion"},{t:"ursus",p:"OOR-soos",en:"bear"},
+      {t:"lupus",p:"LOO-poos",en:"wolf"},{t:"mus",p:"moos",en:"mouse"},
+      {t:"celer",p:"KEH-ler",en:"fast"},{t:"tardus",p:"TAR-doos",en:"slow"},{t:"calidus",p:"KAH-lih-doos",en:"hot"},
+      {t:"frigidus",p:"FRIH-gih-doos",en:"cold"},{t:"novus",p:"NOH-woos",en:"new"},{t:"vetus",p:"WEH-toos",en:"old"},
+      {t:"altus",p:"AL-toos",en:"tall / high"},{t:"brevis",p:"BREH-wis",en:"short"},{t:"longus",p:"LON-goos",en:"long"},
+      {t:"mundus",p:"MOON-doos",en:"clean"},{t:"sordidus",p:"SOR-dih-doos",en:"dirty"},{t:"fessus",p:"FES-soos",en:"tired"},
+      {t:"esuriens",p:"eh-SOO-ree-ens",en:"hungry"},{t:"magnus",p:"MAG-noos",en:"big"},{t:"parvus",p:"PAR-woos",en:"small"},
+      {t:"pulcher",p:"POOL-ker",en:"beautiful"},{t:"bonus",p:"BOH-noos",en:"good"},{t:"malus",p:"MAH-loos",en:"bad"},
+      {t:"carus",p:"KAH-roos",en:"expensive / dear"},{t:"vilis",p:"WEE-lis",en:"cheap"},
+      {t:"edere",p:"EH-deh-reh",en:"to eat"},{t:"bibere",p:"BIH-beh-reh",en:"to drink"},{t:"spectare",p:"spek-TAH-reh",en:"to watch"},
+      {t:"audire",p:"ow-DEE-reh",en:"to listen / hear"},{t:"loqui",p:"LOH-kwee",en:"to speak"},{t:"ambulare",p:"am-boo-LAH-reh",en:"to walk"},
+      {t:"currere",p:"KOOR-reh-reh",en:"to run"},{t:"dormire",p:"dor-MEE-reh",en:"to sleep"},{t:"emere",p:"EH-meh-reh",en:"to buy"},
+      {t:"vendere",p:"WEN-deh-reh",en:"to sell"},{t:"amare",p:"ah-MAH-reh",en:"to love"},{t:"putare",p:"poo-TAH-reh",en:"to think"},
+      {t:"scire",p:"SKEE-reh",en:"to know"},{t:"laborare",p:"lah-boh-RAH-reh",en:"to work"},{t:"legere",p:"LEH-geh-reh",en:"to read"},
+      {t:"scribere",p:"SKREE-beh-reh",en:"to write"},{t:"ludere",p:"LOO-deh-reh",en:"to play"},{t:"vivere",p:"WEE-weh-reh",en:"to live"},
+      {t:"intellegere",p:"in-tel-LEH-geh-reh",en:"to understand"},{t:"velle",p:"WEL-leh",en:"to want"},
+      {t:"quid",p:"kwid",en:"what"},{t:"quis",p:"kwis",en:"who"},{t:"cur",p:"koor",en:"why"},{t:"quomodo",p:"KWOH-moh-doh",en:"how"},
+      {t:"quando",p:"KWAN-doh",en:"when"},{t:"ubi",p:"OO-bee",en:"where"},{t:"qui",p:"kwee",en:"which"},
+      {t:"nunc",p:"noonk",en:"now"},{t:"heri",p:"HEH-ree",en:"yesterday"},{t:"hodie",p:"HOH-dee-eh",en:"today"},{t:"cras",p:"krahs",en:"tomorrow"},
+      {t:"hora",p:"HOH-rah",en:"hour"},{t:"annus",p:"AN-noos",en:"year"},{t:"mensis",p:"MEN-sis",en:"month"},{t:"dies",p:"DEE-ehs",en:"day"},
+      {t:"mane",p:"MAH-neh",en:"morning"},{t:"vesper",p:"WES-per",en:"evening"},{t:"nox",p:"nohx",en:"night"},{t:"meridies",p:"meh-REE-dee-ehs",en:"midday / noon"},
+      {t:"dies Solis",p:"DEE-ehs SOH-lis",en:"Sunday (lit. 'day of the Sun')"},{t:"dies Lunae",p:"DEE-ehs LOO-ny",en:"Monday (day of the Moon)"},
+      {t:"dies Martis",p:"DEE-ehs MAR-tis",en:"Tuesday (day of Mars)"},{t:"dies Mercurii",p:"DEE-ehs mer-KOO-ree-ee",en:"Wednesday (day of Mercury)"},
+      {t:"dies Iovis",p:"DEE-ehs YOH-wis",en:"Thursday (day of Jupiter)"},{t:"dies Veneris",p:"DEE-ehs WEH-neh-ris",en:"Friday (day of Venus)"},
+      {t:"dies Saturni",p:"DEE-ehs sah-TOOR-nee",en:"Saturday (day of Saturn)"},
+      {t:"tempestas",p:"tem-PES-tahs",en:"weather / storm"},{t:"sol",p:"sohl",en:"sun"},{t:"pluvia",p:"PLOO-wee-ah",en:"rain"},
+      {t:"nix",p:"nihx",en:"snow"},{t:"ventus",p:"WEN-toos",en:"wind"},{t:"nubes",p:"NOO-behs",en:"cloud"},
+      {t:"vestis",p:"WES-tis",en:"clothing"},{t:"tunica",p:"TOO-nih-kah",en:"tunic"},{t:"toga",p:"TOH-gah",en:"toga"},
+      {t:"calceus",p:"KAL-keh-oos",en:"shoe"},{t:"pallium",p:"PAL-lee-oom",en:"cloak"},{t:"solea",p:"SOH-leh-ah",en:"sandal"},
+      {t:"currus",p:"KOOR-roos",en:"chariot / cart"},{t:"navis",p:"NAH-wis",en:"ship"},{t:"raeda",p:"RY-dah",en:"four-wheeled carriage"},
+      {t:"liber",p:"LEE-ber",en:"book"},{t:"mensa",p:"MEN-sah",en:"table"},{t:"sella",p:"SEL-lah",en:"chair"},{t:"ianua",p:"YAH-noo-ah",en:"door"},
+      {t:"fenestra",p:"feh-NES-trah",en:"window"},{t:"pecunia",p:"peh-KOO-nee-ah",en:"money"},{t:"tempus",p:"TEM-poos",en:"time"},
+      {t:"opus",p:"OH-poos",en:"work / job"},{t:"clavis",p:"KLAH-wis",en:"key"},{t:"saccus",p:"SAK-koos",en:"bag / sack"},
+      {t:"epistula",p:"eh-PIS-too-lah",en:"letter"},{t:"charta",p:"KAR-tah",en:"paper"},{t:"gladius",p:"GLAH-dee-oos",en:"sword"},
+      {t:"scutum",p:"SKOO-toom",en:"shield"},{t:"lucerna",p:"loo-KER-nah",en:"lamp"},
+      {t:"laetus",p:"LY-toos",en:"happy"},{t:"tristis",p:"TRIS-tis",en:"sad"},{t:"iratus",p:"ee-RAH-toos",en:"angry"},
+      {t:"attonitus",p:"at-TOH-nih-toos",en:"astonished / surprised"},{t:"timidus",p:"TIH-mih-doos",en:"fearful / scared"},
+      {t:"tranquillus",p:"tran-KWIL-loos",en:"calm"},
+      {t:"magister",p:"mah-GIS-ter",en:"teacher"},{t:"medicus",p:"MEH-dih-koos",en:"doctor"},{t:"miles",p:"MEE-lehs",en:"soldier"},
+      {t:"agricola",p:"ah-GRIH-koh-lah",en:"farmer"},{t:"mercator",p:"mer-KAH-tor",en:"merchant"},{t:"nauta",p:"NOW-tah",en:"sailor"},
+      {t:"poeta",p:"poh-EH-tah",en:"poet"},{t:"senator",p:"seh-NAH-tor",en:"senator"},
+      {t:"amor",p:"AH-mor",en:"love (noun)"},{t:"musica",p:"MOO-sih-kah",en:"music"},{t:"ars",p:"ars",en:"art / skill"},
+      {t:"bellum",p:"BEL-loom",en:"war"},{t:"pax",p:"pahx",en:"peace"},{t:"lex",p:"lehx",en:"law"},{t:"deus",p:"DEH-oos",en:"god"},
+      {t:"imperium",p:"im-PEH-ree-oom",en:"power / command / empire"},
+      {t:"mons",p:"mohns",en:"mountain"},{t:"flumen",p:"FLOO-men",en:"river"},{t:"mare",p:"MAH-reh",en:"sea"},{t:"lacus",p:"LAH-koos",en:"lake"},
+      {t:"insula",p:"IN-soo-lah",en:"island"},{t:"litus",p:"LEE-toos",en:"shore / beach"},{t:"silva",p:"SIL-wah",en:"forest"},{t:"caelum",p:"KY-loom",en:"sky"},
+      {t:"res publica",p:"rehs POO-blih-kah",en:"the republic / public affairs — source of the word 'republic'"},
+      {t:"civis",p:"KEE-wis",en:"citizen"},{t:"consul",p:"KON-sool",en:"consul"},{t:"imperator",p:"im-peh-RAH-tor",en:"commander / emperor"},
+      {t:"senatus",p:"seh-NAH-toos",en:"senate"},{t:"legio",p:"LEH-gee-oh",en:"legion"},{t:"centurio",p:"ken-TOO-ree-oh",en:"centurion"},
+      {t:"et cetera",p:"et KEH-teh-rah",en:"and the rest (a Latin phrase used unchanged in English)"},
+      {t:"alibi",p:"AH-lih-bee",en:"elsewhere (an English loanword straight from Latin)"},
+      {t:"agenda",p:"ah-GEN-dah",en:"things to be done (an English loanword)"},
+      {t:"veto",p:"WEH-toh",en:"I forbid (an English loanword)"},
+      {t:"census",p:"KEN-soos",en:"the counted / a registration (an English loanword)"},
+      {t:"alumnus",p:"ah-LOOM-noos",en:"a nourished pupil / graduate (an English loanword)"},
+      {t:"alma mater",p:"AL-mah MAH-ter",en:"nourishing mother — used for one's university (an English loanword)"},
+      {t:"curriculum",p:"koor-RIH-koo-loom",en:"a running / a course (an English loanword)"},
+      {t:"data",p:"DAH-tah",en:"given things (an English loanword — plural of 'datum')"},
+      {t:"ego",p:"EH-goh",en:"I, the self (an English loanword)"},
+      {t:"versus",p:"WER-soos",en:"turned against (an English loanword)"},
+      {t:"bona fide",p:"BOH-nah FEE-deh",en:"in good faith (an English loanword)"},
+      {t:"quid pro quo",p:"kwid proh kwoh",en:"something for something (an English loanword)"},
+      {t:"status quo",p:"STAH-toos kwoh",en:"the state in which (things currently stand — an English loanword)"},
+      {t:"rex",p:"rehx",en:"king"},{t:"regina",p:"reh-GEE-nah",en:"queen"},{t:"natura",p:"nah-TOO-rah",en:"nature"},
+      {t:"ratio",p:"RAH-tee-oh",en:"reason / calculation — source of the word 'ratio'"},{t:"virtus",p:"WEER-toos",en:"virtue / courage"},
+      {t:"fortuna",p:"for-TOO-nah",en:"fortune / luck"},{t:"historia",p:"his-TOH-ree-ah",en:"history / story"},
+      {t:"philosophia",p:"fih-loh-SOH-fee-ah",en:"philosophy"},{t:"medicina",p:"meh-dih-KEE-nah",en:"medicine"},
+      {t:"fabula",p:"FAH-boo-lah",en:"story / fable"},{t:"ludus",p:"LOO-doos",en:"game / school (a playful dual meaning)"},
+      {t:"Ianus",p:"YAH-noos",en:"Janus, the two-faced god of doorways and beginnings — origin of 'January'"}
+    ],
+    phrases:[
+      {t:"Quid agis?",p:"kwid AH-gis",en:"How are you? (lit. 'what are you doing')"},
+      {t:"Bene, gratias",p:"BEH-neh GRAH-tee-ahs",en:"Well, thanks"},
+      {t:"Quod est nomen tibi?",p:"kwohd est NOH-men TIH-bee",en:"What is your name?"},
+      {t:"Nomen mihi est…",p:"NOH-men MIH-hee est",en:"My name is…"},
+      {t:"Quanti constat?",p:"KWAN-tee KON-stat",en:"How much does it cost?"},
+      {t:"Ubi est balneum?",p:"OO-bee est BAL-neh-oom",en:"Where is the bathroom?"},
+      {t:"Non intellego",p:"nohn in-TEL-leh-goh",en:"I don't understand"},
+      {t:"Loquerisne Anglice?",p:"loh-kweh-RIS-neh AN-glih-keh",en:"Do you speak English?"},
+      {t:"Itera, quaeso",p:"IH-teh-rah KWY-soh",en:"Please repeat that"},
+      {t:"Hoc volo",p:"hohk WOH-loh",en:"I want this"},
+      {t:"Fortuna tibi faveat",p:"for-TOO-nah TIH-bee FAH-weh-at",en:"May fortune favour you (good luck)"},
+      {t:"Nulla cura",p:"NOOL-lah KOO-rah",en:"No worries"},
+      {t:"Prosit!",p:"PROH-sit",en:"Cheers! (lit. 'may it do good')"}
+    ],
+    writing:[
+      {t:"I",name:"1"},{t:"V",name:"5"},{t:"X",name:"10"},{t:"L",name:"50"},{t:"C",name:"100"},{t:"D",name:"500"},{t:"M",name:"1000"}
+    ],
+    culture:[
+      {title:"The mother of the Romance languages", body:"French, Spanish, Italian, Portuguese and Romanian all descend directly from spoken (Vulgar) Latin — which is why so much vocabulary in this app's Spanish and French decks looks familiar once you know the Latin root."},
+      {title:"Hiding inside English too", body:"Despite being a Germanic language at its core, roughly 60% of English vocabulary traces back to Latin — largely via Norman French after 1066, plus centuries of direct scholarly borrowing. Words like 'agenda', 'alibi' and 'veto' are just unchanged Latin."},
+      {title:"The working language of science, law and the Church for centuries", body:"Long after Rome fell, Latin remained the shared language of European scholarship, law and Catholic liturgy — which is why species get Latin binomial names (like Homo sapiens) and why legal terms like 'habeas corpus' and 'pro bono' survive today."},
+      {title:"No fixed words for yes and no", body:"Classical Latin didn't really have dedicated words for 'yes' and 'no' the way modern languages do — like Irish, a Roman more often answered a question by restating the verb. 'Ita' and 'non' (used here) are reasonable stand-ins, but they weren't the automatic reflex answer that 'yes' and 'no' are in English."},
+      {title:"Still spoken today, technically", body:"Latin is the official language of Vatican City, and a genuine 'Living Latin' movement runs immersion programmes and conversational meetups worldwide — so it's a dead language in the sense that no country grows up speaking it natively, but not entirely extinct."}
+    ]
+  },
   yolngu: {
     key:"yolngu", name:"Yolŋu Matha", native:"Gupapuyngu", accent:"var(--yolngu)", flag:"🟠",
     speechLang:"en-AU", rtl:false, script:false, available:true,
@@ -2252,15 +2386,27 @@ function render(){
     scoreboard: renderScoreboardScreen
   };
   (renderers[state.screen] || renderHomeScreen)(screenEl);
-  app.appendChild(el("footer",{class:"hint"}, "Yarnabout · G'day, ready for a yarn? · Synced across your devices"));
+  app.appendChild(el("footer",{class:"hint"}, "DingoLingo · G'day, ready for a yarn? · Synced across your devices"));
 }
 
 function renderTopbar(){
   const bar = el("div",{class:"topbar"});
   const brand = el("div",{class:"brand"},
-    el("span",{class:"yarnball"},"🧶"),
+    el("span",{class:"applogo", html: `<svg viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="78" width="140" height="22" fill="#7a5230" opacity="0.55"/>
+      <path d="M15 80 Q 30 35 60 32 Q 95 28 120 55 Q 128 62 128 80 Z" fill="#C1552E"/>
+      <path d="M35 80 Q 45 55 65 48 Q 85 44 100 58 Q 108 64 108 80 Z" fill="#953F22" opacity="0.55"/>
+      <g fill="#E0A94E">
+        <path d="M18 82 Q 14 60 24 52 Q 28 48 34 50 Q 40 52 41 60 L 43 82 Z"/>
+        <circle cx="34" cy="42" r="8"/>
+        <path d="M41 43 L 50 45 L 42 47 Z"/>
+        <path d="M29 37 L 26 27 L 33 35 Z"/>
+        <path d="M39 36 L 44 26 L 41 37 Z"/>
+        <path d="M20 74 Q 10 70 11 60 Q 12 53 19 55 Q 15 60 17 67 Q 18 71 22 74 Z"/>
+      </g>
+    </svg>`}),
     el("div",{},
-      el("h1",{}, "Yarnabout"),
+      el("h1",{}, "DingoLingo"),
       el("small",{}, state.language ? `${LANGUAGES[state.language].flag} ${LANGUAGES[state.language].name} · ${LEVELS[state.level].name}` : "Fun language learning, home team style")
     )
   );
@@ -2461,7 +2607,7 @@ function renderFlashcardsScreen(root){
 function roundComplete(lang, s){
   const wrap = el("div",{class:"stage"});
   wrap.appendChild(el("div",{class:"flashcard"},
-    el("div",{style:"font-size:48px;"}, "🧶"),
+    el("div",{style:"font-size:48px;"}, "🐾"),
     el("h2",{}, "Round done!"),
     el("p",{}, `${s.correct} / ${s.items.length} correct — bonzer effort.`),
     el("div",{class:"row"},
@@ -2591,7 +2737,7 @@ function renderScoreboardScreen(root){
 
 // ---- Boot ----
 (async function boot(){
-  app.appendChild(el("div",{class:"screen"}, el("h2",{},"Winding the yarn ball… 🧶")));
+  app.appendChild(el("div",{class:"screen"}, el("h2",{},"Waking the dingo… 🐾")));
   await ensurePlayersLoaded();
   state.screen = "players";
   render();
