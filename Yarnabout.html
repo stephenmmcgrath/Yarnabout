@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Yarnabout — Learn a Language, Have a Yarn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Noto+Sans+Egyptian+Hieroglyphs&family=Noto+Sans+KR:wght@500;700&family=Noto+Sans+Cuneiform&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Noto+Sans+Egyptian+Hieroglyphs&family=Noto+Sans+KR:wght@500;700&family=Noto+Sans+Cuneiform&family=Noto+Sans+Gurmukhi:wght@500;700&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <style>
   :root{
@@ -33,6 +33,8 @@
     --afrikaans:#E07A3E;
     --sumerian:#B08D57;
     --samoan:#0072B5;
+    --punjabi:#D2691E;
+    --nepali:#8B0000;
     --good:#5FD97E;
     --bad:#F0665C;
     --radius:18px;
@@ -128,7 +130,7 @@
     padding: clamp(28px,5vw,56px) clamp(20px,5vw,50px);text-align:center;box-shadow:var(--shadow);
     display:flex;flex-direction:column;gap:16px;align-items:center;
   }
-  .target-word{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Baloo 2',sans-serif;font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.1;}
+  .target-word{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari','Baloo 2',sans-serif;font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.1;}
   .target-word.rtl{direction:rtl;}
   .translit{color:var(--text-dim);font-size:clamp(14px,2vw,20px);letter-spacing:.03em;}
   .speak-btn{background:var(--accent,var(--thread));color:#171923;border:none;width:52px;height:52px;border-radius:50%;font-size:22px;box-shadow:var(--shadow);}
@@ -148,7 +150,7 @@
   /* ---- Phrases list ---- */
   .phraselist{display:flex;flex-direction:column;gap:12px;}
   .phrase{background:var(--bg-elev);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:16px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-  .phrase .ptext{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Baloo 2',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:600;}
+  .phrase .ptext{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari','Baloo 2',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:600;}
   .phrase .ptext.rtl{direction:rtl;}
   .phrase .ptranslit{color:var(--text-dim);font-size:.9em;}
   .phrase .pen{margin-left:auto;color:var(--text-dim);font-style:italic;}
@@ -156,10 +158,10 @@
   /* ---- Writing practice ---- */
   .writewrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
   .canvasbox{position:relative;width:min(360px,80vw);height:min(360px,80vw);background:var(--bg-elev);border:2px solid rgba(255,255,255,0.1);border-radius:var(--radius);box-shadow:var(--shadow);}
-  .canvasbox .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(260px,60vw);font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform',sans-serif;color:rgba(255,255,255,0.08);user-select:none;pointer-events:none;}
+  .canvasbox .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(260px,60vw);font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari',sans-serif;color:rgba(255,255,255,0.08);user-select:none;pointer-events:none;}
   .canvasbox canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;}
   .writemeta{text-align:center;}
-  .writemeta .lbl{font-size:clamp(28px,4vw,40px);font-weight:700;font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform',sans-serif;}
+  .writemeta .lbl{font-size:clamp(28px,4vw,40px);font-weight:700;font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari',sans-serif;}
   .writemeta .name{color:var(--text-dim);}
 
   /* ---- Culture ---- */
@@ -1841,6 +1843,220 @@ const LANGUAGES = {
       {title:"The glottal stop is a real letter", body:"The 'okina (ʻ) marks a glottal stop and is a distinct sound, not decoration — 'aʻoga' (school) and 'aoga' (useful) are different words because of it, much like the macron over a vowel changes meaning too."},
       {title:"The matai system", body:"Matai (chiefs) hold titles bestowed by their extended family (aiga) and play a central role in Samoan village governance and ceremony — the concept comes up constantly in everyday conversation about family and community."},
       {title:"A major Pacific diaspora language", body:"Beyond Samoa and American Samoa, Samoan is widely spoken in New Zealand, Australia and parts of the US (especially Hawaii and California) — New Zealand in particular has a large Samoan-speaking community and offers Samoan-medium early childhood education."}
+    ]
+  },
+  punjabi: {
+    key:"punjabi", name:"Punjabi", native:"ਪੰਜਾਬੀ", accent:"var(--punjabi)", flag:"🇮🇳",
+    speechLang:"pa-IN", rtl:false, script:true, available:true,
+    blurb:"One spoken language, two scripts — Indian Punjabi is written in Gurmukhi (used here), while Pakistani Punjabi uses the Perso-Arabic Shahmukhi script instead.",
+    words:[
+      {t:"ਸਤ ਸ੍ਰੀ ਅਕਾਲ",p:"sat sri akaal",en:"hello / goodbye"},{t:"ਧੰਨਵਾਦ",p:"dhann-vaad",en:"thank you"},
+      {t:"ਕਿਰਪਾ ਕਰਕੇ",p:"kirpa kar-ke",en:"please"},{t:"ਹਾਂ",p:"haan",en:"yes"},{t:"ਨਹੀਂ",p:"na-heen",en:"no"},
+      {t:"ਅਲਵਿਦਾ",p:"al-vi-da",en:"goodbye"},{t:"ਮਾਫ਼ ਕਰਨਾ",p:"maaf kar-na",en:"sorry / excuse me"},
+      {t:"ਸ਼ੁਭ ਸਵੇਰ",p:"shubh sa-ver",en:"good morning"},{t:"ਸ਼ੁਭ ਰਾਤ",p:"shubh raat",en:"good night"},
+      {t:"ਸੁਆਗਤ ਹੈ",p:"su-aa-gat hai",en:"welcome"},{t:"ਕੋਈ ਗੱਲ ਨਹੀਂ",p:"koi gal na-heen",en:"no worries / you're welcome"},
+      {t:"ਚੰਗਾ",p:"chan-ga",en:"good / fine"},
+      {t:"ਸਿਫ਼ਰ",p:"si-far",en:"zero"},{t:"ਇੱਕ",p:"ikk",en:"one"},{t:"ਦੋ",p:"do",en:"two"},{t:"ਤਿੰਨ",p:"tinn",en:"three"},
+      {t:"ਚਾਰ",p:"chaar",en:"four"},{t:"ਪੰਜ",p:"panj",en:"five"},{t:"ਛੇ",p:"chhe",en:"six"},{t:"ਸੱਤ",p:"satt",en:"seven"},
+      {t:"ਅੱਠ",p:"atth",en:"eight"},{t:"ਨੌਂ",p:"naun",en:"nine"},{t:"ਦਸ",p:"das",en:"ten"},{t:"ਵੀਹ",p:"veeh",en:"twenty"},
+      {t:"ਤੀਹ",p:"teeh",en:"thirty"},{t:"ਸੌ",p:"sau",en:"one hundred"},{t:"ਹਜ਼ਾਰ",p:"ha-zaar",en:"one thousand"},
+      {t:"ਲਾਲ",p:"laal",en:"red"},{t:"ਨੀਲਾ",p:"nee-la",en:"blue"},{t:"ਹਰਾ",p:"ha-ra",en:"green"},{t:"ਪੀਲਾ",p:"pee-la",en:"yellow"},
+      {t:"ਕਾਲਾ",p:"kaa-la",en:"black"},{t:"ਚਿੱਟਾ",p:"chit-ta",en:"white"},{t:"ਸੰਤਰੀ",p:"san-ta-ree",en:"orange"},
+      {t:"ਜਾਮਨੀ",p:"jaam-nee",en:"purple"},{t:"ਗੁਲਾਬੀ",p:"gu-laa-bee",en:"pink"},{t:"ਭੂਰਾ",p:"bhoo-ra",en:"brown"},
+      {t:"ਪਿਤਾ",p:"pi-ta",en:"father"},{t:"ਮਾਂ",p:"maan",en:"mother"},{t:"ਪੁੱਤਰ",p:"put-tar",en:"son"},{t:"ਧੀ",p:"dhee",en:"daughter"},
+      {t:"ਵੱਡਾ ਭਰਾ",p:"vad-da bhra",en:"older brother"},{t:"ਛੋਟਾ ਭਰਾ",p:"cho-ta bhra",en:"younger brother"},
+      {t:"ਵੱਡੀ ਭੈਣ",p:"vad-dee bhain",en:"older sister"},{t:"ਛੋਟੀ ਭੈਣ",p:"cho-tee bhain",en:"younger sister"},
+      {t:"ਦਾਦਾ ਜੀ",p:"daa-da jee",en:"grandfather"},{t:"ਦਾਦੀ ਜੀ",p:"daa-dee jee",en:"grandmother"},
+      {t:"ਪਤੀ",p:"pa-tee",en:"husband"},{t:"ਪਤਨੀ",p:"pat-nee",en:"wife"},{t:"ਪਰਿਵਾਰ",p:"pa-ri-vaar",en:"family"},{t:"ਦੋਸਤ",p:"dost",en:"friend"},
+      {t:"ਪਾਣੀ",p:"paa-nee",en:"water"},{t:"ਰੋਟੀ",p:"ro-tee",en:"bread"},{t:"ਦੁੱਧ",p:"dudh",en:"milk"},{t:"ਚਾਹ",p:"chaah",en:"tea"},
+      {t:"ਕੌਫ਼ੀ",p:"kau-fee",en:"coffee"},{t:"ਜੂਸ",p:"joos",en:"juice"},{t:"ਬੀਅਰ",p:"bee-ar",en:"beer"},{t:"ਗੋਸ਼ਤ",p:"gosht",en:"meat"},
+      {t:"ਮੁਰਗਾ",p:"mur-ga",en:"chicken"},{t:"ਮੱਛੀ",p:"mach-chhee",en:"fish"},{t:"ਚੌਲ",p:"chawal",en:"rice"},{t:"ਸੂਪ",p:"soop",en:"soup"},
+      {t:"ਆਂਡਾ",p:"aan-da",en:"egg"},{t:"ਪਨੀਰ",p:"pa-neer",en:"cheese"},{t:"ਸੇਬ",p:"seb",en:"apple"},{t:"ਕੇਲਾ",p:"ke-la",en:"banana"},
+      {t:"ਸੰਗਤਰਾ",p:"sang-ta-ra",en:"orange (fruit)"},{t:"ਆਲੂ",p:"aa-loo",en:"potato"},{t:"ਸਬਜ਼ੀ",p:"sab-zee",en:"vegetables"},
+      {t:"ਫਲ",p:"phal",en:"fruit"},{t:"ਖੰਡ",p:"khand",en:"sugar"},{t:"ਲੂਣ",p:"loon",en:"salt"},
+      {t:"ਨਾਸ਼ਤਾ",p:"naash-ta",en:"breakfast"},{t:"ਦੁਪਹਿਰ ਦਾ ਖਾਣਾ",p:"du-pehr da khaa-na",en:"lunch"},{t:"ਰਾਤ ਦਾ ਖਾਣਾ",p:"raat da khaa-na",en:"dinner"},
+      {t:"ਸਕੂਲ",p:"school",en:"school"},{t:"ਹਸਪਤਾਲ",p:"has-pa-taal",en:"hospital"},{t:"ਬੈਂਕ",p:"baink",en:"bank"},
+      {t:"ਰੈਸਟੋਰੈਂਟ",p:"restaurant",en:"restaurant"},{t:"ਦੁਕਾਨ",p:"du-kaan",en:"shop"},{t:"ਪਾਰਕ",p:"park",en:"park"},
+      {t:"ਘਰ",p:"ghar",en:"house"},{t:"ਸ਼ਹਿਰ",p:"she-har",en:"city"},{t:"ਗਲੀ",p:"ga-lee",en:"street"},
+      {t:"ਹਵਾਈ ਅੱਡਾ",p:"ha-vaa-ee ad-da",en:"airport"},{t:"ਰੇਲਵੇ ਸਟੇਸ਼ਨ",p:"railway station",en:"train station"},{t:"ਹੋਟਲ",p:"hotel",en:"hotel"},
+      {t:"ਸਿਰ",p:"sir",en:"head"},{t:"ਹੱਥ",p:"hath",en:"hand"},{t:"ਲੱਤ",p:"latt",en:"leg"},{t:"ਅੱਖਾਂ",p:"ak-khaan",en:"eyes"},
+      {t:"ਮੂੰਹ",p:"moonh",en:"mouth"},{t:"ਕੰਨ",p:"kann",en:"ear"},{t:"ਨੱਕ",p:"nakk",en:"nose"},{t:"ਦਿਲ",p:"dil",en:"heart"},
+      {t:"ਵਾਲ",p:"vaal",en:"hair"},{t:"ਦੰਦ",p:"dand",en:"teeth"},{t:"ਪਿੱਠ",p:"pitth",en:"back"},{t:"ਉਂਗਲ",p:"ung-al",en:"finger"},
+      {t:"ਕੁੱਤਾ",p:"kut-ta",en:"dog"},{t:"ਬਿੱਲੀ",p:"bil-lee",en:"cat"},{t:"ਪੰਛੀ",p:"pan-chhee",en:"bird"},{t:"ਘੋੜਾ",p:"gho-ra",en:"horse"},
+      {t:"ਗਾਂ",p:"gaan",en:"cow"},{t:"ਸੂਰ",p:"soor",en:"pig"},{t:"ਬਾਘ",p:"baagh",en:"tiger"},{t:"ਰਿੱਛ",p:"richh",en:"bear"},
+      {t:"ਖ਼ਰਗੋਸ਼",p:"khar-gosh",en:"rabbit"},{t:"ਬਘਿਆੜ",p:"ba-ghi-aar",en:"wolf"},{t:"ਲੂੰਬੜੀ",p:"loom-ba-ree",en:"fox"},{t:"ਚੂਹਾ",p:"choo-ha",en:"mouse"},
+      {t:"ਤੇਜ਼",p:"tez",en:"fast"},{t:"ਹੌਲੀ",p:"hau-lee",en:"slow"},{t:"ਗਰਮ",p:"ga-ram",en:"hot"},{t:"ਠੰਡਾ",p:"than-da",en:"cold"},
+      {t:"ਨਵਾਂ",p:"na-vaan",en:"new"},{t:"ਪੁਰਾਣਾ",p:"pu-raa-na",en:"old"},{t:"ਲੰਬਾ",p:"lam-ba",en:"tall"},{t:"ਛੋਟਾ",p:"cho-ta",en:"short"},
+      {t:"ਲੰਮਾ",p:"lam-ma",en:"long"},{t:"ਸਾਫ਼",p:"saaf",en:"clean"},{t:"ਗੰਦਾ",p:"gan-da",en:"dirty"},{t:"ਥੱਕਿਆ",p:"thak-ki-a",en:"tired"},
+      {t:"ਭੁੱਖਾ",p:"bhukh-a",en:"hungry"},{t:"ਵੱਡਾ",p:"vad-da",en:"big"},{t:"ਸੋਹਣਾ",p:"soh-na",en:"beautiful"},
+      {t:"ਮਾੜਾ",p:"maa-ra",en:"bad"},{t:"ਮਹਿੰਗਾ",p:"me-hin-ga",en:"expensive"},{t:"ਸਸਤਾ",p:"sas-ta",en:"cheap"},
+      {t:"ਖਾਣਾ",p:"khaa-na",en:"to eat"},{t:"ਪੀਣਾ",p:"pee-na",en:"to drink"},{t:"ਦੇਖਣਾ",p:"dekh-na",en:"to watch"},
+      {t:"ਸੁਣਨਾ",p:"sun-na",en:"to listen"},{t:"ਬੋਲਣਾ",p:"bol-na",en:"to speak"},{t:"ਤੁਰਨਾ",p:"tur-na",en:"to walk"},
+      {t:"ਦੌੜਨਾ",p:"daur-na",en:"to run"},{t:"ਸੌਣਾ",p:"sau-na",en:"to sleep"},{t:"ਖਰੀਦਣਾ",p:"kha-reed-na",en:"to buy"},
+      {t:"ਵੇਚਣਾ",p:"vech-na",en:"to sell"},{t:"ਪਿਆਰ ਕਰਨਾ",p:"pyaar kar-na",en:"to love"},{t:"ਸੋਚਣਾ",p:"soch-na",en:"to think"},
+      {t:"ਜਾਣਨਾ",p:"jaan-na",en:"to know"},{t:"ਕੰਮ ਕਰਨਾ",p:"kamm kar-na",en:"to work"},{t:"ਪੜ੍ਹਨਾ",p:"parh-na",en:"to read"},
+      {t:"ਲਿਖਣਾ",p:"likh-na",en:"to write"},{t:"ਖੇਡਣਾ",p:"khed-na",en:"to play"},{t:"ਰਹਿਣਾ",p:"reh-na",en:"to live"},
+      {t:"ਸਮਝਣਾ",p:"sa-majh-na",en:"to understand"},{t:"ਚਾਹੁਣਾ",p:"chaa-hu-na",en:"to want"},
+      {t:"ਕੀ",p:"kee",en:"what"},{t:"ਕੌਣ",p:"kaun",en:"who"},{t:"ਕਿਉਂ",p:"ki-un",en:"why"},{t:"ਕਿਵੇਂ",p:"ki-ven",en:"how"},
+      {t:"ਕਦੋਂ",p:"ka-don",en:"when"},{t:"ਕਿੱਥੇ",p:"kit-the",en:"where"},{t:"ਕਿਹੜਾ",p:"kih-ra",en:"which"},
+      {t:"ਹੁਣ",p:"hun",en:"now"},{t:"ਕੱਲ੍ਹ",p:"kallh",en:"yesterday"},{t:"ਅੱਜ",p:"ajj",en:"today"},{t:"ਭਲਕ",p:"bha-lak",en:"tomorrow"},
+      {t:"ਘੰਟਾ",p:"ghan-ta",en:"hour"},{t:"ਮਿੰਟ",p:"mint",en:"minute"},{t:"ਸਾਲ",p:"saal",en:"year"},{t:"ਮਹੀਨਾ",p:"ma-hee-na",en:"month"},
+      {t:"ਹਫ਼ਤਾ",p:"haf-ta",en:"week"},{t:"ਸੋਮਵਾਰ",p:"som-vaar",en:"Monday"},{t:"ਮੰਗਲਵਾਰ",p:"man-gal-vaar",en:"Tuesday"},
+      {t:"ਬੁੱਧਵਾਰ",p:"budh-vaar",en:"Wednesday"},{t:"ਵੀਰਵਾਰ",p:"veer-vaar",en:"Thursday"},{t:"ਸ਼ੁੱਕਰਵਾਰ",p:"shu-kar-vaar",en:"Friday"},
+      {t:"ਸ਼ਨੀਵਾਰ",p:"sha-nee-vaar",en:"Saturday"},{t:"ਐਤਵਾਰ",p:"ait-vaar",en:"Sunday"},{t:"ਸਵੇਰ",p:"sa-ver",en:"morning"},
+      {t:"ਮੌਸਮ",p:"mau-sam",en:"weather"},{t:"ਸੂਰਜ",p:"soo-raj",en:"sun"},{t:"ਮੀਂਹ",p:"meenh",en:"rain"},{t:"ਬਰਫ਼",p:"barf",en:"snow"},
+      {t:"ਹਵਾ",p:"ha-va",en:"wind"},{t:"ਬੱਦਲ",p:"bad-dal",en:"cloud"},{t:"ਤੂਫ਼ਾਨ",p:"too-faan",en:"storm"},{t:"ਸਤਰੰਗੀ ਪੀਂਘ",p:"sa-tran-gee peengh",en:"rainbow"},
+      {t:"ਕੱਪੜੇ",p:"kap-re",en:"clothing"},{t:"ਕਮੀਜ਼",p:"ka-meez",en:"shirt"},{t:"ਪੈਂਟ",p:"pant",en:"trousers"},
+      {t:"ਫ਼ਰਾਕ",p:"frock",en:"dress"},{t:"ਜੁੱਤੇ",p:"jut-te",en:"shoes"},{t:"ਜੈਕਟ",p:"jacket",en:"jacket"},{t:"ਟੋਪੀ",p:"to-pee",en:"hat"},
+      {t:"ਜੁਰਾਬਾਂ",p:"ju-raa-baan",en:"socks"},
+      {t:"ਗੱਡੀ",p:"gad-dee",en:"car"},{t:"ਬੱਸ",p:"bass",en:"bus"},{t:"ਰੇਲ",p:"rail",en:"train"},{t:"ਹਵਾਈ ਜਹਾਜ਼",p:"ha-vaa-ee ja-haaz",en:"airplane"},
+      {t:"ਸਾਈਕਲ",p:"cycle",en:"bicycle"},{t:"ਟੈਕਸੀ",p:"taxi",en:"taxi"},{t:"ਕਿਸ਼ਤੀ",p:"kish-tee",en:"boat"},{t:"ਮੈਟਰੋ",p:"metro",en:"subway"},
+      {t:"ਕਿਤਾਬ",p:"ki-taab",en:"book"},{t:"ਮੇਜ਼",p:"mez",en:"table"},{t:"ਕੁਰਸੀ",p:"kur-see",en:"chair"},{t:"ਦਰਵਾਜ਼ਾ",p:"dar-vaa-za",en:"door"},
+      {t:"ਖਿੜਕੀ",p:"khir-kee",en:"window"},{t:"ਫ਼ੋਨ",p:"phone",en:"phone"},{t:"ਪੈਸੇ",p:"pai-se",en:"money"},{t:"ਸਮਾਂ",p:"sa-maan",en:"time"},
+      {t:"ਚਾਬੀ",p:"chaa-bee",en:"key"},{t:"ਬੈਗ",p:"bag",en:"bag"},{t:"ਘੜੀ",p:"gha-ree",en:"watch"},{t:"ਅਖ਼ਬਾਰ",p:"akh-baar",en:"newspaper"},
+      {t:"ਕੰਪਿਊਟਰ",p:"computer",en:"computer"},{t:"ਬਾਜ਼ਾਰ",p:"baa-zaar",en:"market"},
+      {t:"ਖੁਸ਼",p:"khush",en:"happy"},{t:"ਉਦਾਸ",p:"u-daas",en:"sad"},{t:"ਗੁੱਸੇ",p:"gus-se",en:"angry"},{t:"ਹੈਰਾਨ",p:"hai-raan",en:"surprised"},
+      {t:"ਡਰਿਆ",p:"dar-i-a",en:"scared"},{t:"ਸ਼ਾਂਤ",p:"shaant",en:"calm"},{t:"ਪਿਆਰ ਵਿੱਚ",p:"pyaar vich",en:"in love"},{t:"ਬੋਰ",p:"bore",en:"bored"},
+      {t:"ਅਧਿਆਪਕ",p:"adh-yaa-pak",en:"teacher"},{t:"ਡਾਕਟਰ",p:"doctor",en:"doctor"},{t:"ਪੁਲਿਸ",p:"police",en:"police officer"},
+      {t:"ਇੰਜੀਨੀਅਰ",p:"engineer",en:"engineer"},{t:"ਵਿਦਿਆਰਥੀ",p:"vid-yaar-thee",en:"student"},{t:"ਡਰਾਈਵਰ",p:"driver",en:"driver"},
+      {t:"ਰਸੋਈਆ",p:"ra-so-ee-a",en:"cook"},{t:"ਦੁਕਾਨਦਾਰ",p:"du-kaan-daar",en:"shop assistant"},
+      {t:"ਪਿਆਰ",p:"pyaar",en:"love (noun)"},{t:"ਸੰਗੀਤ",p:"san-geet",en:"music"},{t:"ਟੈਲੀਵਿਜ਼ਨ",p:"television",en:"TV"},{t:"ਇੰਟਰਨੈੱਟ",p:"internet",en:"internet"},
+      {t:"ਪਹਾੜ",p:"pa-haad",en:"mountain"},{t:"ਦਰਿਆ",p:"da-ri-aa",en:"river"},{t:"ਸਮੁੰਦਰ",p:"sa-mun-dar",en:"sea"},{t:"ਝੀਲ",p:"jheel",en:"lake"},
+      {t:"ਟਾਪੂ",p:"taa-poo",en:"island"},{t:"ਕੰਢਾ",p:"kan-dha",en:"beach / shore"},{t:"ਜੰਗਲ",p:"jan-gal",en:"forest"},
+      {t:"ਅਸਮਾਨ",p:"as-maan",en:"sky"},{t:"ਮਾਰੂਥਲ",p:"maa-roo-thal",en:"desert"}
+    ],
+    phrases:[
+      {t:"ਤੁਸੀਂ ਕਿਵੇਂ ਹੋ?",p:"tu-seen ki-ven ho",en:"How are you?"},
+      {t:"ਮੇਰਾ ਨਾਮ … ਹੈ",p:"me-ra naam … hai",en:"My name is…"},
+      {t:"ਤੁਹਾਡਾ ਨਾਮ ਕੀ ਹੈ?",p:"tu-haa-da naam kee hai",en:"What's your name?"},
+      {t:"ਇਹ ਕਿੰਨੇ ਦਾ ਹੈ?",p:"eh kin-ne da hai",en:"How much is this?"},
+      {t:"ਬਾਥਰੂਮ ਕਿੱਥੇ ਹੈ?",p:"bathroom kit-the hai",en:"Where's the bathroom?"},
+      {t:"ਮੈਨੂੰ ਸਮਝ ਨਹੀਂ ਆਇਆ",p:"mai-noon sa-majh na-heen aa-i-a",en:"I don't understand"},
+      {t:"ਕੀ ਤੁਸੀਂ ਅੰਗਰੇਜ਼ੀ ਬੋਲਦੇ ਹੋ?",p:"kee tu-seen an-gre-zee bol-de ho",en:"Do you speak English?"},
+      {t:"ਦੁਬਾਰਾ ਕਹੋ",p:"du-baa-ra ka-ho",en:"Please say that again"},
+      {t:"ਮੈਨੂੰ ਇਹ ਚਾਹੀਦਾ ਹੈ",p:"mai-noon eh chaa-hee-da hai",en:"I want this"},
+      {t:"ਬਿੱਲ ਦਿਓ",p:"bill di-o",en:"The bill, please"},
+      {t:"ਸ਼ੁਭ ਕਾਮਨਾਵਾਂ",p:"shubh kaam-naa-vaan",en:"Good luck / best wishes"},
+      {t:"ਕੋਈ ਗੱਲ ਨਹੀਂ",p:"koi gal na-heen",en:"No worries"},
+      {t:"ਚੀਅਰਜ਼!",p:"cheers",en:"Cheers!"}
+    ],
+    writing:[
+      {t:"ੳ",name:"ura — the first vowel-bearer letter"},{t:"ਅ",name:"aira — second vowel-bearer"},
+      {t:"ੲ",name:"iri — third vowel-bearer"},{t:"ਸ",name:"sassa — s"},{t:"ਹ",name:"haha — h"},
+      {t:"ਕ",name:"kakka — k"},{t:"ਖ",name:"khakha — kh"},{t:"ਗ",name:"gagga — g"},{t:"ਙ",name:"nganga — ng"}
+    ],
+    culture:[
+      {title:"One language, two scripts", body:"Punjabi is written in Gurmukhi in Indian Punjab (used throughout this deck) and in Shahmukhi — a Perso-Arabic script — in Pakistani Punjab, where more Punjabi speakers actually live. It's the same spoken language split across two completely different writing systems."},
+      {title:"Gurmukhi and Sikh scripture", body:"Gurmukhi was standardised in the 16th century and is closely tied to Sikhism — the Guru Granth Sahib, Sikhism's central scripture, is written in Gurmukhi, and the script's development is traditionally credited to the second Sikh Guru, Guru Angad Dev."},
+      {title:"Bhangra started as harvest music", body:"Bhangra, now a globally popular music and dance style, began as folk music tied to the Vaisakhi harvest festival in rural Punjab, celebrating the wheat harvest and the Sikh new year."},
+      {title:"A famously expressive, direct way of speaking", body:"Punjabi speech is often described as warm, loud and emotionally direct compared to more reserved regional neighbours — a trait Punjabis themselves often embrace with pride."},
+      {title:"A major diaspora language", body:"Large-scale migration has made Punjabi one of the most-spoken languages in the UK and Canada, alongside its tens of millions of speakers across Indian and Pakistani Punjab."}
+    ]
+  },
+  nepali: {
+    key:"nepali", name:"Nepali", native:"नेपाली", accent:"var(--nepali)", flag:"🇳🇵",
+    speechLang:"ne-NP", rtl:false, script:true, available:true,
+    blurb:"Nepal's official language, written in the same Devanagari script as Hindi and Sanskrit — and paired with its own calendar that currently runs about 57 years ahead of the Gregorian one.",
+    words:[
+      {t:"नमस्ते",p:"na-mas-te",en:"hello"},{t:"धन्यवाद",p:"dhan-ya-baad",en:"thank you"},{t:"कृपया",p:"kri-pa-ya",en:"please"},
+      {t:"हो",p:"ho",en:"yes"},{t:"होइन",p:"ho-i-na",en:"no"},{t:"नमस्कार",p:"na-mas-kaar",en:"hello / goodbye (formal)"},
+      {t:"माफ गर्नुहोस्",p:"maaf gar-nu-hos",en:"sorry / excuse me"},{t:"शुभ प्रभात",p:"shub-ha pra-bhaat",en:"good morning"},
+      {t:"शुभ रात्री",p:"shub-ha raat-ree",en:"good night"},{t:"स्वागतम्",p:"swaa-ga-tam",en:"welcome"},
+      {t:"फेरि भेटौंला",p:"phe-ri bhe-taun-la",en:"goodbye / see you again"},
+      {t:"शून्य",p:"shoon-ya",en:"zero"},{t:"एक",p:"ek",en:"one"},{t:"दुई",p:"du-ee",en:"two"},{t:"तीन",p:"teen",en:"three"},
+      {t:"चार",p:"chaar",en:"four"},{t:"पाँच",p:"paanch",en:"five"},{t:"छ",p:"chha",en:"six"},{t:"सात",p:"saat",en:"seven"},
+      {t:"आठ",p:"aath",en:"eight"},{t:"नौ",p:"nau",en:"nine"},{t:"दश",p:"das",en:"ten"},{t:"बीस",p:"bees",en:"twenty"},
+      {t:"तीस",p:"tees",en:"thirty"},{t:"सय",p:"sai",en:"one hundred"},{t:"हजार",p:"ha-jaar",en:"one thousand"},
+      {t:"रातो",p:"raa-to",en:"red"},{t:"निलो",p:"ni-lo",en:"blue"},{t:"हरियो",p:"ha-ri-yo",en:"green"},{t:"पहेंलो",p:"pa-hen-lo",en:"yellow"},
+      {t:"कालो",p:"kaa-lo",en:"black"},{t:"सेतो",p:"se-to",en:"white"},{t:"सुन्तला रंग",p:"sun-ta-la rang",en:"orange"},
+      {t:"बैजनी",p:"bai-ja-nee",en:"purple"},{t:"गुलाबी",p:"gu-laa-bee",en:"pink"},{t:"खैरो",p:"khai-ro",en:"brown"},
+      {t:"बुबा",p:"bu-ba",en:"father"},{t:"आमा",p:"aa-ma",en:"mother"},{t:"छोरा",p:"chho-ra",en:"son"},{t:"छोरी",p:"chho-ree",en:"daughter"},
+      {t:"दाजु",p:"daa-ju",en:"older brother"},{t:"भाइ",p:"bhaa-i",en:"younger brother"},{t:"दिदी",p:"di-dee",en:"older sister"},
+      {t:"बहिनी",p:"ba-hi-nee",en:"younger sister"},{t:"हजुरबुबा",p:"ha-jur-bu-ba",en:"grandfather"},{t:"हजुरआमा",p:"ha-jur-aa-ma",en:"grandmother"},
+      {t:"श्रीमान्",p:"shree-maan",en:"husband"},{t:"श्रीमती",p:"shree-ma-tee",en:"wife"},{t:"परिवार",p:"pa-ri-waar",en:"family"},{t:"साथी",p:"saa-thee",en:"friend"},
+      {t:"पानी",p:"paa-nee",en:"water"},{t:"रोटी",p:"ro-tee",en:"bread"},{t:"दूध",p:"dudh",en:"milk"},{t:"चिया",p:"chi-ya",en:"tea"},
+      {t:"कफी",p:"ka-fee",en:"coffee"},{t:"जुस",p:"jus",en:"juice"},{t:"बियर",p:"bi-yar",en:"beer"},{t:"मासु",p:"maa-su",en:"meat"},
+      {t:"कुखुराको मासु",p:"ku-khu-ra-ko maa-su",en:"chicken"},{t:"माछा",p:"maa-chha",en:"fish"},{t:"भात",p:"bhaat",en:"rice"},
+      {t:"सूप",p:"soop",en:"soup"},{t:"अन्डा",p:"an-da",en:"egg"},{t:"पनीर",p:"pa-neer",en:"cheese"},{t:"स्याउ",p:"sya-u",en:"apple"},
+      {t:"केरा",p:"ke-ra",en:"banana"},{t:"सुन्तला",p:"sun-ta-la",en:"orange (fruit)"},{t:"आलु",p:"aa-lu",en:"potato"},
+      {t:"तरकारी",p:"tar-kaa-ree",en:"vegetables"},{t:"फलफूल",p:"phal-phool",en:"fruit"},{t:"चिनी",p:"chi-nee",en:"sugar"},{t:"नुन",p:"nun",en:"salt"},
+      {t:"बिहानको खाना",p:"bi-haan-ko khaa-na",en:"breakfast"},{t:"दिउँसोको खाना",p:"di-un-so-ko khaa-na",en:"lunch"},{t:"बेलुकाको खाना",p:"be-lu-kaa-ko khaa-na",en:"dinner"},
+      {t:"स्कूल",p:"school",en:"school"},{t:"अस्पताल",p:"as-pa-taal",en:"hospital"},{t:"बैंक",p:"baink",en:"bank"},
+      {t:"रेस्टुरेन्ट",p:"restaurant",en:"restaurant"},{t:"पसल",p:"pa-sal",en:"shop"},{t:"पार्क",p:"park",en:"park"},
+      {t:"घर",p:"ghar",en:"house"},{t:"शहर",p:"sa-har",en:"city"},{t:"सडक",p:"sa-dak",en:"street"},
+      {t:"विमानस्थल",p:"bi-maan-stha-la",en:"airport"},{t:"रेल्वे स्टेशन",p:"railway station",en:"train station"},{t:"होटल",p:"hotel",en:"hotel"},
+      {t:"टाउको",p:"taa-u-ko",en:"head"},{t:"हात",p:"haat",en:"hand"},{t:"खुट्टा",p:"khut-ta",en:"leg / foot"},{t:"आँखा",p:"aan-kha",en:"eyes"},
+      {t:"मुख",p:"mukh",en:"mouth"},{t:"कान",p:"kaan",en:"ear"},{t:"नाक",p:"naak",en:"nose"},{t:"मुटु",p:"mu-tu",en:"heart"},
+      {t:"कपाल",p:"ka-paal",en:"hair"},{t:"दाँत",p:"daant",en:"teeth"},{t:"ढाड",p:"dhaad",en:"back"},{t:"औंला",p:"aun-la",en:"finger"},
+      {t:"कुकुर",p:"ku-kur",en:"dog"},{t:"बिरालो",p:"bi-raa-lo",en:"cat"},{t:"चरा",p:"cha-ra",en:"bird"},{t:"घोडा",p:"gho-da",en:"horse"},
+      {t:"गाई",p:"gaa-ee",en:"cow"},{t:"सुँगुर",p:"sun-gur",en:"pig"},{t:"बाघ",p:"baagh",en:"tiger"},{t:"भालु",p:"bhaa-lu",en:"bear"},
+      {t:"खरायो",p:"kha-raa-yo",en:"rabbit"},{t:"ब्वाँसो",p:"bwaan-so",en:"wolf"},{t:"फ्याउरो",p:"fya-u-ro",en:"fox / jackal"},{t:"मुसा",p:"mu-sa",en:"mouse"},
+      {t:"छिटो",p:"chhi-to",en:"fast"},{t:"ढिलो",p:"dhi-lo",en:"slow"},{t:"तातो",p:"taa-to",en:"hot"},{t:"चिसो",p:"chi-so",en:"cold"},
+      {t:"नयाँ",p:"na-yaan",en:"new"},{t:"पुरानो",p:"pu-raa-no",en:"old"},{t:"अग्लो",p:"ag-lo",en:"tall"},{t:"होचो",p:"ho-cho",en:"short"},
+      {t:"लामो",p:"laa-mo",en:"long"},{t:"छोटो",p:"chho-to",en:"short (length)"},{t:"सफा",p:"sa-fa",en:"clean"},{t:"फोहोर",p:"pho-hor",en:"dirty"},
+      {t:"थकित",p:"tha-kit",en:"tired"},{t:"भोको",p:"bho-ko",en:"hungry"},{t:"ठूलो",p:"thu-lo",en:"big"},{t:"सानो",p:"saa-no",en:"small"},
+      {t:"राम्रो",p:"raam-ro",en:"beautiful / good"},{t:"नराम्रो",p:"na-raam-ro",en:"bad"},{t:"महँगो",p:"ma-han-go",en:"expensive"},{t:"सस्तो",p:"sas-to",en:"cheap"},
+      {t:"खानु",p:"khaa-nu",en:"to eat"},{t:"पिउनु",p:"pi-u-nu",en:"to drink"},{t:"हेर्नु",p:"her-nu",en:"to watch"},
+      {t:"सुन्नु",p:"sun-nu",en:"to listen"},{t:"बोल्नु",p:"bol-nu",en:"to speak"},{t:"हिँड्नु",p:"hind-nu",en:"to walk"},
+      {t:"दौड्नु",p:"daud-nu",en:"to run"},{t:"सुत्नु",p:"sut-nu",en:"to sleep"},{t:"किन्नु",p:"kin-nu",en:"to buy"},
+      {t:"बेच्नु",p:"bech-nu",en:"to sell"},{t:"माया गर्नु",p:"maa-ya gar-nu",en:"to love"},{t:"सोच्नु",p:"soch-nu",en:"to think"},
+      {t:"थाहा हुनु",p:"thaa-ha hu-nu",en:"to know"},{t:"काम गर्नु",p:"kaam gar-nu",en:"to work"},{t:"पढ्नु",p:"padh-nu",en:"to read"},
+      {t:"लेख्नु",p:"lekh-nu",en:"to write"},{t:"खेल्नु",p:"khel-nu",en:"to play"},{t:"बस्नु",p:"bas-nu",en:"to live"},
+      {t:"बुझ्नु",p:"bujh-nu",en:"to understand"},{t:"चाहनु",p:"chaa-ha-nu",en:"to want"},
+      {t:"के",p:"ke",en:"what"},{t:"को",p:"ko",en:"who"},{t:"किन",p:"ki-na",en:"why"},{t:"कसरी",p:"ka-sa-ree",en:"how"},
+      {t:"कहिले",p:"ka-hi-le",en:"when"},{t:"कहाँ",p:"ka-haan",en:"where"},{t:"कुन",p:"kun",en:"which"},
+      {t:"अहिले",p:"a-hi-le",en:"now"},{t:"हिजो",p:"hi-jo",en:"yesterday"},{t:"आज",p:"aa-ja",en:"today"},{t:"भोलि",p:"bho-li",en:"tomorrow"},
+      {t:"घन्टा",p:"ghan-ta",en:"hour"},{t:"मिनेट",p:"mi-net",en:"minute"},{t:"वर्ष",p:"bar-sha",en:"year"},{t:"महिना",p:"ma-hi-na",en:"month"},
+      {t:"हप्ता",p:"hap-ta",en:"week"},{t:"सोमबार",p:"som-baar",en:"Monday"},{t:"मंगलबार",p:"man-gal-baar",en:"Tuesday"},
+      {t:"बुधबार",p:"budh-baar",en:"Wednesday"},{t:"बिहीबार",p:"bi-hee-baar",en:"Thursday"},{t:"शुक्रबार",p:"shuk-ra-baar",en:"Friday"},
+      {t:"शनिबार",p:"sha-ni-baar",en:"Saturday"},{t:"आइतबार",p:"aa-i-ta-baar",en:"Sunday"},{t:"बिहान",p:"bi-haan",en:"morning"},
+      {t:"मौसम",p:"mau-sam",en:"weather"},{t:"सूर्य",p:"soor-ya",en:"sun"},{t:"पानी पर्नु",p:"paa-nee par-nu",en:"rain"},
+      {t:"हिउँ",p:"hi-un",en:"snow"},{t:"हावा",p:"haa-wa",en:"wind"},{t:"बादल",p:"baa-dal",en:"cloud"},{t:"आँधी",p:"aan-dhee",en:"storm"},
+      {t:"इन्द्रेणी",p:"in-dre-nee",en:"rainbow"},
+      {t:"लुगा",p:"lu-ga",en:"clothing"},{t:"सर्ट",p:"shirt",en:"shirt"},{t:"पाइन्ट",p:"paint",en:"trousers"},{t:"फ्रक",p:"frock",en:"dress"},
+      {t:"जुत्ता",p:"jut-ta",en:"shoes"},{t:"ज्याकेट",p:"jacket",en:"jacket"},{t:"टोपी",p:"to-pee",en:"hat"},{t:"मोजा",p:"mo-ja",en:"socks"},
+      {t:"गाडी",p:"gaa-dee",en:"car"},{t:"बस",p:"bus",en:"bus"},{t:"रेल",p:"rail",en:"train"},{t:"हवाइजहाज",p:"ha-wa-i-ja-haaj",en:"airplane"},
+      {t:"साइकल",p:"cycle",en:"bicycle"},{t:"ट्याक्सी",p:"taxi",en:"taxi"},{t:"डुङ्गा",p:"dun-ga",en:"boat"},{t:"मेट्रो",p:"metro",en:"subway"},
+      {t:"किताब",p:"ki-taab",en:"book"},{t:"टेबल",p:"table",en:"table"},{t:"कुर्सी",p:"kur-see",en:"chair"},{t:"ढोका",p:"dho-ka",en:"door"},
+      {t:"झ्याल",p:"jhyaal",en:"window"},{t:"फोन",p:"phone",en:"phone"},{t:"पैसा",p:"pai-sa",en:"money"},{t:"समय",p:"sa-ma-ya",en:"time"},
+      {t:"साँचो",p:"saan-cho",en:"key"},{t:"झोला",p:"jho-la",en:"bag"},{t:"घडी",p:"gha-dee",en:"watch"},{t:"अखबार",p:"akh-baar",en:"newspaper"},
+      {t:"कम्प्युटर",p:"computer",en:"computer"},{t:"बजार",p:"ba-jaar",en:"market"},
+      {t:"खुशी",p:"khu-shee",en:"happy"},{t:"दुखी",p:"du-khee",en:"sad"},{t:"रिसाएको",p:"ri-saa-e-ko",en:"angry"},
+      {t:"छक्क परेको",p:"chhak-ka pa-re-ko",en:"surprised"},{t:"डराएको",p:"da-raa-e-ko",en:"scared"},{t:"शान्त",p:"shaan-ta",en:"calm"},
+      {t:"प्रेममा",p:"prem-ma",en:"in love"},{t:"वाक्क",p:"waak-ka",en:"bored"},
+      {t:"शिक्षक",p:"shik-shak",en:"teacher"},{t:"डाक्टर",p:"doctor",en:"doctor"},{t:"प्रहरी",p:"pra-ha-ree",en:"police officer"},
+      {t:"इन्जिनियर",p:"engineer",en:"engineer"},{t:"विद्यार्थी",p:"bid-yaar-thee",en:"student"},{t:"ड्राइभर",p:"driver",en:"driver"},
+      {t:"पकाउने",p:"pa-kaa-u-ne",en:"cook"},{t:"पसले",p:"pa-sa-le",en:"shop assistant"},
+      {t:"माया",p:"maa-ya",en:"love (noun)"},{t:"संगीत",p:"san-geet",en:"music"},{t:"टेलिभिजन",p:"television",en:"TV"},{t:"इन्टरनेट",p:"internet",en:"internet"},
+      {t:"पहाड",p:"pa-haad",en:"mountain"},{t:"नदी",p:"na-dee",en:"river"},{t:"समुद्र",p:"sa-mud-ra",en:"sea"},{t:"ताल",p:"taal",en:"lake"},
+      {t:"टापु",p:"taa-pu",en:"island"},{t:"समुन्द्र किनारा",p:"sa-mund-ra ki-naa-ra",en:"beach"},{t:"जंगल",p:"jan-gal",en:"forest"},
+      {t:"आकाश",p:"aa-kaash",en:"sky"},{t:"मरुभूमि",p:"ma-ru-bhoo-mi",en:"desert"}
+    ],
+    phrases:[
+      {t:"तपाईंलाई कस्तो छ?",p:"ta-paa-een-laa-ee kas-to chha",en:"How are you?"},
+      {t:"मेरो नाम … हो",p:"me-ro naam … ho",en:"My name is…"},
+      {t:"तपाईंको नाम के हो?",p:"ta-paa-een-ko naam ke ho",en:"What's your name?"},
+      {t:"यो कति पर्छ?",p:"yo ka-ti par-chha",en:"How much is this?"},
+      {t:"शौचालय कहाँ छ?",p:"sau-chaa-la-ya ka-haan chha",en:"Where's the toilet?"},
+      {t:"मलाई बुझिएन",p:"ma-laa-ee bu-jhi-e-na",en:"I don't understand"},
+      {t:"तपाईं अंग्रेजी बोल्नुहुन्छ?",p:"ta-paa-een an-gre-jee bol-nu-hun-chha",en:"Do you speak English?"},
+      {t:"फेरि भन्नुहोस्",p:"phe-ri bhan-nu-hos",en:"Please say that again"},
+      {t:"मलाई यो चाहियो",p:"ma-laa-ee yo chaa-hi-yo",en:"I want this"},
+      {t:"बिल दिनुहोस्",p:"bil di-nu-hos",en:"The bill, please"},
+      {t:"शुभकामना",p:"shub-ha-kaam-na",en:"Good luck"},
+      {t:"केही छैन",p:"ke-hee chhai-na",en:"No worries"},
+      {t:"चियर्स!",p:"cheers",en:"Cheers!"}
+    ],
+    writing:[
+      {t:"अ",name:"a"},{t:"आ",name:"aa"},{t:"इ",name:"i"},{t:"ई",name:"ee"},{t:"उ",name:"u"},{t:"ऊ",name:"oo"},
+      {t:"ए",name:"e"},{t:"ओ",name:"o"},{t:"क",name:"ka"},{t:"ख",name:"kha"}
+    ],
+    culture:[
+      {title:"A different calendar entirely", body:"Nepal officially uses the Bikram Sambat calendar rather than the Gregorian one — it's currently running about 56-57 years ahead, so the Nepali new year (mid-April) doesn't line up with the Western one at all."},
+      {title:"Shared script, different language", body:"Nepali is written in Devanagari, the same script used for Hindi, Marathi and Sanskrit — but Nepali is its own distinct language with different grammar and vocabulary, not a dialect of Hindi."},
+      {title:"A respect-graded pronoun system", body:"Like Korean or Japanese, Nepali verb forms and pronouns shift depending on the listener's age and social status — there are distinct 'you' forms for close friends, general politeness, and formal respect."},
+      {title:"Dashain and Tihar", body:"Dashain, Nepal's longest and most important festival, and Tihar (the festival of lights, celebrated similarly to Diwali) are the two biggest celebrations on the Nepali calendar, both involving family gatherings, blessings and elaborate rituals."},
+      {title:"The language of the Himalaya", body:"Nepali is the lingua franca across Nepal's incredibly linguistically diverse population (over 120 languages are spoken there) and is also widely used in mountaineering and trekking communities around Everest and the wider Himalaya."}
     ]
   },
   yolngu: {
