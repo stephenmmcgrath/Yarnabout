@@ -43,6 +43,10 @@
     --vietnamese:#DA251D;
     --basque:#D52B1E;
     --yucatecmaya:#5B8A72;
+    --swedish:#006AA7;
+    --danish:#C60C30;
+    --quechua:#7A2E2E;
+    --guarani:#3C6E47;
     --good:#5FD97E;
     --bad:#F0665C;
     --radius:18px;
@@ -70,6 +74,8 @@
   .yarn-trail{width:100%;overflow:visible;display:block;margin: 8px 0 24px;}
   .yarn-dot{transition:r .3s ease, fill .3s ease;}
   .stitch{border:none;border-top:3px dashed rgba(232,220,192,0.25);margin:20px 0;}
+  .region-heading{font-family:'Baloo 2',sans-serif;font-size:clamp(15px,1.8vw,19px);font-weight:700;color:var(--thread);letter-spacing:.04em;text-transform:uppercase;margin:28px 0 12px;padding-bottom:6px;border-bottom:2px dashed rgba(232,220,192,0.25);}
+  .region-heading:first-of-type{margin-top:4px;}
 
   /* ---- Header ---- */
   .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px;}
@@ -211,7 +217,7 @@ try{ sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); }catch(e){ console.
 // ---- Content data ----
 const LANGUAGES = {
   mandarin: {
-    key:"mandarin", name:"Mandarin", native:"中文", accent:"var(--mandarin)", flag:"🇨🇳",
+    key:"mandarin", region:"Asia", name:"Mandarin", native:"中文", accent:"var(--mandarin)", flag:"🇨🇳",
     speechLang:"zh-CN", rtl:false, script:true, available:true,
     blurb:"Tones do the heavy lifting — the same syllable can mean four different things depending on pitch.",
     words:[
@@ -295,7 +301,7 @@ const LANGUAGES = {
     ]
   },
   spanish: {
-    key:"spanish", name:"Spanish", native:"Español", accent:"var(--spanish)", flag:"🇪🇸",
+    key:"spanish", region:"Europe", name:"Spanish", native:"Español", accent:"var(--spanish)", flag:"🇪🇸",
     speechLang:"es-ES", rtl:false, script:false, available:true,
     blurb:"One of the most phonetic major languages — if you can read it, you can mostly say it.",
     words:[
@@ -382,7 +388,7 @@ const LANGUAGES = {
     ]
   },
   arabic: {
-    key:"arabic", name:"Arabic", native:"العربية", accent:"var(--arabic)", flag:"🇸🇦",
+    key:"arabic", region:"Middle East", name:"Arabic", native:"العربية", accent:"var(--arabic)", flag:"🇸🇦",
     speechLang:"ar-SA", rtl:true, script:true, available:true,
     blurb:"Written right-to-left with a script that flows and joins — and one spoken language on paper (Modern Standard) that's rarely quite how people actually talk.",
     words:[
@@ -450,7 +456,7 @@ const LANGUAGES = {
     ]
   },
   maori: {
-    key:"maori", name:"Māori", native:"Te Reo Māori", accent:"var(--maori)", flag:"🇳🇿",
+    key:"maori", region:"Oceania", name:"Māori", native:"Te Reo Māori", accent:"var(--maori)", flag:"🇳🇿",
     speechLang:"en-NZ", rtl:false, script:false, available:true,
     blurb:"Every letter is pronounced — no silent letters, and just five vowel sounds to master.",
     words:[
@@ -509,7 +515,7 @@ const LANGUAGES = {
     ]
   },
   russian: {
-    key:"russian", name:"Russian", native:"Русский", accent:"var(--russian)", flag:"🇷🇺",
+    key:"russian", region:"Europe", name:"Russian", native:"Русский", accent:"var(--russian)", flag:"🇷🇺",
     speechLang:"ru-RU", rtl:false, script:true, available:true,
     blurb:"Cyrillic looks intimidating but shares more letters with the Latin alphabet than you'd expect — and cases do a lot of the grammatical heavy lifting.",
     words:[
@@ -633,7 +639,7 @@ const LANGUAGES = {
     ]
   },
   indonesian: {
-    key:"indonesian", name:"Bahasa Indonesia", native:"Bahasa Indonesia", accent:"var(--indonesian)", flag:"🇮🇩",
+    key:"indonesian", region:"Asia", name:"Bahasa Indonesia", native:"Bahasa Indonesia", accent:"var(--indonesian)", flag:"🇮🇩",
     speechLang:"id-ID", rtl:false, script:false, available:true,
     blurb:"No verb tenses, no plurals via endings, and it's written in plain Latin script — one of the more forgiving major languages to start speaking quickly.",
     words:[
@@ -745,7 +751,7 @@ const LANGUAGES = {
     ]
   },
   french: {
-    key:"french", name:"French", native:"Français", accent:"var(--french)", flag:"🇫🇷",
+    key:"french", region:"Europe", name:"French", native:"Français", accent:"var(--french)", flag:"🇫🇷",
     speechLang:"fr-FR", rtl:false, script:true, available:true,
     blurb:"Silent letters everywhere and grammatical gender for every noun — but the payoff is a language spoken as a native or second language on every continent.",
     words:[
@@ -859,7 +865,7 @@ const LANGUAGES = {
     ]
   },
   swahili: {
-    key:"swahili", name:"Swahili", native:"Kiswahili", accent:"var(--swahili)", flag:"🇹🇿",
+    key:"swahili", region:"Africa", name:"Swahili", native:"Kiswahili", accent:"var(--swahili)", flag:"🇹🇿",
     speechLang:"sw-KE", rtl:false, script:false, available:true,
     blurb:"East Africa's great lingua franca — a Bantu language shaped by centuries of Arab coastal trade, spoken across Kenya, Tanzania, Uganda and beyond.",
     words:[
@@ -931,7 +937,7 @@ const LANGUAGES = {
     ]
   },
   hieroglyphs: {
-    key:"hieroglyphs", name:"Egyptian Hieroglyphs", native:"𓂋𓏤𓆎𓅓𓏏𓊖", accent:"var(--hieroglyphs)", flag:"𓋹",
+    key:"hieroglyphs", region:"Middle East", name:"Egyptian Hieroglyphs", native:"𓂋𓏤𓆎𓅓𓏏𓊖", accent:"var(--hieroglyphs)", flag:"𓋹",
     speechLang:"en-US", rtl:false, script:true, available:true,
     blurb:"Not a spoken language you'll chat in tonight — a 3,000-year-old writing system. This is the alphabet, number system and a handful of the most iconic signs, verified sign-by-sign against the real Unicode hieroglyph chart.",
     words:[
@@ -1054,7 +1060,7 @@ const LANGUAGES = {
     ]
   },
   korean: {
-    key:"korean", name:"Korean", native:"한국어", accent:"var(--korean)", flag:"🇰🇷",
+    key:"korean", region:"Asia", name:"Korean", native:"한국어", accent:"var(--korean)", flag:"🇰🇷",
     speechLang:"ko-KR", rtl:false, script:true, available:true,
     blurb:"Hangul was purpose-built in 1443 to be easy to learn — genuinely one of the most logical writing systems ever designed, even if the grammar takes more work.",
     words:[
@@ -1168,7 +1174,7 @@ const LANGUAGES = {
     ]
   },
   irish: {
-    key:"irish", name:"Irish", native:"Gaeilge", accent:"var(--irish)", flag:"🇮🇪",
+    key:"irish", region:"Europe", name:"Irish", native:"Gaeilge", accent:"var(--irish)", flag:"🇮🇪",
     speechLang:"ga-IE", rtl:false, script:false, available:true,
     blurb:"A Celtic language with no direct words for 'yes' or 'no' — you answer by echoing the verb instead. Ireland's first official language, and an official EU language too.",
     words:[
@@ -1275,7 +1281,7 @@ const LANGUAGES = {
     ]
   },
   turkish: {
-    key:"turkish", name:"Turkish", native:"Türkçe", accent:"var(--turkish)", flag:"🇹🇷",
+    key:"turkish", region:"Middle East", name:"Turkish", native:"Türkçe", accent:"var(--turkish)", flag:"🇹🇷",
     speechLang:"tr-TR", rtl:false, script:true, available:true,
     blurb:"Wonderfully logical grammar (vowel harmony makes endings predictable) written in a Latin alphabet reformed by Atatürk in 1928 — plus a dotless ı that trips up programmers worldwide.",
     words:[
@@ -1388,7 +1394,7 @@ const LANGUAGES = {
     ]
   },
   zulu: {
-    key:"zulu", name:"Zulu", native:"isiZulu", accent:"var(--zulu)", flag:"🇿🇦",
+    key:"zulu", region:"Africa", name:"Zulu", native:"isiZulu", accent:"var(--zulu)", flag:"🇿🇦",
     speechLang:"zu-ZA", rtl:false, script:false, available:true,
     blurb:"South Africa's most widely spoken home language — a Nguni Bantu language where nouns carry grammatical class prefixes that ripple through the whole sentence.",
     words:[
@@ -1457,7 +1463,7 @@ const LANGUAGES = {
     ]
   },
   icelandic: {
-    key:"icelandic", name:"Icelandic", native:"Íslenska", accent:"var(--icelandic)", flag:"🇮🇸",
+    key:"icelandic", region:"Europe", name:"Icelandic", native:"Íslenska", accent:"var(--icelandic)", flag:"🇮🇸",
     speechLang:"is-IS", rtl:false, script:true, available:true,
     blurb:"So conservative it's barely changed since the medieval sagas were written — modern Icelanders can still read 800-year-old texts. Comes with a couple of letters that vanished from English centuries ago.",
     words:[
@@ -1567,7 +1573,7 @@ const LANGUAGES = {
     ]
   },
   afrikaans: {
-    key:"afrikaans", name:"Afrikaans", native:"Afrikaans", accent:"var(--afrikaans)", flag:"🇿🇦",
+    key:"afrikaans", region:"Africa", name:"Afrikaans", native:"Afrikaans", accent:"var(--afrikaans)", flag:"🇿🇦",
     speechLang:"af-ZA", rtl:false, script:false, available:true,
     blurb:"A young language by world standards — descended from 17th-century Dutch and simplified along the way, with almost no verb conjugation to memorise.",
     words:[
@@ -1669,7 +1675,7 @@ const LANGUAGES = {
     ]
   },
   sumerian: {
-    key:"sumerian", name:"Sumerian", native:"𒅴𒂠", accent:"var(--sumerian)", flag:"𒀭",
+    key:"sumerian", region:"Middle East", name:"Sumerian", native:"𒅴𒂠", accent:"var(--sumerian)", flag:"𒀭",
     speechLang:"en-US", rtl:false, script:true, available:true,
     blurb:"The world's first written language, invented in Mesopotamia around 3200 BCE — every sign below is checked directly against the academic Unicode cuneiform sign list, not guessed.",
     words:[
@@ -1787,7 +1793,7 @@ const LANGUAGES = {
     ]
   },
   samoan: {
-    key:"samoan", name:"Samoan", native:"Gagana Sāmoa", accent:"var(--samoan)", flag:"🇼🇸",
+    key:"samoan", region:"Oceania", name:"Samoan", native:"Gagana Sāmoa", accent:"var(--samoan)", flag:"🇼🇸",
     speechLang:"sm-WS", rtl:false, script:false, available:true,
     blurb:"A Polynesian language where fa'a Sāmoa — 'the Samoan way' — shapes everyday speech, from respect vocabulary to elaborate greetings.",
     words:[
@@ -1856,7 +1862,7 @@ const LANGUAGES = {
     ]
   },
   punjabi: {
-    key:"punjabi", name:"Punjabi", native:"ਪੰਜਾਬੀ", accent:"var(--punjabi)", flag:"🇮🇳",
+    key:"punjabi", region:"Asia", name:"Punjabi", native:"ਪੰਜਾਬੀ", accent:"var(--punjabi)", flag:"🇮🇳",
     speechLang:"pa-IN", rtl:false, script:true, available:true,
     blurb:"One spoken language, two scripts — Indian Punjabi is written in Gurmukhi (used here), while Pakistani Punjabi uses the Perso-Arabic Shahmukhi script instead.",
     words:[
@@ -1964,7 +1970,7 @@ const LANGUAGES = {
     ]
   },
   nepali: {
-    key:"nepali", name:"Nepali", native:"नेपाली", accent:"var(--nepali)", flag:"🇳🇵",
+    key:"nepali", region:"Asia", name:"Nepali", native:"नेपाली", accent:"var(--nepali)", flag:"🇳🇵",
     speechLang:"ne-NP", rtl:false, script:true, available:true,
     blurb:"Nepal's official language, written in the same Devanagari script as Hindi and Sanskrit — and paired with its own calendar that currently runs about 57 years ahead of the Gregorian one.",
     words:[
@@ -2070,7 +2076,7 @@ const LANGUAGES = {
     ]
   },
   latin: {
-    key:"latin", name:"Latin", native:"Latina", accent:"var(--latin)", flag:"🏛️",
+    key:"latin", region:"Europe", name:"Latin", native:"Latina", accent:"var(--latin)", flag:"🏛️",
     speechLang:"la",
     rtl:false, script:false, available:true,
     blurb:"The ancestor of French, Spanish and Italian — and hiding inside thousands of everyday English words too. Verbs shown here as infinitives for consistency with the rest of the app; classical dictionaries traditionally cite 'amo' (I love) rather than 'amare' (to love).",
@@ -2203,7 +2209,7 @@ const LANGUAGES = {
     ]
   },
   navajo: {
-    key:"navajo", name:"Navajo", native:"Diné bizaad", accent:"var(--navajo)", flag:"🏜️",
+    key:"navajo", region:"The Americas", name:"Navajo", native:"Diné bizaad", accent:"var(--navajo)", flag:"🏜️",
     speechLang:"en-US",
     rtl:false, script:false, available:true,
     blurb:"A tonal, polysynthetic language of the Navajo Nation — famous for the WWII Code Talkers. Every word here is sourced from a verified dictionary or linguistics reference, kept to a smaller honest set because tone and nasalization marks genuinely change meaning, and Navajo verbs don't have simple citation forms the way most languages here do.",
@@ -2261,7 +2267,7 @@ const LANGUAGES = {
     ]
   },
   greek: {
-    key:"greek", name:"Greek", native:"Ελληνικά", accent:"var(--greek)", flag:"🇬🇷",
+    key:"greek", region:"Europe", name:"Greek", native:"Ελληνικά", accent:"var(--greek)", flag:"🇬🇷",
     speechLang:"el-GR", rtl:false, script:true, available:true,
     blurb:"The oldest continuously-recorded language in Europe — modern Greek is a direct descendant of Ancient Greek, not a separate offshoot the way Latin split into the Romance languages.",
     words:[
@@ -2383,7 +2389,7 @@ const LANGUAGES = {
     ]
   },
   japanese: {
-    key:"japanese", name:"Japanese", native:"日本語", accent:"var(--japanese)", flag:"🇯🇵",
+    key:"japanese", region:"Asia", name:"Japanese", native:"日本語", accent:"var(--japanese)", flag:"🇯🇵",
     speechLang:"ja-JP", rtl:false, script:true, available:true,
     blurb:"Written with three scripts at once — hiragana, katakana and kanji all mixed together in ordinary sentences, each doing a different job.",
     words:[
@@ -2490,7 +2496,7 @@ const LANGUAGES = {
     ]
   },
   thai: {
-    key:"thai", name:"Thai", native:"ภาษาไทย", accent:"var(--thai)", flag:"🇹🇭",
+    key:"thai", region:"Asia", name:"Thai", native:"ภาษาไทย", accent:"var(--thai)", flag:"🇹🇭",
     speechLang:"th-TH", rtl:false, script:true, available:true,
     blurb:"A tonal language with five distinct pitch patterns — the same syllable spelled the same way can mean five completely different things depending on tone.",
     words:[
@@ -2596,7 +2602,7 @@ const LANGUAGES = {
     ]
   },
   vietnamese: {
-    key:"vietnamese", name:"Vietnamese", native:"Tiếng Việt", accent:"var(--vietnamese)", flag:"🇻🇳",
+    key:"vietnamese", region:"Asia", name:"Vietnamese", native:"Tiếng Việt", accent:"var(--vietnamese)", flag:"🇻🇳",
     speechLang:"vi-VN", rtl:false, script:false, available:true,
     blurb:"Written in the Latin alphabet, but don't let that fool you — six tones, each marked by a diacritic, mean 'ma' can be ghost, but, cheek, grave, horse-like, or rice seedling depending on which mark you use.",
     words:[
@@ -2700,7 +2706,7 @@ const LANGUAGES = {
     ]
   },
   basque: {
-    key:"basque", name:"Basque", native:"Euskara", accent:"var(--basque)", flag:"🏴",
+    key:"basque", region:"Europe", name:"Basque", native:"Euskara", accent:"var(--basque)", flag:"🏴",
     speechLang:"eu-ES", rtl:false, script:false, available:true,
     blurb:"A genuine language isolate — Euskara has no known relatives to any other language on Earth, and was spoken in the Pyrenees long before Indo-European languages ever arrived in Europe.",
     words:[
@@ -2792,7 +2798,7 @@ const LANGUAGES = {
     ]
   },
   yucatecmaya: {
-    key:"yucatecmaya", name:"Yucatec Maya", native:"Màaya t'àan", accent:"var(--yucatecmaya)", flag:"🌽",
+    key:"yucatecmaya", region:"The Americas", name:"Yucatec Maya", native:"Màaya t'àan", accent:"var(--yucatecmaya)", flag:"🌽",
     speechLang:"es-MX",
     rtl:false, script:false, available:true,
     blurb:"A living Mayan language spoken by around 800,000 people across the Yucatán Peninsula today — kept intentionally small here, since freely available dictionary material is much thinner than for the world languages elsewhere in this app.",
@@ -2835,8 +2841,314 @@ const LANGUAGES = {
       {title:"One of the world's few independently invented writing systems", body:"Classic Maya hieroglyphic writing — closely related to the language ancestral to modern Yucatec — is one of only a handful of writing systems developed completely independently anywhere in the world, and was substantially deciphered only in the 20th century."}
     ]
   },
+  swedish: {
+    key:"swedish", region:"Europe", name:"Swedish", native:"Svenska", accent:"var(--swedish)", flag:"🇸🇪",
+    speechLang:"sv-SE", rtl:false, script:false, available:true,
+    blurb:"Melodic and pitch-accented, with three extra vowels (å, ä, ö) tacked on at the end of the alphabet — and home to two untranslatable-in-one-word concepts, fika and lagom.",
+    words:[
+      {t:"hej",p:"hey",en:"hello"},{t:"hejdå",p:"HEY-daw",en:"goodbye"},{t:"tack",p:"tahk",en:"thank you"},
+      {t:"snälla",p:"SNEH-la",en:"please"},{t:"ja",p:"yah",en:"yes"},{t:"nej",p:"ney",en:"no"},
+      {t:"förlåt",p:"fer-LAWT",en:"sorry"},{t:"ursäkta",p:"oor-SHEK-ta",en:"excuse me"},
+      {t:"god morgon",p:"good MOR-on",en:"good morning"},{t:"god kväll",p:"good kvel",en:"good evening"},
+      {t:"god natt",p:"good nat",en:"good night"},{t:"varsågod",p:"var-sha-GOOD",en:"you're welcome / here you go"},
+      {t:"noll",p:"nol",en:"zero"},{t:"ett",p:"et",en:"one"},{t:"två",p:"tvaw",en:"two"},{t:"tre",p:"treh",en:"three"},
+      {t:"fyra",p:"FEE-ra",en:"four"},{t:"fem",p:"fem",en:"five"},{t:"sex",p:"sex",en:"six"},{t:"sju",p:"shoo",en:"seven"},
+      {t:"åtta",p:"AW-ta",en:"eight"},{t:"nio",p:"NEE-oh",en:"nine"},{t:"tio",p:"TEE-oh",en:"ten"},{t:"tjugo",p:"CHOO-goh",en:"twenty"},
+      {t:"trettio",p:"TRE-tee-oh",en:"thirty"},{t:"hundra",p:"HOON-dra",en:"one hundred"},{t:"tusen",p:"TOO-sen",en:"one thousand"},
+      {t:"röd",p:"rerd",en:"red"},{t:"blå",p:"blaw",en:"blue"},{t:"grön",p:"grern",en:"green"},{t:"gul",p:"gool",en:"yellow"},
+      {t:"svart",p:"svart",en:"black"},{t:"vit",p:"veet",en:"white"},{t:"orange",p:"oh-RANSH",en:"orange"},
+      {t:"lila",p:"LEE-la",en:"purple"},{t:"rosa",p:"ROH-sa",en:"pink"},{t:"brun",p:"broon",en:"brown"},
+      {t:"pappa",p:"PA-pa",en:"dad"},{t:"mamma",p:"MA-ma",en:"mum"},{t:"son",p:"sohn",en:"son"},{t:"dotter",p:"DOH-ter",en:"daughter"},
+      {t:"bror",p:"broor",en:"brother"},{t:"syster",p:"SEES-ter",en:"sister"},{t:"farfar",p:"FAR-far",en:"grandfather (paternal)"},
+      {t:"farmor",p:"FAR-moor",en:"grandmother (paternal)"},{t:"man",p:"man",en:"husband"},{t:"fru",p:"froo",en:"wife"},
+      {t:"familj",p:"fa-MILY",en:"family"},{t:"vän",p:"ven",en:"friend"},{t:"morbror",p:"MOOR-broor",en:"uncle (maternal)"},
+      {t:"vatten",p:"VA-ten",en:"water"},{t:"bröd",p:"brerd",en:"bread"},{t:"mjölk",p:"myerlk",en:"milk"},{t:"te",p:"teh",en:"tea"},
+      {t:"kaffe",p:"KA-feh",en:"coffee"},{t:"juice",p:"joos",en:"juice"},{t:"öl",p:"erl",en:"beer"},{t:"kött",p:"khert",en:"meat"},
+      {t:"kyckling",p:"CHOOK-ling",en:"chicken"},{t:"fisk",p:"fisk",en:"fish"},{t:"ris",p:"rees",en:"rice"},{t:"soppa",p:"SOH-pa",en:"soup"},
+      {t:"ägg",p:"eg",en:"egg"},{t:"ost",p:"oost",en:"cheese"},{t:"äpple",p:"EP-leh",en:"apple"},{t:"banan",p:"ba-NAHN",en:"banana"},
+      {t:"apelsin",p:"a-pel-SEEN",en:"orange (fruit)"},{t:"potatis",p:"poh-TAH-tis",en:"potato"},{t:"grönsaker",p:"grern-SAH-ker",en:"vegetables"},
+      {t:"frukt",p:"frookt",en:"fruit"},{t:"socker",p:"SOH-ker",en:"sugar"},{t:"salt",p:"salt",en:"salt"},
+      {t:"frukost",p:"FROO-kost",en:"breakfast"},{t:"lunch",p:"loonsh",en:"lunch"},{t:"middag",p:"MID-dahg",en:"dinner"},
+      {t:"skola",p:"SKOO-la",en:"school"},{t:"sjukhus",p:"SHOOK-hoos",en:"hospital"},{t:"bank",p:"bank",en:"bank"},
+      {t:"restaurang",p:"res-toh-RANG",en:"restaurant"},{t:"affär",p:"a-FER",en:"shop"},{t:"park",p:"park",en:"park"},
+      {t:"hus",p:"hoos",en:"house"},{t:"stad",p:"stahd",en:"city"},{t:"gata",p:"GAH-ta",en:"street"},
+      {t:"flygplats",p:"FLEEG-plats",en:"airport"},{t:"tågstation",p:"TAWG-sta-shoon",en:"train station"},{t:"hotell",p:"hoh-TEL",en:"hotel"},
+      {t:"huvud",p:"HOO-vood",en:"head"},{t:"hand",p:"hand",en:"hand"},{t:"fot",p:"foot",en:"foot"},{t:"ögon",p:"ER-gon",en:"eyes"},
+      {t:"mun",p:"moon",en:"mouth"},{t:"öra",p:"ER-ra",en:"ear"},{t:"näsa",p:"NEH-sa",en:"nose"},{t:"hjärta",p:"YAR-ta",en:"heart"},
+      {t:"hår",p:"hawr",en:"hair"},{t:"tänder",p:"TEN-der",en:"teeth"},{t:"rygg",p:"reeg",en:"back"},{t:"finger",p:"FING-er",en:"finger"},
+      {t:"hund",p:"hoond",en:"dog"},{t:"katt",p:"kat",en:"cat"},{t:"fågel",p:"FAW-gel",en:"bird"},{t:"häst",p:"hest",en:"horse"},
+      {t:"ko",p:"koo",en:"cow"},{t:"gris",p:"grees",en:"pig"},{t:"tiger",p:"TEE-ger",en:"tiger"},{t:"björn",p:"byern",en:"bear"},
+      {t:"kanin",p:"ka-NEEN",en:"rabbit"},{t:"varg",p:"vary",en:"wolf"},{t:"räv",p:"rev",en:"fox"},{t:"mus",p:"moos",en:"mouse"},
+      {t:"snabb",p:"snab",en:"fast"},{t:"långsam",p:"LAWNG-sam",en:"slow"},{t:"varm",p:"varm",en:"hot"},{t:"kall",p:"kal",en:"cold"},
+      {t:"ny",p:"nee",en:"new"},{t:"gammal",p:"GA-mal",en:"old"},{t:"lång",p:"lawng",en:"tall / long"},{t:"kort",p:"kort",en:"short"},
+      {t:"ren",p:"rehn",en:"clean"},{t:"smutsig",p:"SMOOT-sig",en:"dirty"},{t:"trött",p:"trert",en:"tired"},{t:"hungrig",p:"HOONG-rig",en:"hungry"},
+      {t:"stor",p:"stoor",en:"big"},{t:"liten",p:"LEE-ten",en:"small"},{t:"vacker",p:"VA-ker",en:"beautiful"},{t:"bra",p:"brah",en:"good"},
+      {t:"dålig",p:"DAW-lig",en:"bad"},{t:"dyr",p:"deer",en:"expensive"},{t:"billig",p:"BIL-lig",en:"cheap"},{t:"söt",p:"sert",en:"sweet / cute"},
+      {t:"äta",p:"EH-ta",en:"to eat"},{t:"dricka",p:"DRIK-a",en:"to drink"},{t:"titta",p:"TIT-a",en:"to watch"},
+      {t:"lyssna",p:"LEESS-na",en:"to listen"},{t:"prata",p:"PRAH-ta",en:"to speak"},{t:"gå",p:"gaw",en:"to walk"},
+      {t:"springa",p:"SPRING-a",en:"to run"},{t:"sova",p:"SOH-va",en:"to sleep"},{t:"köpa",p:"CHER-pa",en:"to buy"},
+      {t:"sälja",p:"SEL-ya",en:"to sell"},{t:"älska",p:"EL-ska",en:"to love"},{t:"tänka",p:"TENG-ka",en:"to think"},
+      {t:"veta",p:"VEH-ta",en:"to know"},{t:"jobba",p:"YOB-a",en:"to work"},{t:"läsa",p:"LEH-sa",en:"to read"},{t:"skriva",p:"SKREE-va",en:"to write"},
+      {t:"leka",p:"LEH-ka",en:"to play"},{t:"bo",p:"boo",en:"to live"},{t:"förstå",p:"fer-STAW",en:"to understand"},{t:"vilja",p:"VIL-ya",en:"to want"},
+      {t:"vad",p:"vahd",en:"what"},{t:"vem",p:"vem",en:"who"},{t:"varför",p:"var-FER",en:"why"},{t:"hur",p:"hoor",en:"how"},
+      {t:"när",p:"nehr",en:"when"},{t:"var",p:"vahr",en:"where"},{t:"vilken",p:"VIL-ken",en:"which"},
+      {t:"nu",p:"noo",en:"now"},{t:"igår",p:"ee-GAWR",en:"yesterday"},{t:"idag",p:"ee-DAHG",en:"today"},{t:"imorgon",p:"ee-MOR-on",en:"tomorrow"},
+      {t:"timme",p:"TIM-eh",en:"hour"},{t:"minut",p:"mi-NOOT",en:"minute"},{t:"år",p:"awr",en:"year"},{t:"månad",p:"MAW-nad",en:"month"},
+      {t:"vecka",p:"VE-ka",en:"week"},{t:"måndag",p:"MAWN-dahg",en:"Monday"},{t:"tisdag",p:"TEES-dahg",en:"Tuesday"},
+      {t:"onsdag",p:"OONS-dahg",en:"Wednesday"},{t:"torsdag",p:"TOORS-dahg",en:"Thursday"},{t:"fredag",p:"FREH-dahg",en:"Friday"},
+      {t:"lördag",p:"LER-dahg",en:"Saturday"},{t:"söndag",p:"SERN-dahg",en:"Sunday"},{t:"morgon",p:"MOR-on",en:"morning"},
+      {t:"väder",p:"VEH-der",en:"weather"},{t:"sol",p:"sool",en:"sun"},{t:"regn",p:"regn",en:"rain"},{t:"snö",p:"snerr",en:"snow"},
+      {t:"vind",p:"vind",en:"wind"},{t:"moln",p:"mooln",en:"cloud"},{t:"storm",p:"storm",en:"storm"},{t:"regnbåge",p:"REGN-baw-geh",en:"rainbow"},
+      {t:"kläder",p:"KLEH-der",en:"clothing"},{t:"skjorta",p:"SHOOR-ta",en:"shirt"},{t:"byxor",p:"BEEK-sor",en:"trousers"},
+      {t:"klänning",p:"KLEN-ing",en:"dress"},{t:"skor",p:"skoor",en:"shoes"},{t:"jacka",p:"YAK-a",en:"jacket"},{t:"hatt",p:"hat",en:"hat"},{t:"strumpor",p:"STROOM-por",en:"socks"},
+      {t:"bil",p:"beel",en:"car"},{t:"buss",p:"boos",en:"bus"},{t:"tåg",p:"tawg",en:"train"},{t:"flygplan",p:"FLEEG-plahn",en:"airplane"},
+      {t:"cykel",p:"SEE-kel",en:"bicycle"},{t:"taxi",p:"TAK-see",en:"taxi"},{t:"båt",p:"bawt",en:"boat"},{t:"tunnelbana",p:"TOO-nel-bah-na",en:"subway"},
+      {t:"bok",p:"book",en:"book"},{t:"bord",p:"boord",en:"table"},{t:"stol",p:"stool",en:"chair"},{t:"dörr",p:"derr",en:"door"},
+      {t:"fönster",p:"FERN-ster",en:"window"},{t:"telefon",p:"te-le-FOHN",en:"phone"},{t:"pengar",p:"PENG-ar",en:"money"},{t:"tid",p:"teed",en:"time"},
+      {t:"jobb",p:"yob",en:"job / work"},{t:"nyckel",p:"NEE-kel",en:"key"},{t:"väska",p:"VES-ka",en:"bag"},{t:"klocka",p:"KLOH-ka",en:"watch / clock"},
+      {t:"tidning",p:"TEED-ning",en:"newspaper"},{t:"dator",p:"DAH-tor",en:"computer"},{t:"marknad",p:"MARK-nad",en:"market"},
+      {t:"glad",p:"glahd",en:"happy"},{t:"ledsen",p:"LED-sen",en:"sad"},{t:"arg",p:"ary",en:"angry"},{t:"förvånad",p:"fer-VAW-nad",en:"surprised"},
+      {t:"rädd",p:"red",en:"scared"},{t:"lugn",p:"loongn",en:"calm"},{t:"kär",p:"kehr",en:"in love"},{t:"uttråkad",p:"OOT-traw-kad",en:"bored"},
+      {t:"lärare",p:"LEH-ra-reh",en:"teacher"},{t:"läkare",p:"LEH-ka-reh",en:"doctor"},{t:"polis",p:"poh-LEES",en:"police officer"},
+      {t:"ingenjör",p:"in-shen-YERR",en:"engineer"},{t:"student",p:"stoo-DENT",en:"student"},{t:"chaufför",p:"sho-FERR",en:"driver"},
+      {t:"kock",p:"kok",en:"cook"},{t:"expedit",p:"eks-peh-DEET",en:"shop assistant"},
+      {t:"kärlek",p:"CHEHR-lek",en:"love (noun)"},{t:"musik",p:"moo-SEEK",en:"music"},{t:"tv",p:"teh-veh",en:"TV"},{t:"internet",p:"IN-ter-net",en:"internet"},
+      {t:"berg",p:"bary",en:"mountain"},{t:"flod",p:"flood",en:"river"},{t:"hav",p:"hahv",en:"sea"},{t:"sjö",p:"sherr",en:"lake"},
+      {t:"ö",p:"err",en:"island"},{t:"strand",p:"strand",en:"beach"},{t:"skog",p:"skoog",en:"forest"},{t:"himmel",p:"HIM-el",en:"sky"},{t:"öken",p:"ER-ken",en:"desert"},
+      {t:"fika",p:"FEE-ka",en:"fika (a coffee-and-pastry social break)"},{t:"lagom",p:"LAH-gom",en:"lagom (just the right amount, not too much or little)"},
+      {t:"midsommar",p:"MID-som-ar",en:"midsummer"},{t:"smörgåsbord",p:"SMER-gaws-boord",en:"smorgasbord"},{t:"jul",p:"yool",en:"Christmas"},{t:"tomte",p:"TOM-teh",en:"the Swedish Christmas gnome"}
+    ],
+    phrases:[
+      {t:"Hur mår du?",p:"hoor mawr doo",en:"How are you?"},
+      {t:"Bra, tack",p:"brah tahk",en:"Good, thanks"},
+      {t:"Vad heter du?",p:"vahd HEH-ter doo",en:"What's your name?"},
+      {t:"Jag heter…",p:"yah HEH-ter",en:"My name is…"},
+      {t:"Hur mycket kostar det?",p:"hoor MEE-ket KOS-tar deh",en:"How much does it cost?"},
+      {t:"Var är toaletten?",p:"vahr ehr toh-a-LET-en",en:"Where's the toilet?"},
+      {t:"Jag förstår inte",p:"yah fer-STAWR IN-teh",en:"I don't understand"},
+      {t:"Pratar du engelska?",p:"PRAH-tar doo ENG-el-ska",en:"Do you speak English?"},
+      {t:"Kan du säga det igen?",p:"kan doo SEH-ya deh ee-YEN",en:"Can you say that again?"},
+      {t:"Jag vill ha den här",p:"yah vil hah den hehr",en:"I want this"},
+      {t:"Notan, tack",p:"NOO-tan tahk",en:"The bill, please"},
+      {t:"Lycka till",p:"LEE-ka til",en:"Good luck"},
+      {t:"Skål!",p:"skawl",en:"Cheers!"}
+    ],
+    writing:[
+      {t:"å",name:"a with a ring — like 'o' in 'more'"},{t:"ä",name:"a with two dots — like 'e' in 'bed'"},
+      {t:"ö",name:"o with two dots — like 'u' in 'fur'"}
+    ],
+    culture:[
+      {title:"Fika is a verb and a ritual", body:"Fika means taking a proper break for coffee and something sweet, ideally with company — it's a genuine social institution in Swedish workplace and daily life, not just 'having a coffee'."},
+      {title:"Lagom — not too much, not too little", body:"Lagom describes exactly the right amount — neither too much nor too little — and is often cited as capturing a core Swedish value of balance and moderation, with no single-word English equivalent."},
+      {title:"Midsummer is bigger than New Year's", body:"Midsommar, celebrated around the summer solstice with maypole dancing, flower crowns and outdoor feasting, is one of the most important holidays on the Swedish calendar — for many, a bigger deal than New Year's Eve."},
+      {title:"Jantelagen — don't think you're special", body:"The informal 'Law of Jante' describes a cultural discomfort with individual boasting or standing out above the group — a widely referenced, if debated, description of a broader Scandinavian social norm."},
+      {title:"Three extra letters", body:"Å, ä and ö sit at the very end of the Swedish alphabet, after z — they're genuinely distinct letters, not accented versions of a/o, and change a word's meaning and alphabetical position."}
+    ]
+  },
+  danish: {
+    key:"danish", region:"Europe", name:"Danish", native:"Dansk", accent:"var(--danish)", flag:"🇩🇰",
+    speechLang:"da-DK", rtl:false, script:false, available:true,
+    blurb:"Written similarly enough to Swedish and Norwegian that readers can often follow along — but pronounced so differently, with sounds swallowed mid-word, that even other Scandinavians sometimes struggle with spoken Danish.",
+    words:[
+      {t:"hej",p:"hi",en:"hello"},{t:"farvel",p:"far-VEL",en:"goodbye"},{t:"tak",p:"tak",en:"thank you"},
+      {t:"undskyld",p:"OON-skyl",en:"sorry / excuse me"},{t:"ja",p:"yah",en:"yes"},{t:"nej",p:"nigh",en:"no"},
+      {t:"god morgen",p:"goh MOR-en",en:"good morning"},{t:"god aften",p:"goh AF-ten",en:"good evening"},
+      {t:"godnat",p:"goh-NAT",en:"good night"},{t:"værsgo",p:"vehrs-GOH",en:"here you go / you're welcome"},
+      {t:"ingen årsag",p:"IN-en AWR-say",en:"no worries / no problem"},{t:"hej hej",p:"hi hi",en:"bye bye (casual)"},
+      {t:"nul",p:"nool",en:"zero"},{t:"en",p:"ehn",en:"one"},{t:"to",p:"toh",en:"two"},{t:"tre",p:"treh",en:"three"},
+      {t:"fire",p:"FEE-a",en:"four"},{t:"fem",p:"fem",en:"five"},{t:"seks",p:"sex",en:"six"},{t:"syv",p:"syoo",en:"seven"},
+      {t:"otte",p:"OH-teh",en:"eight"},{t:"ni",p:"nee",en:"nine"},{t:"ti",p:"tee",en:"ten"},{t:"tyve",p:"TEW-veh",en:"twenty"},
+      {t:"tredive",p:"TRETH-veh",en:"thirty"},{t:"hundrede",p:"HOON-reth",en:"one hundred"},{t:"tusind",p:"TOO-sin",en:"one thousand"},
+      {t:"rød",p:"rerth",en:"red"},{t:"blå",p:"blaw",en:"blue"},{t:"grøn",p:"grern",en:"green"},{t:"gul",p:"gool",en:"yellow"},
+      {t:"sort",p:"sort",en:"black"},{t:"hvid",p:"veeth",en:"white"},{t:"orange",p:"oh-RANSH",en:"orange"},
+      {t:"lilla",p:"LI-la",en:"purple"},{t:"lyserød",p:"LEW-seh-rerth",en:"pink"},{t:"brun",p:"broon",en:"brown"},
+      {t:"far",p:"far",en:"dad"},{t:"mor",p:"moor",en:"mum"},{t:"søn",p:"sern",en:"son"},{t:"datter",p:"DA-ter",en:"daughter"},
+      {t:"bror",p:"broor",en:"brother"},{t:"søster",p:"SERS-ter",en:"sister"},{t:"farfar",p:"FAR-far",en:"grandfather (paternal)"},
+      {t:"farmor",p:"FAR-moor",en:"grandmother (paternal)"},{t:"mand",p:"man",en:"husband"},{t:"kone",p:"KOH-neh",en:"wife"},
+      {t:"familie",p:"fa-MEE-lyeh",en:"family"},{t:"ven",p:"ven",en:"friend"},{t:"onkel",p:"ON-kel",en:"uncle"},{t:"moster",p:"MOS-ter",en:"aunt (maternal)"},
+      {t:"vand",p:"van",en:"water"},{t:"brød",p:"brerth",en:"bread"},{t:"mælk",p:"melk",en:"milk"},{t:"te",p:"teh",en:"tea"},
+      {t:"kaffe",p:"KA-feh",en:"coffee"},{t:"juice",p:"joos",en:"juice"},{t:"øl",p:"erl",en:"beer"},{t:"kød",p:"kerth",en:"meat"},
+      {t:"kylling",p:"KEW-ling",en:"chicken"},{t:"fisk",p:"fisk",en:"fish"},{t:"ris",p:"rees",en:"rice"},{t:"suppe",p:"SOO-beh",en:"soup"},
+      {t:"æg",p:"eg",en:"egg"},{t:"ost",p:"oast",en:"cheese"},{t:"æble",p:"EB-leh",en:"apple"},{t:"banan",p:"ba-NAHN",en:"banana"},
+      {t:"appelsin",p:"a-bel-SEEN",en:"orange (fruit)"},{t:"kartoffel",p:"kar-TOF-el",en:"potato"},{t:"grøntsager",p:"GRERNT-sa-yer",en:"vegetables"},
+      {t:"frugt",p:"frookt",en:"fruit"},{t:"sukker",p:"SOO-ker",en:"sugar"},{t:"salt",p:"salt",en:"salt"},
+      {t:"morgenmad",p:"MOR-en-math",en:"breakfast"},{t:"frokost",p:"FROH-kost",en:"lunch"},{t:"aftensmad",p:"AF-tens-math",en:"dinner"},
+      {t:"skole",p:"SKOH-leh",en:"school"},{t:"hospital",p:"hos-pi-TAL",en:"hospital"},{t:"bank",p:"bank",en:"bank"},
+      {t:"restaurant",p:"res-toh-RANG",en:"restaurant"},{t:"butik",p:"boo-TIK",en:"shop"},{t:"park",p:"park",en:"park"},
+      {t:"hus",p:"hoos",en:"house"},{t:"by",p:"bew",en:"city"},{t:"gade",p:"GA-theh",en:"street"},
+      {t:"lufthavn",p:"LOOFT-hown",en:"airport"},{t:"togstation",p:"TOW-sta-shoon",en:"train station"},{t:"hotel",p:"ho-TEL",en:"hotel"},
+      {t:"hoved",p:"HOH-eth",en:"head"},{t:"hånd",p:"hon",en:"hand"},{t:"fod",p:"foath",en:"foot"},{t:"øjne",p:"OI-neh",en:"eyes"},
+      {t:"mund",p:"moon",en:"mouth"},{t:"øre",p:"ER-eh",en:"ear"},{t:"næse",p:"NEH-seh",en:"nose"},{t:"hjerte",p:"YER-teh",en:"heart"},
+      {t:"hår",p:"hoar",en:"hair"},{t:"tænder",p:"TEN-er",en:"teeth"},{t:"ryg",p:"rewg",en:"back"},{t:"finger",p:"FING-er",en:"finger"},
+      {t:"hund",p:"hoon",en:"dog"},{t:"kat",p:"kat",en:"cat"},{t:"fugl",p:"fool",en:"bird"},{t:"hest",p:"hest",en:"horse"},
+      {t:"ko",p:"koh",en:"cow"},{t:"gris",p:"grees",en:"pig"},{t:"tiger",p:"TEE-ger",en:"tiger"},{t:"bjørn",p:"byern",en:"bear"},
+      {t:"kanin",p:"ka-NEEN",en:"rabbit"},{t:"ulv",p:"ool",en:"wolf"},{t:"ræv",p:"reh-oo",en:"fox"},{t:"mus",p:"moos",en:"mouse"},
+      {t:"hurtig",p:"HOOR-tee",en:"fast"},{t:"langsom",p:"LANG-som",en:"slow"},{t:"varm",p:"varm",en:"hot"},{t:"kold",p:"kol",en:"cold"},
+      {t:"ny",p:"new",en:"new"},{t:"gammel",p:"GA-mel",en:"old"},{t:"høj",p:"hoi",en:"tall"},{t:"kort",p:"kort",en:"short"},
+      {t:"ren",p:"rehn",en:"clean"},{t:"beskidt",p:"beh-SKIT",en:"dirty"},{t:"træt",p:"trat",en:"tired"},{t:"sulten",p:"SOOL-ten",en:"hungry"},
+      {t:"stor",p:"stoar",en:"big"},{t:"lille",p:"LEE-leh",en:"small"},{t:"smuk",p:"smook",en:"beautiful"},{t:"god",p:"goath",en:"good"},
+      {t:"dårlig",p:"DAWR-lee",en:"bad"},{t:"dyr",p:"dewr",en:"expensive"},{t:"billig",p:"BIL-lee",en:"cheap"},{t:"sød",p:"serth",en:"sweet / cute"},
+      {t:"spise",p:"SPEE-seh",en:"to eat"},{t:"drikke",p:"DRIK-eh",en:"to drink"},{t:"se",p:"seh",en:"to watch"},
+      {t:"lytte",p:"LEW-teh",en:"to listen"},{t:"tale",p:"TA-leh",en:"to speak"},{t:"gå",p:"gaw",en:"to walk"},
+      {t:"løbe",p:"LER-beh",en:"to run"},{t:"sove",p:"SOH-veh",en:"to sleep"},{t:"købe",p:"KER-beh",en:"to buy"},
+      {t:"sælge",p:"SEL-yeh",en:"to sell"},{t:"elske",p:"EL-skeh",en:"to love"},{t:"tænke",p:"TENG-keh",en:"to think"},
+      {t:"vide",p:"VEE-theh",en:"to know"},{t:"arbejde",p:"ar-BAI-theh",en:"to work"},{t:"læse",p:"LEH-seh",en:"to read"},{t:"skrive",p:"SKREE-veh",en:"to write"},
+      {t:"lege",p:"LIGH-eh",en:"to play"},{t:"bo",p:"boh",en:"to live"},{t:"forstå",p:"for-STAW",en:"to understand"},{t:"ville",p:"VIL-eh",en:"to want"},
+      {t:"hvad",p:"vath",en:"what"},{t:"hvem",p:"vem",en:"who"},{t:"hvorfor",p:"VOR-for",en:"why"},{t:"hvordan",p:"vor-DAN",en:"how"},
+      {t:"hvornår",p:"vor-NOR",en:"when"},{t:"hvor",p:"vor",en:"where"},{t:"hvilken",p:"VIL-ken",en:"which"},
+      {t:"nu",p:"noo",en:"now"},{t:"i går",p:"ee gor",en:"yesterday"},{t:"i dag",p:"ee dah",en:"today"},{t:"i morgen",p:"ee MOR-en",en:"tomorrow"},
+      {t:"time",p:"TEE-meh",en:"hour"},{t:"minut",p:"mi-NOOT",en:"minute"},{t:"år",p:"or",en:"year"},{t:"måned",p:"MAW-neth",en:"month"},
+      {t:"uge",p:"OO-eh",en:"week"},{t:"mandag",p:"MAN-da",en:"Monday"},{t:"tirsdag",p:"TEERS-da",en:"Tuesday"},
+      {t:"onsdag",p:"OANS-da",en:"Wednesday"},{t:"torsdag",p:"TOARS-da",en:"Thursday"},{t:"fredag",p:"FREH-da",en:"Friday"},
+      {t:"lørdag",p:"LER-da",en:"Saturday"},{t:"søndag",p:"SERN-da",en:"Sunday"},{t:"morgen",p:"MOR-en",en:"morning"},
+      {t:"vejr",p:"vehr",en:"weather"},{t:"sol",p:"soal",en:"sun"},{t:"regn",p:"ryn",en:"rain"},{t:"sne",p:"sneh",en:"snow"},
+      {t:"vind",p:"vin",en:"wind"},{t:"sky",p:"skew",en:"cloud"},{t:"storm",p:"storm",en:"storm"},{t:"regnbue",p:"RYN-boo-eh",en:"rainbow"},
+      {t:"tøj",p:"toi",en:"clothing"},{t:"skjorte",p:"SKYOR-teh",en:"shirt"},{t:"bukser",p:"BOOK-ser",en:"trousers"},
+      {t:"kjole",p:"KYOH-leh",en:"dress"},{t:"sko",p:"skoh",en:"shoes"},{t:"jakke",p:"YA-keh",en:"jacket"},{t:"hat",p:"hat",en:"hat"},{t:"strømper",p:"STRERM-per",en:"socks"},
+      {t:"bil",p:"beel",en:"car"},{t:"bus",p:"boos",en:"bus"},{t:"tog",p:"tow",en:"train"},{t:"fly",p:"flew",en:"airplane"},
+      {t:"cykel",p:"SEW-kel",en:"bicycle"},{t:"taxi",p:"TAK-see",en:"taxi"},{t:"båd",p:"bawth",en:"boat"},{t:"metro",p:"MET-roh",en:"subway"},
+      {t:"bog",p:"boh",en:"book"},{t:"bord",p:"boar",en:"table"},{t:"stol",p:"stoal",en:"chair"},{t:"dør",p:"der",en:"door"},
+      {t:"vindue",p:"VIN-doo",en:"window"},{t:"telefon",p:"te-le-FOHN",en:"phone"},{t:"penge",p:"PENG-eh",en:"money"},{t:"tid",p:"teeth",en:"time"},
+      {t:"arbejde",p:"ar-BAI-theh",en:"job / work"},{t:"nøgle",p:"NOI-leh",en:"key"},{t:"taske",p:"TAS-keh",en:"bag"},{t:"ur",p:"oor",en:"watch / clock"},
+      {t:"avis",p:"a-VEES",en:"newspaper"},{t:"computer",p:"kom-PYOO-ter",en:"computer"},{t:"marked",p:"MAR-keth",en:"market"},
+      {t:"glad",p:"glath",en:"happy"},{t:"ked af det",p:"kehth ah deh",en:"sad"},{t:"vred",p:"vreth",en:"angry"},{t:"overrasket",p:"OH-ver-ras-keth",en:"surprised"},
+      {t:"bange",p:"BANG-eh",en:"scared"},{t:"rolig",p:"ROH-lee",en:"calm"},{t:"forelsket",p:"for-EL-sketh",en:"in love"},{t:"doven",p:"DOH-ven",en:"lazy"},
+      {t:"lærer",p:"LEH-rer",en:"teacher"},{t:"læge",p:"LEH-eh",en:"doctor"},{t:"politibetjent",p:"po-lee-tee-be-TYENT",en:"police officer"},
+      {t:"ingeniør",p:"in-shen-YER",en:"engineer"},{t:"studerende",p:"stoo-DEH-ren-eh",en:"student"},{t:"chauffør",p:"sho-FER",en:"driver"},
+      {t:"kok",p:"kok",en:"cook"},{t:"ekspedient",p:"eks-peh-di-ENT",en:"shop assistant"},
+      {t:"kærlighed",p:"KEHR-lee-heth",en:"love (noun)"},{t:"musik",p:"moo-SIK",en:"music"},{t:"fjernsyn",p:"FYERN-sewn",en:"TV"},{t:"internet",p:"IN-ter-net",en:"internet"},
+      {t:"bjerg",p:"byerg",en:"mountain"},{t:"flod",p:"floath",en:"river"},{t:"hav",p:"how",en:"sea"},{t:"sø",p:"ser",en:"lake"},
+      {t:"ø",p:"er",en:"island"},{t:"strand",p:"stran",en:"beach"},{t:"skov",p:"skow",en:"forest"},{t:"himmel",p:"HIM-el",en:"sky"},{t:"ørken",p:"ER-ken",en:"desert"},
+      {t:"hygge",p:"HEW-geh",en:"hygge (cozy, contented togetherness)"},{t:"smørrebrød",p:"SMER-reh-brerth",en:"smørrebrød (open-faced sandwich)"},
+      {t:"jul",p:"yool",en:"Christmas"},{t:"nisse",p:"NEE-seh",en:"the Danish Christmas elf"},{t:"fastelavn",p:"FAS-teh-lown",en:"fastelavn (a Danish carnival-like festival)"},{t:"dannebrog",p:"DA-neh-brow",en:"the Danish flag"}
+    ],
+    phrases:[
+      {t:"Hvordan har du det?",p:"vor-DAN har doo deh",en:"How are you?"},
+      {t:"Godt, tak",p:"got tak",en:"Good, thanks"},
+      {t:"Hvad hedder du?",p:"vath HETH-er doo",en:"What's your name?"},
+      {t:"Jeg hedder…",p:"yai HETH-er",en:"My name is…"},
+      {t:"Hvor meget koster det?",p:"vor MY-eth KOS-ter deh",en:"How much does it cost?"},
+      {t:"Hvor er toilettet?",p:"vor ehr toi-LET-eth",en:"Where's the toilet?"},
+      {t:"Jeg forstår ikke",p:"yai for-STOR IK-eh",en:"I don't understand"},
+      {t:"Taler du engelsk?",p:"TA-ler doo ENG-elsk",en:"Do you speak English?"},
+      {t:"Kan du sige det igen?",p:"kan doo SEE-eh deh ee-GEN",en:"Can you say that again?"},
+      {t:"Jeg vil gerne have den her",p:"yai vil GER-neh ha den hehr",en:"I want this"},
+      {t:"Regningen, tak",p:"RY-ning-en tak",en:"The bill, please"},
+      {t:"Held og lykke",p:"hel ow LEW-keh",en:"Good luck"},
+      {t:"Skål!",p:"skoal",en:"Cheers!"}
+    ],
+    writing:[
+      {t:"æ",name:"a-e ligature — like 'a' in 'cat'"},{t:"ø",name:"o with a slash — like 'u' in 'fur'"},
+      {t:"å",name:"a with a ring — like 'o' in 'more'"}
+    ],
+    culture:[
+      {title:"Hygge — Denmark's most famous export word", body:"Hygge describes a warm, cozy feeling of contented togetherness — candles, blankets, good company — and has been adopted almost wholesale into English as a lifestyle buzzword, though Danes use it far more casually than the marketing suggests."},
+      {title:"Smørrebrød is an institution", body:"Traditional open-faced rye bread sandwiches, topped with anything from pickled herring to roast beef, come with real conventions about presentation and pairing — it's a proper culinary tradition, not just 'a sandwich'."},
+      {title:"Spoken Danish is notoriously hard to parse", body:"Danish pronunciation drops and swallows sounds present in the spelling to a degree that even Swedish and Norwegian speakers — who can often read Danish comfortably — sometimes struggle to follow it spoken aloud."},
+      {title:"One of the most bike-friendly cities on Earth", body:"Copenhagen is consistently ranked among the world's most bicycle-friendly cities, with a huge share of daily commutes made by bike rather than car — cycling infrastructure is treated as core public infrastructure, not an afterthought."},
+      {title:"Jantelov, shared across Scandinavia", body:"Like Sweden, Denmark references the informal 'Law of Jante' — a cultural discomfort with individuals claiming to be better than others — as a widely cited (if debated) description of a shared Scandinavian social norm."}
+    ]
+  },
+  quechua: {
+    key:"quechua", region:"The Americas", name:"Quechua", native:"Runasimi", accent:"var(--quechua)", flag:"🏔️",
+    speechLang:"qu-PE",
+    rtl:false, script:false, available:true,
+    blurb:"The language of the Inca Empire, still spoken by 8-10 million people across the Andes — really a family of related varieties rather than one uniform language, so this deck sticks to the most widely taught Southern (Cusco) form.",
+    words:[
+      {t:"imaynalla",p:"ee-my-NA-lya",en:"a general greeting (how's it going)"},{t:"allillanmi",p:"a-lyee-LYAN-mee",en:"I'm fine (reply to a greeting)"},
+      {t:"ari",p:"AH-ree",en:"yes"},{t:"mana",p:"MA-na",en:"no"},{t:"añay",p:"AN-yai",en:"thank you"},
+      {t:"ama hina kaychu",p:"A-ma HEE-na KAI-choo",en:"please"},{t:"pampachaykuway",p:"pam-pa-chai-koo-WAI",en:"forgive me / excuse me"},
+      {t:"ch'usaq",p:"CHOO-sahk",en:"zero"},{t:"huq",p:"hook",en:"one"},{t:"iskay",p:"ees-KAI",en:"two"},{t:"kimsa",p:"KEEM-sa",en:"three"},
+      {t:"tawa",p:"TA-wa",en:"four"},{t:"pichqa",p:"PEECH-ka",en:"five"},{t:"suqta",p:"SOOK-ta",en:"six"},{t:"qanchis",p:"KAN-chees",en:"seven"},
+      {t:"pusaq",p:"poo-SAHK",en:"eight"},{t:"isqun",p:"ees-KOON",en:"nine"},{t:"chunka",p:"CHOON-ka",en:"ten"},
+      {t:"chunka hukniyuq",p:"CHOON-ka hook-nee-YOOK",en:"eleven"},{t:"iskay chunka",p:"ees-KAI CHOON-ka",en:"twenty"},
+      {t:"kimsa chunka",p:"KEEM-sa CHOON-ka",en:"thirty"},{t:"pachak",p:"pa-CHAHK",en:"one hundred"},{t:"waranqa",p:"wa-RAN-ka",en:"one thousand"},
+      {t:"puka",p:"POO-ka",en:"red"},{t:"q'umir",p:"KOH-meer",en:"green"},{t:"qillu",p:"KEE-lyoo",en:"yellow"},
+      {t:"yana",p:"YA-na",en:"black"},{t:"yuraq",p:"YOO-rahk",en:"white"},{t:"anqas",p:"AN-kas",en:"blue"},
+      {t:"tayta",p:"TAI-ta",en:"father"},{t:"mama",p:"MA-ma",en:"mother"},{t:"warmi",p:"WAR-mee",en:"woman"},{t:"qhari",p:"KHA-ree",en:"man"},
+      {t:"wawa",p:"WA-wa",en:"baby / child"},{t:"wawqi",p:"WOW-kee",en:"brother (said by a man)"},{t:"pana",p:"PA-na",en:"sister (said by a man)"},
+      {t:"ñaña",p:"NYA-nya",en:"sister (said by a woman)"},{t:"tura",p:"TOO-ra",en:"brother (said by a woman)"},{t:"ayllu",p:"AI-lyoo",en:"extended family / kin group"},
+      {t:"inti",p:"EEN-tee",en:"sun"},{t:"killa",p:"KEE-lya",en:"moon"},{t:"mayu",p:"MA-yoo",en:"river"},{t:"qucha",p:"KOO-cha",en:"lake"},
+      {t:"rit'i",p:"REE-tee",en:"snow"},{t:"para",p:"PA-ra",en:"rain"},{t:"wayra",p:"WY-ra",en:"wind"},{t:"yaku",p:"YA-koo",en:"water"},
+      {t:"llama",p:"LYA-ma",en:"llama"},{t:"alpaka",p:"al-PA-ka",en:"alpaca"},{t:"quwi",p:"KOO-wee",en:"guinea pig"},{t:"kuchi",p:"KOO-chee",en:"pig"},
+      {t:"wasi",p:"WA-see",en:"house"},{t:"urqu",p:"OOR-koo",en:"mountain"},{t:"sara",p:"SA-ra",en:"corn / maize"},
+      {t:"mikhuy",p:"MEE-khooy",en:"to eat"},{t:"ukyay",p:"OOK-yai",en:"to drink"},{t:"rikuy",p:"REE-kooy",en:"to see / watch"},
+      {t:"uyariy",p:"oo-ya-REEY",en:"to listen / hear"},{t:"rimay",p:"REE-my",en:"to speak"},{t:"puriy",p:"poo-REEY",en:"to walk"},
+      {t:"puñuy",p:"poo-NYOOY",en:"to sleep"},{t:"rantiy",p:"ran-TEEY",en:"to buy"},{t:"munay",p:"moo-NAI",en:"to want / to love"},{t:"yachay",p:"ya-CHAI",en:"to know"},
+      {t:"ima",p:"EE-ma",en:"what"},{t:"pi",p:"pee",en:"who"},{t:"imarayku",p:"ee-ma-RAI-koo",en:"why"},{t:"imayna",p:"ee-MAI-na",en:"how"},
+      {t:"hayk'aq",p:"HAI-kahk",en:"when"},{t:"maypi",p:"MY-pee",en:"where"},
+      {t:"hatun",p:"ha-TOON",en:"big"},{t:"huch'uy",p:"hoo-CHOOY",en:"small"},{t:"sumaq",p:"soo-MAHK",en:"good / beautiful"},
+      {t:"mana allin",p:"MA-na a-LYEEN",en:"bad"},{t:"q'uñi",p:"KOH-nyee",en:"hot / warm"},{t:"chiri",p:"CHEE-ree",en:"cold"},
+      {t:"musuq",p:"moo-SOOK",en:"new"},{t:"machu",p:"MA-choo",en:"old"},{t:"karu",p:"KA-roo",en:"far"},{t:"k'acha",p:"KA-cha",en:"lovely / graceful"},
+      {t:"uma",p:"OO-ma",en:"head"},{t:"maki",p:"MA-kee",en:"hand"},{t:"chaki",p:"CHA-kee",en:"foot"},{t:"ñawi",p:"NYA-wee",en:"eyes"},
+      {t:"simi",p:"SEE-mee",en:"mouth"},{t:"rinri",p:"REEN-ree",en:"ear"},{t:"sunqu",p:"SOON-koo",en:"heart"},{t:"chukcha",p:"CHOOK-cha",en:"hair"},
+      {t:"llaqta",p:"LYAHK-ta",en:"town / village"},{t:"ñan",p:"nyan",en:"road / path"},{t:"qullqa",p:"KOOL-ka",en:"storehouse"},
+      {t:"chakra",p:"CHA-kra",en:"farm field"},{t:"q'ipi",p:"KEE-pee",en:"carrying bundle (a traditional Andean cloth pack)"},{t:"ch'uspa",p:"CHOOS-pa",en:"woven coca bag"}
+    ],
+    phrases:[
+      {t:"Imaynallan kashanki?",p:"ee-my-NA-lyan ka-SHAN-kee",en:"How are you?"},
+      {t:"Allillanmi, qamri?",p:"a-lyee-LYAN-mee kam-REE",en:"I'm fine, and you?"},
+      {t:"Iman sutiyki?",p:"ee-MAN SOO-tee-kee",en:"What is your name?"},
+      {t:"Sutiymi…",p:"SOO-teey-mee",en:"My name is…"},
+      {t:"Hayq'an?",p:"HAI-kan",en:"How much does it cost?"},
+      {t:"Maymantan kanki?",p:"my-MAN-tan KAN-kee",en:"Where are you from?"},
+      {t:"Ñuqa … manta kani",p:"NYOO-ka … MAN-ta KA-nee",en:"I am from…"},
+      {t:"Tupananchiskama",p:"too-pa-nan-chees-KA-ma",en:"Until we meet again / goodbye"}
+    ],
+    writing:[],
+    culture:[
+      {title:"A family of languages, not just one", body:"'Quechua' actually covers a family of related varieties across the Andes — Southern Quechua (Cusco and Ayacucho, the most widely taught form, used here), Central, and Northern Quechua (including Ecuadorian Kichwa) differ enough that speakers of distant varieties can struggle to understand each other."},
+      {title:"The language of the Inca Empire", body:"Quechua — Runasimi, 'the people's language' — was the administrative language of the Inca Empire (Tawantinsuyu), spread across the Andes as the empire expanded, which is why it's still spoken over such a huge geographic range today."},
+      {title:"Words English borrowed from Quechua", body:"Llama, alpaca, condor, puma, coca and quinoa all entered English via Spanish borrowings from Quechua — a direct legacy of Andean vocabulary describing animals and plants unique to the region."},
+      {title:"Still very much alive", body:"Quechua is spoken by an estimated 8-10 million people today, mainly in Peru, Bolivia and Ecuador, and holds official or co-official status in all three countries alongside Spanish."},
+      {title:"Built from stacked suffixes", body:"Quechua is heavily agglutinative — a single word can be built from a root plus a long chain of suffixes, conveying in one word what might take a whole sentence in English."}
+    ]
+  },
+  guarani: {
+    key:"guarani", region:"The Americas", name:"Guaraní", native:"Avañe'ẽ", accent:"var(--guarani)", flag:"🇵🇾",
+    speechLang:"gn-PY",
+    rtl:false, script:false, available:true,
+    blurb:"The only Indigenous language in the Americas spoken by a non-Indigenous majority — around 90% of Paraguayans speak Guaraní, co-official with Spanish.",
+    words:[
+      {t:"Mba'éichapa",p:"ma-EY-cha-pa",en:"hello / how are you (general greeting)"},{t:"Eguahé porã",p:"eh-gwa-HEH po-RAH",en:"welcome"},
+      {t:"Heẽ",p:"heh-EH",en:"yes"},{t:"Nahániri",p:"na-HA-nee-ree",en:"no"},{t:"Aguyje",p:"a-GOO-yeh",en:"thank you"},
+      {t:"Jajotopata",p:"ha-ho-to-PA-ta",en:"goodbye / until we meet again"},
+      {t:"mba'eve",p:"ma-EH-veh",en:"zero (lit. 'nothing')"},{t:"peteĩ",p:"peh-teh-EE",en:"one"},{t:"mokõi",p:"mo-KOH-ee",en:"two"},
+      {t:"mbohapy",p:"mbo-HA-pee",en:"three"},{t:"irundy",p:"ee-ROON-dee",en:"four"},{t:"po",p:"po",en:"five (also means 'hand')"},
+      {t:"poteĩ",p:"po-teh-EE",en:"six"},{t:"pokõi",p:"po-KOH-ee",en:"seven"},{t:"poapy",p:"po-A-pee",en:"eight"},
+      {t:"porundy",p:"po-ROON-dee",en:"nine"},{t:"pa",p:"pa",en:"ten"},{t:"mokõipa",p:"mo-KOH-ee-pa",en:"twenty"},
+      {t:"mbohapypa",p:"mbo-HA-pee-pa",en:"thirty"},{t:"sa",p:"sa",en:"one hundred"},{t:"su",p:"soo",en:"one thousand"},
+      {t:"michĩ",p:"mee-CHEE",en:"small"},{t:"mbyky",p:"MBOO-kee",en:"short"},{t:"kuña",p:"KOO-nya",en:"woman"},
+      {t:"kuimba'e",p:"koo-eem-BA-eh",en:"man"},{t:"tekove",p:"teh-KO-veh",en:"person / human being"},{t:"ména",p:"MEH-na",en:"husband"},
+      {t:"sy",p:"soo",en:"mother"},{t:"túva",p:"TOO-va",en:"father"},{t:"mymba",p:"MOOM-ba",en:"animal"},{t:"pira",p:"PEE-ra",en:"fish"},
+      {t:"guyra",p:"GOO-ee-ra",en:"bird"},{t:"jagua",p:"ha-GWA",en:"dog"},{t:"mbói",p:"MBOY",en:"snake"},{t:"yvyra",p:"ee-VOO-ra",en:"tree"},
+      {t:"ka'aguy",p:"ka-a-GOO-ee",en:"forest"},{t:"yva",p:"EE-va",en:"fruit"},{t:"yvoty",p:"ee-VO-tee",en:"flower"},
+      {t:"ka'a",p:"ka-A",en:"grass / yerba mate plant"},{t:"pire",p:"PEE-reh",en:"skin"},{t:"so'o",p:"so-O",en:"meat"},
+      {t:"y",p:"uh",en:"water"},{t:"guasu",p:"GWA-soo",en:"big"},{t:"ñandu",p:"nyan-DOO",en:"rhea (a large flightless bird)"},
+      {t:"jaguarete",p:"ha-gwa-REH-teh",en:"jaguar"},{t:"mainumby",p:"my-NOOM-bee",en:"hummingbird"},
+      {t:"nde",p:"ndeh",en:"you"},{t:"che",p:"cheh",en:"I / me"},{t:"avañe'ẽ",p:"a-va-nyeh-EH",en:"the Guaraní language (lit. 'people's speech')"},
+      {t:"ñe'ẽ",p:"nyeh-EH",en:"word / language / soul"},{t:"Tupã",p:"too-PAN",en:"God"}
+    ],
+    phrases:[
+      {t:"Mba'éichapa reiko?",p:"ma-EY-cha-pa reh-EE-ko",en:"How are you?"},
+      {t:"Iporã, ha nde?",p:"ee-po-RAH ha ndeh",en:"I'm fine, and you?"},
+      {t:"Mba'éichapa nderéra?",p:"ma-EY-cha-pa ndeh-REH-ra",en:"What is your name?"},
+      {t:"Che cheréra…",p:"cheh cheh-REH-ra",en:"My name is…"},
+      {t:"Moõguápa nde?",p:"mo-oh-GWA-pa ndeh",en:"Where are you from?"},
+      {t:"Che … gua",p:"cheh … gwa",en:"I'm from…"},
+      {t:"Che roryete roikuaávo",p:"cheh ro-ree-EH-teh ro-ee-kwa-A-vo",en:"Pleased to meet you"}
+    ],
+    writing:[],
+    culture:[
+      {title:"A rare success story for an Indigenous language", body:"Guaraní is the only Indigenous language in the Americas spoken by a majority who aren't ethnically Indigenous — roughly 90% of Paraguayans speak it, and about half the rural population speaks only Guaraní."},
+      {title:"Co-official since 1992", body:"Guaraní became a full official language of Paraguay, alongside Spanish, in the 1992 constitution — after being banned in state schools for over a century under earlier governments."},
+      {title:"Words English borrowed from Guaraní", body:"Jaguar, cougar and toucan all trace back to Guaraní words, borrowed into English via Spanish and Portuguese — a direct legacy of Guaraní vocabulary for South American wildlife."},
+      {title:"Hiding in plain sight on the map", body:"Iguazú ('big water') and Iberá ('bright waters') are both Guaraní place names still in everyday use — and 'Paraguay' and 'Uruguay' are themselves Guaraní-derived words."},
+      {title:"Jopará — the everyday blend", body:"Most Paraguayans actually speak Jopará, an informal, fluid mix of Guaraní and Spanish, rather than the more 'pure' Guaraní taught in schools — a living reflection of the two languages' centuries of coexistence."}
+    ]
+  },
   yolngu: {
-    key:"yolngu", name:"Yolŋu Matha", native:"Gupapuyngu", accent:"var(--yolngu)", flag:"🟠",
+    key:"yolngu", region:"Oceania", name:"Yolŋu Matha", native:"Gupapuyngu", accent:"var(--yolngu)", flag:"🟠",
     speechLang:"en-AU", rtl:false, script:false, available:true,
     blurb:"An Aboriginal language family from North East Arnhem Land — a small, verified starter set, kept deliberately short so nothing here is guessed.",
     words:[
@@ -3037,7 +3349,7 @@ function renderTopbar(){
     el("img",{class:"applogo", src:"data:image/webp;base64,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", alt:"DingoLingo"}),
     el("div",{},
       el("h1",{}, "DingoLingo"),
-      el("small",{}, state.language ? `${LANGUAGES[state.language].flag} ${LANGUAGES[state.language].name} · ${LEVELS[state.level].name}` : "Fun language learning, home team style")
+      el("small",{}, state.language ? `${LANGUAGES[state.language].flag} ${LANGUAGES[state.language].name}` : "Fun language learning, home team style")
     )
   );
   bar.appendChild(brand);
@@ -3102,23 +3414,35 @@ function renderHomeScreen(root){
     ? `${readyCount} languages ready to go, ${comingCount} more brewing.`
     : `${readyCount} languages ready to go.`;
   root.appendChild(el("p",{class:"subtitle"}, subtitle));
-  const grid = el("div",{class:"grid"});
-  Object.values(LANGUAGES).forEach(lang=>{
-    const card = el("div",{
-      class:"card clickable" + (lang.available ? "" : " locked"),
-      style:`--accent:${lang.accent}`,
-      tabindex: lang.available ? "0" : "-1",
-      onclick: lang.available ? ()=>{ state.language=lang.key; state.screen="level"; render(); } : null
-    },
-      el("div",{class:"bar"}),
-      el("div",{class:"icon"}, lang.flag),
-      el("h3",{}, lang.name + (lang.native? " · " + lang.native : "")),
-      el("p",{}, lang.blurb),
-      !lang.available ? el("span",{class:"badge"}, "Coming soon") : el("span",{class:"badge"}, lang.words.length + " words ready")
-    );
-    grid.appendChild(card);
+
+  const REGION_ORDER = ["Europe","Asia","Middle East","Africa","The Americas","Oceania"];
+  const byRegion = {};
+  allLangs.forEach(lang=>{
+    const r = lang.region || "Other";
+    (byRegion[r] = byRegion[r] || []).push(lang);
   });
-  root.appendChild(grid);
+  const orderedRegions = [...REGION_ORDER.filter(r=>byRegion[r]), ...Object.keys(byRegion).filter(r=>!REGION_ORDER.includes(r))];
+
+  orderedRegions.forEach(region=>{
+    root.appendChild(el("h3",{class:"region-heading"}, region));
+    const grid = el("div",{class:"grid"});
+    byRegion[region].forEach(lang=>{
+      const card = el("div",{
+        class:"card clickable" + (lang.available ? "" : " locked"),
+        style:`--accent:${lang.accent}`,
+        tabindex: lang.available ? "0" : "-1",
+        onclick: lang.available ? ()=>{ state.language=lang.key; state.level="tourist"; state.screen="mode"; render(); } : null
+      },
+        el("div",{class:"bar"}),
+        el("div",{class:"icon"}, lang.flag),
+        el("h3",{}, lang.name + (lang.native? " · " + lang.native : "")),
+        el("p",{}, lang.blurb),
+        !lang.available ? el("span",{class:"badge"}, "Coming soon") : el("span",{class:"badge"}, lang.words.length + " words ready")
+      );
+      grid.appendChild(card);
+    });
+    root.appendChild(grid);
+  });
 }
 
 // ---- Screen: Level ----
@@ -3148,7 +3472,7 @@ function renderLevelScreen(root){
 function renderModeScreen(root){
   const lang = LANGUAGES[state.language];
   root.appendChild(el("h2",{}, "How do you want to play?"));
-  root.appendChild(el("p",{class:"subtitle"}, `${lang.flag} ${lang.name} · ${LEVELS[state.level].name}`));
+  root.appendChild(el("p",{class:"subtitle"}, `${lang.flag} ${lang.name}`));
   const modes = [
     {key:"flashcards", icon:"🎴", title:"Flashcards", desc:"Multiple choice, quick rounds", enabled: lang.words.length>0},
     {key:"phrases", icon:"💬", title:"Key Phrases", desc:"Everyday lines with audio", enabled: lang.phrases.length>0},
@@ -3170,7 +3494,7 @@ function renderModeScreen(root){
     ));
   });
   root.appendChild(grid);
-  root.appendChild(el("button",{class:"btn ghost", onclick:()=>{ state.screen="level"; render(); }}, "← Back"));
+  root.appendChild(el("button",{class:"btn ghost", onclick:()=>{ state.screen="home"; render(); }}, "← Back to languages"));
 }
 
 function startMode(mode){
