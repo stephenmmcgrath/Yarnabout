@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>DingoLingo — Learn a Language, Have a Yarn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Noto+Sans+Egyptian+Hieroglyphs&family=Noto+Sans+KR:wght@500;700&family=Noto+Sans+Cuneiform&family=Noto+Sans+Gurmukhi:wght@500;700&family=Noto+Sans+Devanagari:wght@500;700&family=Noto+Sans+JP:wght@500;700&family=Noto+Sans+Thai:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Noto+Sans+Egyptian+Hieroglyphs&family=Noto+Sans+KR:wght@500;700&family=Noto+Sans+Cuneiform&family=Noto+Sans+Gurmukhi:wght@500;700&family=Noto+Sans+Devanagari:wght@500;700&family=Noto+Sans+JP:wght@500;700&family=Noto+Sans+Thai:wght@500;700&family=Noto+Sans+Canadian+Aboriginal:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <style>
   :root{
@@ -47,6 +47,8 @@
     --danish:#C60C30;
     --quechua:#7A2E2E;
     --guarani:#3C6E47;
+    --german:#000000;
+    --inuktitut:#3D7A8C;
     --good:#5FD97E;
     --bad:#F0665C;
     --radius:18px;
@@ -146,7 +148,7 @@
     padding: clamp(28px,5vw,56px) clamp(20px,5vw,50px);text-align:center;box-shadow:var(--shadow);
     display:flex;flex-direction:column;gap:16px;align-items:center;
   }
-  .target-word{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari','Noto Sans JP','Noto Sans Thai','Baloo 2',sans-serif;font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.1;}
+  .target-word{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari','Noto Sans JP','Noto Sans Thai','Noto Sans Canadian Aboriginal','Baloo 2',sans-serif;font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.1;}
   .target-word.rtl{direction:rtl;}
   .translit{color:var(--text-dim);font-size:clamp(14px,2vw,20px);letter-spacing:.03em;}
   .speak-btn{background:var(--accent,var(--thread));color:#171923;border:none;width:52px;height:52px;border-radius:50%;font-size:22px;box-shadow:var(--shadow);}
@@ -166,7 +168,7 @@
   /* ---- Phrases list ---- */
   .phraselist{display:flex;flex-direction:column;gap:12px;}
   .phrase{background:var(--bg-elev);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:16px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-  .phrase .ptext{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari','Noto Sans JP','Noto Sans Thai','Baloo 2',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:600;}
+  .phrase .ptext{font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari','Noto Sans JP','Noto Sans Thai','Noto Sans Canadian Aboriginal','Baloo 2',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:600;}
   .phrase .ptext.rtl{direction:rtl;}
   .phrase .ptranslit{color:var(--text-dim);font-size:.9em;}
   .phrase .pen{margin-left:auto;color:var(--text-dim);font-style:italic;}
@@ -174,10 +176,10 @@
   /* ---- Writing practice ---- */
   .writewrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
   .canvasbox{position:relative;width:min(360px,80vw);height:min(360px,80vw);background:var(--bg-elev);border:2px solid rgba(255,255,255,0.1);border-radius:var(--radius);box-shadow:var(--shadow);}
-  .canvasbox .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(260px,60vw);font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari','Noto Sans JP','Noto Sans Thai',sans-serif;color:rgba(255,255,255,0.08);user-select:none;pointer-events:none;}
+  .canvasbox .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(260px,60vw);font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari','Noto Sans JP','Noto Sans Thai','Noto Sans Canadian Aboriginal',sans-serif;color:rgba(255,255,255,0.08);user-select:none;pointer-events:none;}
   .canvasbox canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;}
   .writemeta{text-align:center;}
-  .writemeta .lbl{font-size:clamp(28px,4vw,40px);font-weight:700;font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari','Noto Sans JP','Noto Sans Thai',sans-serif;}
+  .writemeta .lbl{font-size:clamp(28px,4vw,40px);font-weight:700;font-family:'Noto Sans SC','Noto Sans KR','Noto Sans Arabic','Noto Sans Egyptian Hieroglyphs','Noto Sans Cuneiform','Noto Sans Gurmukhi','Noto Sans Devanagari','Noto Sans JP','Noto Sans Thai','Noto Sans Canadian Aboriginal',sans-serif;}
   .writemeta .name{color:var(--text-dim);}
 
   /* ---- Culture ---- */
@@ -3145,6 +3147,187 @@ const LANGUAGES = {
       {title:"Words English borrowed from Guaraní", body:"Jaguar, cougar and toucan all trace back to Guaraní words, borrowed into English via Spanish and Portuguese — a direct legacy of Guaraní vocabulary for South American wildlife."},
       {title:"Hiding in plain sight on the map", body:"Iguazú ('big water') and Iberá ('bright waters') are both Guaraní place names still in everyday use — and 'Paraguay' and 'Uruguay' are themselves Guaraní-derived words."},
       {title:"Jopará — the everyday blend", body:"Most Paraguayans actually speak Jopará, an informal, fluid mix of Guaraní and Spanish, rather than the more 'pure' Guaraní taught in schools — a living reflection of the two languages' centuries of coexistence."}
+    ]
+  },
+  german: {
+    key:"german", region:"Europe", name:"German", native:"Deutsch", accent:"var(--german)", flag:"🇩🇪",
+    speechLang:"de-DE", rtl:false, script:false, available:true,
+    blurb:"Famous for building enormous compound words on the fly, and for capitalising every single noun — a rule no other major language keeps.",
+    words:[
+      {t:"hallo",p:"ha-LO",en:"hello"},{t:"guten Tag",p:"GOO-ten tahk",en:"good day"},{t:"tschüss",p:"chooss",en:"bye"},
+      {t:"auf Wiedersehen",p:"owf VEE-der-zayn",en:"goodbye (formal)"},{t:"danke",p:"DAN-keh",en:"thank you"},
+      {t:"bitte",p:"BIT-teh",en:"please / you're welcome"},{t:"ja",p:"yah",en:"yes"},{t:"nein",p:"nine",en:"no"},
+      {t:"entschuldigung",p:"ent-SHOOL-di-goong",en:"sorry / excuse me"},{t:"guten Morgen",p:"GOO-ten MOR-gen",en:"good morning"},
+      {t:"guten Abend",p:"GOO-ten AH-bent",en:"good evening"},{t:"gute Nacht",p:"GOO-teh nakht",en:"good night"},
+      {t:"null",p:"nool",en:"zero"},{t:"eins",p:"ines",en:"one"},{t:"zwei",p:"tsvy",en:"two"},{t:"drei",p:"dry",en:"three"},
+      {t:"vier",p:"feer",en:"four"},{t:"fünf",p:"fewnf",en:"five"},{t:"sechs",p:"zex",en:"six"},{t:"sieben",p:"ZEE-ben",en:"seven"},
+      {t:"acht",p:"akht",en:"eight"},{t:"neun",p:"noyn",en:"nine"},{t:"zehn",p:"tsayn",en:"ten"},{t:"zwanzig",p:"TSVAN-tsig",en:"twenty"},
+      {t:"dreißig",p:"DRY-sig",en:"thirty"},{t:"hundert",p:"HOON-dert",en:"one hundred"},{t:"tausend",p:"TOW-zent",en:"one thousand"},
+      {t:"rot",p:"roht",en:"red"},{t:"blau",p:"blau",en:"blue"},{t:"grün",p:"grewn",en:"green"},{t:"gelb",p:"gelp",en:"yellow"},
+      {t:"schwarz",p:"shvarts",en:"black"},{t:"weiß",p:"vice",en:"white"},{t:"orange",p:"o-RAHNZH",en:"orange"},
+      {t:"lila",p:"LEE-la",en:"purple"},{t:"rosa",p:"ROH-za",en:"pink"},{t:"braun",p:"brown",en:"brown"},
+      {t:"Vater",p:"FAH-ter",en:"father"},{t:"Mutter",p:"MOO-ter",en:"mother"},{t:"Sohn",p:"zohn",en:"son"},{t:"Tochter",p:"TOKH-ter",en:"daughter"},
+      {t:"Bruder",p:"BROO-der",en:"brother"},{t:"Schwester",p:"SHVES-ter",en:"sister"},{t:"Großvater",p:"GROHS-fah-ter",en:"grandfather"},
+      {t:"Großmutter",p:"GROHS-moo-ter",en:"grandmother"},{t:"Ehemann",p:"AY-eh-man",en:"husband"},{t:"Ehefrau",p:"AY-eh-frow",en:"wife"},
+      {t:"Familie",p:"fa-MEE-lee-eh",en:"family"},{t:"Freund",p:"froynt",en:"friend (male)"},{t:"Freundin",p:"FROYN-din",en:"friend (female)"},{t:"Onkel",p:"ON-kel",en:"uncle"},
+      {t:"Wasser",p:"VAS-ser",en:"water"},{t:"Brot",p:"broht",en:"bread"},{t:"Milch",p:"milkh",en:"milk"},{t:"Tee",p:"tay",en:"tea"},
+      {t:"Kaffee",p:"KAH-feh",en:"coffee"},{t:"Saft",p:"zaft",en:"juice"},{t:"Bier",p:"beer",en:"beer"},{t:"Fleisch",p:"flysh",en:"meat"},
+      {t:"Hähnchen",p:"HEN-khen",en:"chicken"},{t:"Fisch",p:"fish",en:"fish"},{t:"Reis",p:"rice",en:"rice"},{t:"Suppe",p:"ZOOP-peh",en:"soup"},
+      {t:"Ei",p:"eye",en:"egg"},{t:"Käse",p:"KAY-zeh",en:"cheese"},{t:"Apfel",p:"AP-fel",en:"apple"},{t:"Banane",p:"ba-NAH-neh",en:"banana"},
+      {t:"Orange",p:"o-RAHNZH-eh",en:"orange (fruit)"},{t:"Kartoffel",p:"kar-TOF-fel",en:"potato"},{t:"Gemüse",p:"geh-MEW-zeh",en:"vegetables"},
+      {t:"Obst",p:"ohpst",en:"fruit"},{t:"Zucker",p:"TSOOK-er",en:"sugar"},{t:"Salz",p:"zaltz",en:"salt"},
+      {t:"Frühstück",p:"FREW-shtewk",en:"breakfast"},{t:"Mittagessen",p:"mi-TAHK-es-sen",en:"lunch"},{t:"Abendessen",p:"AH-bent-es-sen",en:"dinner"},
+      {t:"Schule",p:"SHOO-leh",en:"school"},{t:"Krankenhaus",p:"KRAN-ken-house",en:"hospital"},{t:"Bank",p:"bank",en:"bank"},
+      {t:"Restaurant",p:"res-toh-RAHN",en:"restaurant"},{t:"Geschäft",p:"geh-SHEFT",en:"shop"},{t:"Park",p:"park",en:"park"},
+      {t:"Haus",p:"house",en:"house"},{t:"Stadt",p:"shtat",en:"city"},{t:"Straße",p:"SHTRAH-seh",en:"street"},
+      {t:"Flughafen",p:"FLOOK-hah-fen",en:"airport"},{t:"Bahnhof",p:"BAHN-hohf",en:"train station"},{t:"Hotel",p:"ho-TEL",en:"hotel"},
+      {t:"Kopf",p:"kopf",en:"head"},{t:"Hand",p:"hant",en:"hand"},{t:"Fuß",p:"foos",en:"foot"},{t:"Augen",p:"OW-gen",en:"eyes"},
+      {t:"Mund",p:"moont",en:"mouth"},{t:"Ohr",p:"or",en:"ear"},{t:"Nase",p:"NAH-zeh",en:"nose"},{t:"Herz",p:"hairts",en:"heart"},
+      {t:"Haare",p:"HAH-reh",en:"hair"},{t:"Zähne",p:"TSAY-neh",en:"teeth"},{t:"Rücken",p:"REW-ken",en:"back"},{t:"Finger",p:"FING-er",en:"finger"},
+      {t:"Hund",p:"hoont",en:"dog"},{t:"Katze",p:"KAT-seh",en:"cat"},{t:"Vogel",p:"FOH-gel",en:"bird"},{t:"Pferd",p:"pfairt",en:"horse"},
+      {t:"Kuh",p:"koo",en:"cow"},{t:"Schwein",p:"shvine",en:"pig"},{t:"Tiger",p:"TEE-ger",en:"tiger"},{t:"Bär",p:"bair",en:"bear"},
+      {t:"Kaninchen",p:"ka-NEEN-khen",en:"rabbit"},{t:"Wolf",p:"volf",en:"wolf"},{t:"Fuchs",p:"fooks",en:"fox"},{t:"Maus",p:"mouse",en:"mouse"},
+      {t:"schnell",p:"shnel",en:"fast"},{t:"langsam",p:"LANG-zahm",en:"slow"},{t:"heiß",p:"hice",en:"hot"},{t:"kalt",p:"kalt",en:"cold"},
+      {t:"neu",p:"noy",en:"new"},{t:"alt",p:"alt",en:"old"},{t:"groß",p:"grohs",en:"big / tall"},{t:"klein",p:"kline",en:"small"},
+      {t:"kurz",p:"koorts",en:"short"},{t:"lang",p:"lang",en:"long"},{t:"sauber",p:"ZOW-ber",en:"clean"},{t:"schmutzig",p:"SHMOOT-sig",en:"dirty"},
+      {t:"müde",p:"MEW-deh",en:"tired"},{t:"hungrig",p:"HOONG-rig",en:"hungry"},{t:"schön",p:"shern",en:"beautiful"},{t:"gut",p:"goot",en:"good"},
+      {t:"schlecht",p:"shlekht",en:"bad"},{t:"teuer",p:"TOY-er",en:"expensive"},{t:"billig",p:"BIL-lig",en:"cheap"},{t:"süß",p:"soos",en:"sweet / cute"},
+      {t:"essen",p:"ES-sen",en:"to eat"},{t:"trinken",p:"TRINK-en",en:"to drink"},{t:"sehen",p:"ZAY-en",en:"to watch / see"},
+      {t:"hören",p:"HER-en",en:"to listen"},{t:"sprechen",p:"SHPREKH-en",en:"to speak"},{t:"gehen",p:"GAY-en",en:"to walk"},
+      {t:"laufen",p:"LOW-fen",en:"to run"},{t:"schlafen",p:"SHLAH-fen",en:"to sleep"},{t:"kaufen",p:"KOW-fen",en:"to buy"},
+      {t:"verkaufen",p:"fer-KOW-fen",en:"to sell"},{t:"lieben",p:"LEE-ben",en:"to love"},{t:"denken",p:"DENK-en",en:"to think"},
+      {t:"wissen",p:"VIS-sen",en:"to know"},{t:"arbeiten",p:"AR-by-ten",en:"to work"},{t:"lesen",p:"LAY-zen",en:"to read"},{t:"schreiben",p:"SHRY-ben",en:"to write"},
+      {t:"spielen",p:"SHPEE-len",en:"to play"},{t:"leben",p:"LAY-ben",en:"to live"},{t:"verstehen",p:"fer-SHTAY-en",en:"to understand"},{t:"wollen",p:"VOL-len",en:"to want"},
+      {t:"was",p:"vas",en:"what"},{t:"wer",p:"vair",en:"who"},{t:"warum",p:"va-ROOM",en:"why"},{t:"wie",p:"vee",en:"how"},
+      {t:"wann",p:"van",en:"when"},{t:"wo",p:"voh",en:"where"},{t:"welche",p:"VEL-kheh",en:"which"},
+      {t:"jetzt",p:"yetst",en:"now"},{t:"gestern",p:"GES-tern",en:"yesterday"},{t:"heute",p:"HOY-teh",en:"today"},{t:"morgen",p:"MOR-gen",en:"tomorrow"},
+      {t:"Stunde",p:"SHTOON-deh",en:"hour"},{t:"Minute",p:"mi-NOO-teh",en:"minute"},{t:"Jahr",p:"yahr",en:"year"},{t:"Monat",p:"MOH-nat",en:"month"},
+      {t:"Woche",p:"VOKH-eh",en:"week"},{t:"Montag",p:"MOHN-tahk",en:"Monday"},{t:"Dienstag",p:"DEENS-tahk",en:"Tuesday"},
+      {t:"Mittwoch",p:"MIT-vokh",en:"Wednesday"},{t:"Donnerstag",p:"DON-ers-tahk",en:"Thursday"},{t:"Freitag",p:"FRY-tahk",en:"Friday"},
+      {t:"Samstag",p:"ZAMS-tahk",en:"Saturday"},{t:"Sonntag",p:"ZON-tahk",en:"Sunday"},{t:"Morgen",p:"MOR-gen",en:"morning (a capitalised noun — same spelling as 'tomorrow')"},
+      {t:"Wetter",p:"VET-ter",en:"weather"},{t:"Sonne",p:"ZON-neh",en:"sun"},{t:"Regen",p:"RAY-gen",en:"rain"},{t:"Schnee",p:"shnay",en:"snow"},
+      {t:"Wind",p:"vint",en:"wind"},{t:"Wolke",p:"VOL-keh",en:"cloud"},{t:"Sturm",p:"shtoorm",en:"storm"},{t:"Regenbogen",p:"RAY-gen-boh-gen",en:"rainbow"},
+      {t:"Kleidung",p:"KLY-doong",en:"clothing"},{t:"Hemd",p:"hemt",en:"shirt"},{t:"Hose",p:"HOH-zeh",en:"trousers"},{t:"Kleid",p:"klite",en:"dress"},
+      {t:"Schuhe",p:"SHOO-eh",en:"shoes"},{t:"Jacke",p:"YAK-eh",en:"jacket"},{t:"Hut",p:"hoot",en:"hat"},{t:"Socken",p:"ZOK-ken",en:"socks"},
+      {t:"Auto",p:"OW-toh",en:"car"},{t:"Bus",p:"boos",en:"bus"},{t:"Zug",p:"tsook",en:"train"},{t:"Flugzeug",p:"FLOOK-tsoyk",en:"airplane"},
+      {t:"Fahrrad",p:"FAHR-raht",en:"bicycle"},{t:"Taxi",p:"TAK-see",en:"taxi"},{t:"Boot",p:"boht",en:"boat"},{t:"U-Bahn",p:"OO-bahn",en:"subway"},
+      {t:"Buch",p:"bookh",en:"book"},{t:"Tisch",p:"tish",en:"table"},{t:"Stuhl",p:"shtool",en:"chair"},{t:"Tür",p:"tewr",en:"door"},
+      {t:"Fenster",p:"FENS-ter",en:"window"},{t:"Telefon",p:"tel-eh-FOHN",en:"phone"},{t:"Geld",p:"gelt",en:"money"},{t:"Zeit",p:"tsite",en:"time"},
+      {t:"Arbeit",p:"AR-bite",en:"job / work"},{t:"Schlüssel",p:"SHLEW-sel",en:"key"},{t:"Tasche",p:"TASH-eh",en:"bag"},{t:"Uhr",p:"oor",en:"watch / clock"},
+      {t:"Zeitung",p:"TSY-toong",en:"newspaper"},{t:"Computer",p:"kom-PYOO-ter",en:"computer"},{t:"Markt",p:"markt",en:"market"},
+      {t:"glücklich",p:"GLEWK-likh",en:"happy"},{t:"traurig",p:"TROW-rig",en:"sad"},{t:"wütend",p:"VEW-tent",en:"angry"},
+      {t:"überrascht",p:"ew-ber-RASHT",en:"surprised"},{t:"ängstlich",p:"ENGST-likh",en:"scared"},{t:"ruhig",p:"ROO-ig",en:"calm"},
+      {t:"verliebt",p:"fer-LEEPT",en:"in love"},{t:"gelangweilt",p:"geh-LANG-vylt",en:"bored"},
+      {t:"Lehrer",p:"LAY-rer",en:"teacher"},{t:"Arzt",p:"artst",en:"doctor"},{t:"Polizist",p:"po-li-TSIST",en:"police officer"},
+      {t:"Ingenieur",p:"in-zhen-YER",en:"engineer"},{t:"Student",p:"shtoo-DENT",en:"student"},{t:"Fahrer",p:"FAH-rer",en:"driver"},
+      {t:"Koch",p:"kokh",en:"cook"},{t:"Verkäufer",p:"fer-KOY-fer",en:"shop assistant"},
+      {t:"Liebe",p:"LEE-beh",en:"love (noun)"},{t:"Musik",p:"moo-ZEEK",en:"music"},{t:"Fernseher",p:"FERN-zay-er",en:"TV"},{t:"Internet",p:"IN-ter-net",en:"internet"},
+      {t:"Berg",p:"bairk",en:"mountain"},{t:"Fluss",p:"floos",en:"river"},{t:"Meer",p:"mair",en:"sea"},{t:"See",p:"zay",en:"lake"},
+      {t:"Insel",p:"IN-zel",en:"island"},{t:"Strand",p:"shtrant",en:"beach"},{t:"Wald",p:"valt",en:"forest"},{t:"Himmel",p:"HIM-mel",en:"sky"},{t:"Wüste",p:"VEWS-teh",en:"desert"},
+      {t:"Gemütlichkeit",p:"geh-MEWT-likh-kite",en:"a cosy, contented feeling (a famously untranslatable German concept)"},
+      {t:"Oktoberfest",p:"ok-TOH-ber-fest",en:"Oktoberfest"},{t:"Wanderlust",p:"VAN-der-loost",en:"a strong desire to travel (an English loanword)"},
+      {t:"Schadenfreude",p:"SHAH-den-froy-deh",en:"pleasure at someone else's misfortune (an English loanword)"},
+      {t:"Kindergarten",p:"KIN-der-gar-ten",en:"kindergarten (lit. 'children's garden' — an English loanword)"},{t:"Brezel",p:"BRAY-tsel",en:"pretzel"}
+    ],
+    phrases:[
+      {t:"Wie geht es dir?",p:"vee gayt es deer",en:"How are you?"},
+      {t:"Gut, danke",p:"goot DAN-keh",en:"Good, thanks"},
+      {t:"Wie heißt du?",p:"vee hyst doo",en:"What's your name?"},
+      {t:"Ich heiße…",p:"ikh HY-seh",en:"My name is…"},
+      {t:"Wie viel kostet das?",p:"vee feel KOS-tet das",en:"How much does it cost?"},
+      {t:"Wo ist die Toilette?",p:"voh ist dee toy-LET-eh",en:"Where's the toilet?"},
+      {t:"Ich verstehe nicht",p:"ikh fer-SHTAY-eh nikht",en:"I don't understand"},
+      {t:"Sprichst du Englisch?",p:"shprikhst doo ENG-lish",en:"Do you speak English?"},
+      {t:"Kannst du das wiederholen?",p:"kanst doo das vee-der-HOH-len",en:"Can you repeat that?"},
+      {t:"Ich möchte das",p:"ikh MERKH-teh das",en:"I want this"},
+      {t:"Die Rechnung, bitte",p:"dee REKH-noong BIT-teh",en:"The bill, please"},
+      {t:"Viel Glück",p:"feel glewk",en:"Good luck"},
+      {t:"Prost!",p:"prohst",en:"Cheers!"}
+    ],
+    writing:[
+      {t:"ä",name:"a-umlaut — like 'e' in 'bed'"},{t:"ö",name:"o-umlaut — like 'u' in 'fur'"},
+      {t:"ü",name:"u-umlaut — round your lips for 'ee'"},{t:"ß",name:"eszett / sharp S — a double-s sound"}
+    ],
+    culture:[
+      {title:"Compound words on demand", body:"German famously builds new words by stringing existing ones together — Handschuh (hand-shoe) means glove, and speakers can coin long, precise compounds on the fly rather than needing a separate word for everything."},
+      {title:"Every noun gets a capital letter", body:"German capitalises all nouns, not just proper names — a rule unique among major world languages, and one that actually makes long, unfamiliar sentences easier to parse at a glance."},
+      {title:"Words English borrowed from German", body:"Kindergarten, wanderlust, schadenfreude, doppelganger, angst and zeitgeist all entered English as direct, unchanged borrowings from German."},
+      {title:"Oktoberfest and the purity law", body:"Munich's Oktoberfest is the world's largest folk festival, and German beer is still shaped by the Reinheitsgebot (purity law) dating back to 1516, which originally restricted beer ingredients to water, barley and hops."},
+      {title:"Sie versus du", body:"Like French and Spanish, German has a formal and informal 'you' — Sie for strangers, professional settings and elders, du for friends, family and children — and picking the wrong one can come across as either too familiar or too stiff."}
+    ]
+  },
+  inuktitut: {
+    key:"inuktitut", region:"The Americas", name:"Inuktitut", native:"ᐃᓄᒃᑎᑐᑦ", accent:"var(--inuktitut)", flag:"🧊",
+    speechLang:"iu-CA",
+    rtl:false, script:true, available:true,
+    blurb:"'Inuit' actually covers several related languages across the Arctic — this deck uses Inuktitut, an official language of Nunavut, sourced from the Government of Nunavut's own free Tusaalanga dictionary rather than guessed.",
+    words:[
+      {t:"ᐋᒡᒐ",p:"aagga",en:"no"},{t:"ᐄ",p:"ii",en:"yes"},{t:"ᖃᓄᐃᑉᐱᑦ?",p:"qanuippit?",en:"how are you? (informal one-word greeting)"},
+      {t:"ᖃᓄᐃᙱᑦᑐᖓ",p:"qanuinngittunga",en:"I'm fine"},{t:"ᐃᓛᓕ",p:"ilaali",en:"you're welcome"},
+      {t:"ᐊᑏ",p:"atii",en:"come on! / let's go!"},{t:"ᐋᑦᓲ",p:"aatsuu",en:"I don't know"},
+      {t:"ᐊᑕᐅᓯᖅ",p:"atausiq",en:"one"},{t:"ᖁᓕᑦ",p:"qulit",en:"ten"},{t:"ᐃᓕᐊᐸᓐ",p:"iliapan",en:"eleven"},{t:"ᐊᕙᑎᑦ",p:"avatit",en:"twenty"},
+      {t:"ᐊᐅᐸᖅᑐᖅ",p:"aupaqtuq",en:"red"},{t:"ᐊᐅᐸᔮᖓᔪᖅ",p:"aupajaangajuq",en:"orange"},{t:"ᐊᐅᐸᔮᑦᑐᖅ",p:"aupajaattuq",en:"pink"},
+      {t:"ᖃᑯᖅᑕᖅ",p:"qakuqtaq",en:"white"},{t:"ᕿᕐᓂᖅᑕᖅ",p:"qirniqtaq",en:"black"},{t:"ᖁᖅᓱᖅᑕᖅ",p:"quqsuqtaq",en:"yellow"},{t:"ᐃᓱᖅᑕᖅ",p:"isuqtaq",en:"grey"},
+      {t:"ᐊᑖᑕ",p:"ataata",en:"father"},{t:"ᐊᓈᓇ",p:"anaana",en:"mother"},{t:"ᐊᑖᑕᑦᓯᐊᖅ",p:"ataatatsiaq",en:"grandfather"},
+      {t:"ᐊᓈᓇᑦᓯᐊᖅ",p:"anaanatsiaq",en:"grandmother"},{t:"ᐊᒃᑲᒃ",p:"akkak",en:"uncle (father's brother)"},{t:"ᐊᖓᒃ",p:"angak",en:"uncle (mother's brother)"},
+      {t:"ᐊᑦᑕᒃ",p:"attak",en:"aunt (father's sister)"},{t:"ᐊᔭᒃ",p:"ajak",en:"aunt (mother's sister)"},{t:"ᐊᐃᑉᐸᖅ",p:"aippaq",en:"spouse / partner"},
+      {t:"ᐊᖏᔪᒃ",p:"angijuk",en:"older sibling (same sex)"},{t:"ᐊᓂᒃ",p:"anik",en:"brother of a female"},{t:"ᐃᕐᓂᖅ",p:"irniq",en:"son"},
+      {t:"ᐃᓚᒌᑦ",p:"ilagiit",en:"family"},{t:"ᐃᕐᖑᑕᖅ",p:"irngutaq",en:"grandchild"},{t:"ᐃᓪᓗᖅ",p:"illuq",en:"cousin"},
+      {t:"ᐊᒪᕈᖅ",p:"amaruq",en:"wolf"},{t:"ᐊᐃᕕᖅ",p:"aiviq",en:"walrus"},{t:"ᐊᕐᕕᒃ",p:"arvik",en:"bowhead whale"},{t:"ᐊᒃᖤᒃ",p:"akłak",en:"grizzly bear"},
+      {t:"ᐊᕿᒡᒋᖅ",p:"aqiggiq",en:"ptarmigan"},{t:"ᐊᕕᙵᖅ",p:"avinngaq",en:"lemming"},{t:"ᐋᕐᓗᒃ",p:"aarluk",en:"orca"},{t:"ᖃᐃᕈᓕᒃ",p:"qairulik",en:"harp seal"},
+      {t:"ᖃᕝᕕᒃ",p:"qavvik",en:"wolverine"},{t:"ᕿᓚᓗᒐᖅ",p:"qilalugaq",en:"beluga"},{t:"ᖃᓯᒋᐊᖅ",p:"qasigiaq",en:"harbour seal"},{t:"ᕿᒻᒥᖅ",p:"qimmiq",en:"dog"},
+      {t:"ᐃᖃᓗᒃ",p:"iqaluk",en:"fish"},{t:"ᖁᐸᓄᐊᖅ",p:"qupanuaq",en:"songbird"},{t:"ᐊᒃᐸ",p:"akpa",en:"murre (a small Arctic seabird)"},
+      {t:"ᐊᐳᑦ",p:"aput",en:"snow"},{t:"ᐊᖅᓴᕐᓃᑦ",p:"aqsarniit",en:"northern lights"},{t:"ᐊᓄᕌᖅᑐᖅ",p:"anuraaqtuq",en:"windy (it's...)"},
+      {t:"ᖃᓐᓂᖅᑐᖅ",p:"qanniqtuq",en:"snowing (it's...)"},{t:"ᐊᐅᔭᖅ",p:"aujaq",en:"summer"},{t:"ᐊᐅᔪᐃᑦᑐᖅ",p:"aujuittuq",en:"glacier"},
+      {t:"ᖁᓪᓕᖅ",p:"qulliq",en:"seal-oil lamp (a traditional lamp)"},{t:"ᖃᒧᑏᒃ",p:"qamutiik",en:"sled"},{t:"ᖃᔭᖅ",p:"qajaq",en:"kayak"},
+      {t:"ᐃᒡᓗᕕᒐᖅ",p:"igluvigaq",en:"igloo / snowhouse"},{t:"ᐊᓪᓗ",p:"allu",en:"a seal's breathing hole in the ice"},
+      {t:"ᖃᓂᖅ",p:"qaniq",en:"mouth"},{t:"ᖃᐅᖅ",p:"qauq",en:"forehead"},{t:"ᖃᓪᓗ",p:"qallu",en:"eyebrow"},{t:"ᐊᐅᒃ",p:"auk",en:"blood"},
+      {t:"ᖃᓚᓯᖅ",p:"qalasiq",en:"belly button"},{t:"ᐃᔨ",p:"iji",en:"eye"},{t:"ᐃᑎᒪᒃ",p:"itimak",en:"palm of the hand"},
+      {t:"ᐃᓯᒐᑦ",p:"isigat",en:"foot"},{t:"ᐃᖅᓴᖅ",p:"iqsaq",en:"cheek"},{t:"ᕿᖓᖅ",p:"qingaq",en:"nose"},{t:"ᕿᑎᖅ",p:"qitiq",en:"waist"},
+      {t:"ᖁᑦᑐᕌᒃ",p:"qutturaak",en:"thigh"},{t:"ᐊᒡᒐᑦ",p:"aggat",en:"hand"},
+      {t:"ᖃᐅᔨᒪᔪᖅ",p:"qaujimajuq",en:"knows (he/she...)"},{t:"ᐃᓱᒪᔪᖓ",p:"isumajunga",en:"I think"},{t:"ᐊᖑᓇᓱᑦᑐᖅ",p:"angunasuttuq",en:"hunts (he/she...)"},
+      {t:"ᐃᓕᓐᓂᐊᖅᑐᖅ",p:"ilinniaqtuq",en:"learning (he/she is...)"},{t:"ᐃᖅᑲᓇᐃᔭᖅᑐᖅ",p:"iqqanaijaqtuq",en:"working (he/she is...)"},{t:"ᐃᒥᖅᑐᖅ",p:"imiqtuq",en:"drinking water (he/she is...)"},
+      {t:"ᐊᖏᔪᖅ",p:"angijuq",en:"big (it is...)"},{t:"ᐊᒥᑦᑐᖅ",p:"amittuq",en:"narrow (it is...)"},{t:"ᐊᑭᑭᑦᑐᖅ",p:"akikittuq",en:"cheap (it is...)"},
+      {t:"ᐊᑭᑐᔪᖅ",p:"akitujuq",en:"expensive (it is...)"},{t:"ᐊᕿᑦᑐᖅ",p:"aqittuq",en:"soft (it is...)"},{t:"ᐃᑎᔪᖅ",p:"itijuq",en:"deep (it is...)"},
+      {t:"ᐃᒃᑲᑦᑐᖅ",p:"ikkattuq",en:"shallow (it is...)"},{t:"ᖃᓂᑦᑐᖅ",p:"qanittuq",en:"near / close"},{t:"ᖁᐃᓂᔪᖅ",p:"quinijuq",en:"fat (it is...)"},
+      {t:"ᐊᔾᔨᒌᒃ",p:"ajjigiik",en:"same (they are the...)"},{t:"ᐊᔾᔨᒌᖏᑦᑑᒃ",p:"ajjigiingittuuk",en:"different (they are...)"},
+      {t:"ᐊᔾᔨᓕᐅᕈᑦ",p:"ajjiliurut",en:"camera"},{t:"ᐊᓪᓕᕉᔮᒃ",p:"alliruujaak",en:"scissors"},{t:"ᐊᓘᑦ",p:"aluut",en:"spoon"},
+      {t:"ᐊᑦᑐᓈᖅ",p:"attunaaq",en:"rope"},{t:"ᐊᕙᓗ",p:"avalu",en:"wall"},{t:"ᐊᑭᓯᖅ",p:"akisiq",en:"pillow"},{t:"ᐃᓪᓕᖅ",p:"illiq",en:"bed"},
+      {t:"ᐊᓪᓚᕈᑦ",p:"allarut",en:"towel"},{t:"ᐃᕐᖑᓯᖅ",p:"irngusiq",en:"cup / mug"},{t:"ᐃᑦᓯᕙᐅᑕᖅ",p:"itsivautaq",en:"chair"},
+      {t:"ᖃᕋᓴᐅᔭᖅ",p:"qarasaujaq",en:"computer"},{t:"ᖃᖓᑕᓲᖅ",p:"qangatasuuq",en:"airplane"},{t:"ᖃᒧᑕᐅᔭᖅ",p:"qamutaujaq",en:"snowmobile"},
+      {t:"ᐊᖅᑯᑦ",p:"aqqut",en:"street"},{t:"ᐊᓪᓚᕝᕕᒃ",p:"allavvik",en:"office"},{t:"ᐃᓪᓗ",p:"illu",en:"house"},{t:"ᐋᓐᓂᐊᕕᒃ",p:"aanniavik",en:"hospital"},
+      {t:"ᐃᓕᓐᓂᐊᕐᕕᒃ",p:"ilinniarvik",en:"school"},{t:"ᖃᖓᑕᓲᒃᑯᕕᒃ",p:"qangatasuukkuvik",en:"airport"},{t:"ᖁᕐᕕᒃ",p:"qurvik",en:"toilet"},
+      {t:"ᐃᓄᐃᑦ",p:"inuit",en:"people (also the name Inuit)"},{t:"ᐊᖑᑦ",p:"angut",en:"man"},{t:"ᐊᕐᓇᖅ",p:"arnaq",en:"woman"},
+      {t:"ᐊᕐᕌᒍ",p:"arraagu",en:"year"},{t:"ᐊᐅᔭᑕᒫᑦ",p:"aujatamaat",en:"every summer"},{t:"ᖃᐅᑕᒫᑦ",p:"qautamaat",en:"every day"},
+      {t:"ᖃᐅᑉᐸᑦ",p:"qauppat",en:"tomorrow"},{t:"ᐃᑉᐸᑦᓴᖅ",p:"ippatsaq",en:"yesterday"},{t:"ᖃᓄᖅ?",p:"qanuq?",en:"how?"},
+      {t:"ᖃᖓ?",p:"qanga?",en:"when? (past or future)"},{t:"ᖃᑦᓯᓂᒃ?",p:"qatsinik?",en:"how many?"},{t:"ᖃᑦᓯᒨᖅᑲ?",p:"qatsimuuqqa?",en:"what time is it?"},
+      {t:"ᖁᕕᐊᓱᑦᑐᖓ",p:"quviasuttunga",en:"happy (I am...)"},{t:"ᖁᓱᔪᖅ",p:"qusujuq",en:"sad (he/she is...)"},{t:"ᕿᐊᔪᖅ",p:"qiajuq",en:"crying (he/she is...)"},
+      {t:"ᖃᓂᒪᔪᖅ",p:"qanimajuq",en:"sick (he/she feels...)"},{t:"ᖃᐅᒪᔪᖅ",p:"qaumajuq",en:"gives off light (it...)"},
+      {t:"ᖁᔭᓕᔪᖅ",p:"qujalijuq",en:"thankful (he/she is...)"},{t:"ᐃᑲᔪᖅᑐᖅ",p:"ikajuqtuq",en:"helps (he/she...)"},
+      {t:"ᖃᔭᖅᑐᖅᑐᖅ",p:"qajaqtuqtuq",en:"kayaks (he/she...)"},{t:"ᐊᑐᖅᑐᖅ",p:"atuqtuq",en:"uses something (he/she...)"},
+      {t:"ᖃᐃᒋᑦ",p:"qaigit",en:"come! (command)"},{t:"ᐊᓕᐊᓇᐃᑦ",p:"alianait",en:"wonderful (it's...)"},{t:"ᖃᑦᓯᐅᓛᖅᑭᓯ?",p:"qatsiulaaqqisi?",en:"how many will you (3+) be?"},
+      {t:"ᐃᓄᒃᑎᑐᑦ",p:"inuktitut",en:"Inuktitut (the language)"},{t:"ᖃᓪᓗᓈᑎᑐᑦ",p:"qallunaatitut",en:"English (the language)"}
+    ],
+    phrases:[
+      {t:"ᖃᓄᐃᑉᐱᑦ?",p:"Qanuippit?",en:"How are you?"},
+      {t:"ᖃᓄᐃᙱᑦᑐᖓ",p:"Qanuinngittunga.",en:"I'm fine."},
+      {t:"ᖃᓄᐃᙱᑦᑐᒍᒃ",p:"Qanuinngittuguk.",en:"We (two) are fine."},
+      {t:"ᐊᑎᐅᑉ ᑭᓲᖓ?",p:"(introduce yourself using) …-ujunga",en:"I am… (used with a name or origin, e.g. Iqalummiutaujunga — 'I'm from Iqaluit')"},
+      {t:"ᖃᓐᓂᖅᑲ?",p:"Qanniqqa?",en:"Is it snowing?"},
+      {t:"ᖃᐅᔨᒪᕕᐅᒃ?",p:"Qaujimaviuk?",en:"Do you know him/her/it?"},
+      {t:"ᖃᓪᓗᓈᑎᑐᓲᖑᕖᑦ?",p:"Qallunaatitusuunguviit?",en:"Do you speak English?"},
+      {t:"ᐃᓄᒃᑎᑑᓲᖑᕕᑦ?",p:"Inuktituusuunguvit?",en:"Do you speak Inuktitut?"},
+      {t:"ᖁᔭᓐᓇᒦᒃ",p:"Qujannamiik",en:"Thank you"}
+    ],
+    writing:[
+      {t:"ᐃ",name:"i"},{t:"ᐊ",name:"a"},{t:"ᐅ",name:"u"},{t:"ᒥ",name:"mi"},{t:"ᓇ",name:"na"},{t:"ᖃ",name:"qa"}
+    ],
+    culture:[
+      {title:"'Inuit' covers several related languages", body:"Inuktitut (used here, official in Nunavut), Inuinnaqtun, Inuvialuktun, Kalaallisut (Greenlandic) and others together make up the Inuit language continuum spread across the Arctic from Alaska to Greenland — related, but not all mutually intelligible."},
+      {title:"Syllabics, not the Latin alphabet", body:"Inuktitut syllabics (qaniujaaqpait) represent whole syllables rather than single sounds, and were adapted in the mid-1800s from a system originally developed for Cree — some Inuit regions write Inuktitut in Latin letters instead (qaliujaaqpait), depending on the community."},
+      {title:"A word for stepping outside in bitter cold", body:"Inuktitut has richly specific vocabulary for snow, ice and Arctic conditions — this deck includes just a taste, like aput (snow on the ground) and qanniqtuq (actively snowing), which are genuinely distinct words rather than the same word used two ways."},
+      {title:"An official language of a Canadian territory", body:"Inuktitut is an official language of Nunavut alongside English and French — used in the territorial legislature, government services and education, a level of official status few Indigenous languages in North America hold."},
+      {title:"Kept to what's genuinely sourced", body:"Every word here comes from Tusaalanga, the Government of Nunavut and Pirurvik Centre's free public Inuktitut dictionary — reflecting the South Qikiqtaaluk (Uqqurmiut) dialect specifically. Other Inuktitut dialects may use different words for the same thing."}
     ]
   },
   yolngu: {
